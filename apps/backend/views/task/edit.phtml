@@ -1,0 +1,102 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <?php foreach($task as $t){ ?>
+    <ul class="ulColumn2">
+        <form action="/task/doedit" method="post" enctype="multipart/form-data">
+            <li>
+                <span class="item_name" style="width:150px;">任务编号：</span>
+                <span style="color:#11a274;"><?php echo $t->sn; ?></span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">任务发布人：</span>
+                <span style="color:#11a274;"><?php echo $t->account; ?></span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">任务平台：</span>
+                <span style="color:#11a274;"><?php if($t->platform==1){ ?>淘宝<?php }else{ ?>京东<?php } ?></span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">任务类型：</span>
+                <span style="color:#11a274;"><?php if($t->type==1){ ?>电脑单<?php }elseif($t->type==2){ ?>手机单<?php }elseif($t->type==3){ ?>浏览单<?php }else{ ?>秒拍单<?php } ?></span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">任务所属店铺：</span>
+                <span style="color:#11a274;"><?php echo $t->shop; ?></span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">缩略图：</span>
+                <img src="<?php echo $t->img_thumb; ?>" style="width: 150px;height: 100px;" />
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">任务总金额：</span>
+                <input type="text" class="textbox" value="<?php echo $t->total_money; ?>" name="total_money"/>元
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">任务佣金：</span>
+                <input type="text" class="textbox" value="<?php echo $t->commission; ?>" name="commission"/>元
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">任务剩余单数：</span>
+                <input type="text" class="textbox" value="<?php echo $t->number; ?>" name="number"/>单
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">任务搜索关键词：</span>
+                <input type="text" class="textbox textbox_295" value="<?php echo $t->keywords; ?>" name="keywords"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">小号认证要求：</span>
+                <label class="single_selection"><input type="radio" name="isauth" value="1" <?php if($t->isauth==1){ ?>checked="checked"<?php } ?>>是</label>
+                <label class="single_selection"><input type="radio" name="isauth" value="2" <?php if($t->isauth==2){ ?>checked="checked"<?php } ?>>否</label>
+            </li>
+            <?php if($t->isauth==1){ ?>
+                <?php if($t->platform==1){ ?>
+                    <li>
+                        <span class="item_name" style="width:150px;">小号认证要求：</span>
+                        <label class="single_selection"><input type="radio" name="auth_level" value="1" <?php if($t->auth_level==1){ ?>checked="checked"<?php } ?>>一心</label>
+                        <label class="single_selection"><input type="radio" name="auth_level" value="2" <?php if($t->auth_level==2){ ?>checked="checked"<?php } ?>>二心</label>
+                        <label class="single_selection"><input type="radio" name="auth_level" value="3" <?php if($t->auth_level==3){ ?>checked="checked"<?php } ?>>三心</label>
+                        <label class="single_selection"><input type="radio" name="auth_level" value="4" <?php if($t->auth_level==4){ ?>checked="checked"<?php } ?>>四心</label>
+                        <label class="single_selection"><input type="radio" name="auth_level" value="5" <?php if($t->auth_level==5){ ?>checked="checked"<?php } ?>>五心</label>
+                        <label class="single_selection"><input type="radio" name="auth_level" value="6" <?php if($t->auth_level==6){ ?>checked="checked"<?php } ?>>一钻</label>
+                    </li>
+                <?php }else{ ?>
+                    <li>
+                        <span class="item_name" style="width:150px;">小号认证要求：</span>
+                        <label class="single_selection"><input type="radio" name="auth_level" value="1" <?php if($t->auth_level==1){ ?>checked="checked"<?php } ?>>注册会员</label>
+                        <label class="single_selection"><input type="radio" name="auth_level" value="2" <?php if($t->auth_level==2){ ?>checked="checked"<?php } ?>>铜牌会员</label>
+                        <label class="single_selection"><input type="radio" name="auth_level" value="3" <?php if($t->auth_level==3){ ?>checked="checked"<?php } ?>>银牌会员</label>
+                        <label class="single_selection"><input type="radio" name="auth_level" value="4" <?php if($t->auth_level==4){ ?>checked="checked"<?php } ?>>金牌会员</label>
+                        <label class="single_selection"><input type="radio" name="auth_level" value="5" <?php if($t->auth_level==5){ ?>checked="checked"<?php } ?>>钻石会员</label>
+                    </li>
+                <?php } ?>
+            <?php } ?>
+            <li>
+                <span class="item_name" style="width:150px;">增拍店铺宝贝数量：</span>
+                <select class="select" name="add_num" style="width: 50px;">
+                    <?php for($i=0;$i<=5;$i++){ ?>
+                    <option value="<?php echo $i; ?>" <?php if($t->add_num==$i){ ?>selected="selected"<?php } ?> ><?php echo $i; ?></option>
+                    <?php } ?>
+                </select>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">增拍店铺宝贝标题：</span>
+                <textarea cols="50" rows="8" name="add_title" class="textarea" ><?php echo $t->add_title; ?></textarea>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">任务详细要求：</span>
+                <textarea cols="50" rows="5" name="detail" class="textarea" ><?php echo $t->detail; ?></textarea>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">特殊要求：</span>
+                <input type="text" class="textbox textbox_295" value="<?php echo $t->special_ask; ?>" name="special_ask"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:200px;"></span>
+                <input type="submit" class="link_btn" value="编辑" />
+            </li>
+        </form>
+    </ul>
+    <?php } ?>
+</section>
+{% endblock %}

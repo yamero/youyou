@@ -1,0 +1,53 @@
+<div class="contentr fr">
+    <div class="cr">
+        <p>购买发布点</p>
+    </div>
+    <!--<div class="zhifu"> <span class="f16">购买方式</span></div>-->
+    <div class="slideTxtBox mt30">
+        <div class="hd">
+            <ul>
+                <li class="f16">金币购买</li>
+                <li class="f16">充值卡兑换</li>
+            </ul>
+        </div>
+        <div class="bd">
+            <ul>
+                <div class="jinbi ">
+                    <form action="/user/bycoin" method="post">
+                        <h1 class="f18" style="color:#cf4503">每一个金币可购买1发布点，1金币起购买</h1>
+                        <div class="mt25">
+                            <span class="f16 ">当前金币数:</span><em class="f16">&nbsp;<?php echo $user->gcoin; ?></em>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/user/recharge" class="f16" style="color:#f78d0e">金币不够？点击充值</a></div>
+                        <div class="mt25">
+                            <label class="f16">购买发布点数:</label>
+                            <input type="text" name="point_num" class="kuang3" onchange="countRelease(this.value)" />
+                        </div>
+                        <div class="mt25">
+                            <label class="f16 ml14">扣除金币:</label>
+                            <input type="text" class="kuang3"disabled="disabled" id="coin_num" />
+                        </div>
+                        <input class="submit_reg mt25 ml85" type="submit" value="购买" />
+                    </form>
+                </div>
+            </ul>
+            <form action="/user/bycard" method="post" class="mt25">
+                <label class="f16 ml14">输入充值卡号:</label>
+                <input type="text" name="card_num" class="kuang2" /><br />
+                <input class="submit_reg mt25 ml85" type="submit" value="兑换" />
+            </form>
+            <ul>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">jQuery(".slideTxtBox").slide();</script>
+<script type="text/javascript">
+    function countRelease(num){
+        $.post("/user/countnum",{num:num},function(data){
+            if(data.status==1){
+                $("#coin_num").val(data.n);
+            }else{
+                alert(data.info);
+            }
+        },"json");
+    }
+</script>

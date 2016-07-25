@@ -1,0 +1,30 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <ul class="ulColumn2">
+        <form action="/taobao/doedit" method="post">
+            <li>
+                <span class="item_name" style="width:150px;">审核状态：</span>
+                <label class="single_selection"><input type="radio" name="verify_status" value="1" <?php if($taobao->verify_status==1){ ?>checked="checked"<?php } ?>>未审核</label>
+                <label class="single_selection"><input type="radio" name="verify_status" value="2" <?php if($taobao->verify_status==2){ ?>checked="checked"<?php } ?>>审核不通过</label>
+                <label class="single_selection"><input type="radio" name="verify_status" value="3" <?php if($taobao->verify_status==3){ ?>checked="checked"<?php } ?>>已通过审核</label>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">等级：</span>
+                <label class="single_selection"><input type="radio" name="level" value="1" <?php if($taobao->level==1){ ?>checked="checked"<?php } ?>>默认</label>
+                <label class="single_selection"><input type="radio" name="level" value="2" <?php if($taobao->level==2){ ?>checked="checked"<?php } ?>>升级淘宝号</label>
+                <label class="single_selection"><input type="radio" name="level" value="3" <?php if($taobao->level==3){ ?>checked="checked"<?php } ?>>升级淘宝号V2</label>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">审核不通过原因：</span>
+                <textarea placeholder="审核不通过原因" class="textarea" style="width:500px;height:100px;" name="reason"><?php echo $taobao->reason; ?></textarea>
+            </li>
+            <li>
+                <span class="item_name" style="width:200px;"></span>
+                <input type="hidden" name="id" value="<?php echo $taobao->id; ?>" />
+                <input type="submit" class="link_btn" value="编辑"/>
+            </li>
+        </form>
+    </ul>
+</section>
+{% endblock %}

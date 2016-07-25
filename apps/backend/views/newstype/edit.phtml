@@ -1,0 +1,18 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <ul class="ulColumn2">
+        <form action="/newstype/doedit" method="post">
+            <li>
+                <span class="item_name" style="width:150px;">类型名：</span>
+                <input type="text" class="textbox textbox_295" placeholder="类型名" name="name" value="{{ newsType.name }}"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:200px;"></span>
+                <input type="hidden" name="id" value="{{ newsType.id }}" />
+                <input type="submit" class="link_btn"/>
+            </li>
+        </form>
+    </ul>
+</section>
+{% endblock %}

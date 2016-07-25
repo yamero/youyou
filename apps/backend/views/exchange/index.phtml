@@ -1,0 +1,48 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <div class="page_title">
+        <h2 class="fl">金币兑现申请列表</h2>
+    </div>
+    <table class="table">
+        <tr>
+            <th>流水号</th>
+            <th>申请提现会员</th>
+            <th>银行卡号</th>
+            <th>银行名称</th>
+            <th>真实姓名</th>
+            <th>手机号</th>
+            <th>申请提现金币数</th>
+            <th>金币换算为人民币</th>
+            <th>状态</th>
+            <th>处理日期</th>
+            <th>操作</th>
+        </tr>
+        <?php foreach($page->items as $item){ ?>
+        <tr align="center">
+            <td><?php echo $item->serial_num; ?></td>
+            <td><?php echo $item->account; ?></td>
+            <td><?php echo $item->bankcard_id; ?></td>
+            <td><?php echo $item->bank_name; ?></td>
+            <td><?php echo $item->real_name; ?></td>
+            <td><?php echo $item->mobile; ?></td>
+            <td><?php echo $item->coin_num; ?></td>
+            <td><?php echo $item->money_num; ?>元</td>
+            <td><?php if($item->handle_status==1){ ?>未处理<?php }elseif($item->handle_status==2){ ?>处理中<?php }else{ ?>已处理<?php } ?></td>
+            <td><?php if($item->handle_time){ echo date('Y-m-d H:i',$item->handle_time); } ?></td>
+            <td>
+                <a href="/exchange/edit/<?php echo $item->id; ?>" class="inner_btn">编辑</a>
+                <a href="/exchange/del/<?php echo $item->id; ?>" class="inner_btn">删除</a>
+            </td>
+        </tr>
+        <?php } ?>
+    </table>
+    <aside class="paging">
+        <a href="/exchange/index/1">第一页</a>
+        <?php for($i=$startnum;$i<=$lastnum;$i++){ ?>
+            <a href="/exchange/index/<?php echo $i; ?>" <?php if($i==$currentPage){ ?> class="active" <?php } ?>><?php echo $i; ?></a>
+        <?php } ?>
+        <a href="/exchange/index/<?php echo $page->last; ?>">最后一页</a>
+    </aside>
+</section>
+{% endblock %}

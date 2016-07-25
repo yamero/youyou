@@ -1,0 +1,169 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <META NAME="Generator" CONTENT="EditPlus">
+    <META NAME="Author" CONTENT="">
+    <META NAME="Keywords" CONTENT="">
+    <META NAME="Description" CONTENT="">
+    <title>任务大厅</title>
+    <link href="/static/css/liebiao.css" rel="stylesheet" type="text/css" />
+    <script Language="javascript">
+        function a(x,y,color)
+        {document.write("<img border='0' style='position: absolute; left: "+(x+20)+"; top: "+(y+20)+";background-color: "+color+"' src='px.gif' width=1 height=1>")}
+    </script>
+    <script src="/static/js/jquery-1.11.3.min.js"></script>
+</head>
+
+<body leftmargin=20 topmargin=20>
+<!--top开始-->
+<div id="top">
+    <div class="top auto">
+        <?php if(!$this->session->has('uname')){ ?>
+            <div class="huanying fl" id="noname">
+                <p> <span class="midn"></span>您好,欢迎来到右右电商服务平台！<a href="#">[ 登录 ]</a><a href="/index/reg"> [ 免费注册 ]</a></p>
+            </div>
+        <?php }else{ ?>
+            <div class="huanying fl" id="isname">
+                <p> <span class="midn"></span>您好,<span><a href="/user/index"><?php echo $this->session->get('uname'); ?></a><a href="/index/logout"> [ 安全退出 ]</a></span></p>
+            </div>
+        <?php } ?>
+        <div class="jiaru fr">
+            <ul>
+                <li><a <?php if($this->session->has('uname')){ ?> href="/user/index" <?php }else{ ?> href="/" <?php } ?> >我的账户</a></li>
+                <li><a href="#">帮助中心</a></li>
+                <li class="phone">手机版</li>
+                <li class="wei">微信端</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--logo开始-->
+<div class="denglu auto">
+    <div class="logo fl"><img src="/static/images/logo.jpg"></div>
+</div>
+<!--导航开始-->
+<div id="nav">
+    <div class=" dh auto">
+        <ul class="auto">
+            <li><a href="/">首页</a></li>
+            <li><a <?php if($this->session->has('uname')){ ?> href="/task/index" <?php }else{ ?> href="/" <?php } ?> >任务大厅</a></li>
+            <li><a <?php if($this->session->has('uname')){ ?> href="/user/index" <?php }else{ ?> href="/" <?php } ?> >会员中心</a></li>
+            <li><a <?php if($this->session->has('uname')){ ?> href="/promotion/index" <?php }else{ ?> href="/" <?php } ?> >我的推广</a></li>
+            <li><a <?php if($this->session->has('uname')){ ?> href="/user/recharge" <?php }else{ ?> href="/" <?php } ?> >会员充值</a></li>
+            <li><a href="lianxikefu.html">联系客服</a></li>
+        </ul>
+    </div>
+</div>
+<!--任务大厅-->
+<div id="content4" class="auto mt25">
+
+    <!--content左边-->
+    <div class="contentl fl">
+        <p><img src="/static/images/renwudating.jpg" /></p>
+        <ul class="ul3">
+            <?php if($operation=='mytask'){ ?><li style="color:#f7941d;">我的任务</li><?php }else{ ?><li><a href="/task/<?php if($this->session->get('utype')==1){ ?>shoppertask<?php }else{ ?>usertask<?php } ?>">我的任务</a></li><?php } ?>
+            <?php if($this->session->get('utype')==1){ if($operation=='releasetask'){ ?><li style="color:#f7941d;">发布任务</li><?php }else{ ?><li><a href="/task/selectplatform">发布任务</a></li><?php } } ?>
+            <?php if($this->session->get('utype')==1){ ?><li><a href="/user/bindshop">绑定店铺</a></li><?php } ?>
+            <?php if($this->session->get('utype')==2){ ?><li><a href="/user/bindtb">绑定买号</a></li><?php } ?>
+            <?php if($this->session->get('utype')==1){ ?><li><a href="/user/bindshop">真实流量</a></li><?php } ?>
+            <li><a href="#">常见问题</a></li>
+        </ul>
+    </div>
+    <!--content右边-->
+    <?php echo $this->getContent(); ?>
+</div>
+
+<!--底部开始-->
+<div id="footer">
+    <div class="footer auto">
+        <div class="footer_l fl">
+            <div class="footer-about fl">
+                <h2 class="title">关于右右网</h2>
+            </div>
+            <div class="footer-help fl">
+                <h2 class="title">帮助中心</h2>
+            </div>
+            <div class="footer-safe fl">
+                <h2 class="title">安全保障</h2>
+            </div>
+            <!--<div class="footer-help fl"><h3>帮助中心</h3></div>-->
+        </div>
+        <div class="footer_r fr">
+            <div class="erweima fl"> <img src="/static/images/erweima1.png" />
+                <h3 class="ml20">移动端下载</h3>
+            </div>
+            <div class="erweima fl"> <img src="/static/images/erweima2.png" />
+                <h3 class="ml20">微信公众号</h3>
+            </div>
+            <div class="youyou fr">
+                <p ><img src="/static/images/logo.png"/></p>
+                <p >全国服务热线：</p>
+                <p>人工服务时间：8.00-12.00</p>
+            </div>
+        </div>
+    </div>
+</div>
+<?php if($this->session->get('utype')==2){ ?>
+<!--------------抢此任务弹出框------------------------>
+<div class="pay-qc">
+    <div class="qc">
+  <span class="qc-top">
+          <p class="qc-order-list">请选择买号</p>
+          <p class="qc-false"><a href=""> ｘ</a></p>
+      </span>
+        <div class="qc-bg ml20">
+            <p class="ml20 qc-prompt"><em>商家所需星级：</em><i>无星级</i></p>
+            <table border="1" cellspacing="0" cellpadding="0" class="ml20" bordercolor="dddddd">
+                <tr style="border-top:#none;">
+                    <td width="143" height="32" align="center">买号会员名</td>
+                    <td width="127" align="center">买号星级</td>
+                    <td width="144" align="center">操作</td>
+                </tr>
+                <input type="hidden" id="taskid" />
+                <?php foreach($tb as $t){ ?>
+                <tr>
+                    <td height="34"><input type="radio" value="<?php echo $t->id; ?>" name="tb" /><?php echo $t->name; ?></td>
+                    <td align="center"><?php if($t->heart_level==0){ ?>白号<?php }else{ ?><img src="/static/images/0<?php echo $t->heart_level; ?>.gif" /><?php } ?></td>
+                    <td align="center"><span class="xing"><a href="/user/updatecredit/<?php echo $t->id; ?>">更新星级</a></span></td>
+                </tr>
+                <?php } ?>
+            </table>
+            <span class="qc-success ml200 mt25"><a href="javascript:void(0)" onclick="snatchTask();">确定</a></span>
+            <span class="qc-filed ml14 mt25"><a href="javascript:void(0)" onclick="$('.pay-qc').css('display','none');">取消</a></span>
+            <div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function showTB(tid){
+                $('.pay-qc').css('display','block');
+                $('input#taskid').val(tid);
+            }
+            function snatchTask(){
+                var tbid=$("input[name='tb']:checked").val();
+                var taskid=$("input#taskid").val();
+                if(typeof(tbid)=='undefined'){
+                    alert("请至少选择一个买号！");
+                    return false;
+                }
+                $.ajax({
+                    url:"/task/snatch",
+                    type:"POST",
+                    data:{tbid:tbid,taskid:taskid},
+                    dataType:"json",
+                    success:function(result){
+                        if(result.status==1){
+                            alert(result.msg);
+                            $('.pay-qc').css('display','none');
+                            location.reload();
+                        }else{
+                            alert(result.msg);
+                        }
+                    }
+                });
+            }
+        </script>
+<?php } ?>
+</body>
+</html>

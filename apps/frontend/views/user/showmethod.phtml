@@ -1,0 +1,94 @@
+<?php if($data['rechargeway']==1){ ?>
+<!--微信扫描支付-->
+<div class="contentr-r fr">
+    <div class="ws ml200 mt45">
+        <h1><img src="/static/images/WePayLogo.png" width="204" height="54"></h1>
+        <span class="Image2"><img src="/static/images/weixinsaoma.jpg" />   </span>
+
+    </div>
+    <div class="sys ml200">
+        <p>请使用微信“扫一扫”</p>
+        <p>扫描二维码支付</p>
+    </div>
+    <p class="zfje1 ml200 mt15">支付金额：¥<span id="mylbl"><?php echo $data['money']; ?>.00</span></p>
+</div>
+<?php }elseif($data['rechargeway']==2){ ?>
+<!--支付宝扫码支付-->
+<div class="contentr-r fr">
+    <div class=" mt15 ml32">
+        <p><span class="f16">正在使用即时到账交易</span></p>
+        <p class="mt10">
+            <input name="userName" type="hidden" id="userName" value="tbzhenhua">
+            <b class="f16">平台账号：tbzhenhua充值</b>&nbsp;&nbsp;&nbsp; <span class="f16">收款方：右右电商平台</span> </p>
+    </div>
+    <div class="container_l mt25">
+        <div class="ss f16">扫一扫付款（元）</div>
+        <div class="f16"><span class="money"><?php echo $data['money']; ?></span></div>
+        <div class="img-wrap"><img src="/static/images/ewm.png" width="168" height="168" />
+            <div class="mt5"><img src="/static/images/ss.png" alt="扫一扫标识" class="fl mt5"> 打开手机支付宝<br>
+                扫一扫继续付款 </div></div>
+        <div class="mt25"><span  style="color:Red;font-size:18px; font-weight:bold;">提示:支付宝更新，充值请填写备注(<b style="color:#123ef8">7866</b>)。</span></div>
+        <div class=" mt15">
+            <input name="total_id" type="hidden" id="total_id" value="7866">
+            <span>电脑支付宝转款请转至：</span><b>admin@7ee.com</b>收款方右右电商平台（备注： <b>7866</b>）
+        </div>
+    </div>
+    <div class="container_d" id="banner">
+        <img class="d1" src="/static/images/z-1.png" style="display: block; z-index: 1;">
+        <img class="d1" src="/static/images/z-2.png" style="display: none; z-index: 2;">
+    </div>
+    <div class="container_t" >
+        <img class="dk" src="/static/images/resolve.png" style="display:none;"  />
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var bn_id = 0;
+        var bn_id2 = 1;
+        var speed33 = 4000;
+        var qhjg = 1;
+        $("#banner .d1").hide();
+        $("#banner .d1").eq(0).show();
+        //	       $(".dk").css("display", "block");
+        if ($("#banner .d1").length > 1) {
+            function Marquee33() {
+                bn_id2 = bn_id + 1;
+                if (bn_id2 > $("#banner .d1").length - 1) {
+                    bn_id2 = 0;
+                }
+                $("#banner .d1").eq(bn_id).css("z-index", "2");
+                $("#banner .d1").eq(bn_id2).css("z-index", "1");
+                $("#banner .d1").eq(bn_id2).show();
+                $("#banner .d1").eq(bn_id).fadeOut("slow");
+                $(".dk").show();
+                $(".dk").css("width", "180px")
+                bn_id = bn_id2;
+            };
+            setInterval(Marquee33, speed33);
+        }
+    })
+</script>
+<?php }else{ ?>
+<!--支付宝转账支付-->
+<div class="contentr-r fr">
+    <div class="zfcz f16 ml50 mt55">
+        <span class="f16">请支付宝转到帐号：</span> <i>543210@163.com 姓名：纪沐荣&nbsp;</i><input onclick="javascript: copyToClipboard('543210@163.com');" type="button" value="复制支付宝" class="sbt_add">，转账成功后，复制交易号点击提交，即可充值
+        <br> <a href="#">具体教程，请点击此处查看，或者联系企业QQ800016849</a>
+        <br> 转账金额只能为：<i>10元，50元，100元，500元</i>【转账其他金额均无效,交易号有效期为2天,请及时使用】
+    </div>
+    <div class="ml50">
+        <form action="/user/savetradenum" method="post">
+            <table width="469" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="146" height="56" align="right">支付宝交易号：</td>
+                    <td width="323" height="56"><input type="text" name="trade_num" class="kuang2" /></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><input class="submit_reg " type="submit" value="提交充值" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<?php } ?>

@@ -1,0 +1,53 @@
+<div class="contentr fr">
+    <div class="cr">
+        <p>奖励明细</p>
+    </div>
+    <div leftmargin=20 topmargin=20 class=" ml96 mt55" >
+        <table width="600" border="1" bordercolor="#dddddd" cellspacing="0" cellpadding="0" class="f16">
+
+            <tr >
+                <td width="200" height="60"  background="../images/table-bg.jpg">&nbsp;</td>
+                <td width="130" height="60" align="center" bgcolor="#f0f0f0">金币</td>
+                <td width="130" height="60" align="center" bgcolor="#f0f0f0">发布点</td>
+                <td width="130" height="60" align="center" bgcolor="#f0f0f0">积分</td>
+            </tr>
+            <tr >
+                <td height="40" align="center">新注册奖励</td>
+                <td height="40" align="center"><?php echo $reward->register_coin; ?></td>
+                <td height="40" align="center"><?php echo $reward->register_release; ?></td>
+                <td height="40" align="center"><?php echo $reward->register_point; ?></td>
+            </tr>
+            <tr >
+                <td height="40" align="center">推荐奖励</td>
+                <td height="40" align="center"><?php echo $reward->recommend_coin; ?></td>
+                <td height="40" align="center"><?php echo $reward->recommend_release; ?></td>
+                <td height="40" align="center"><?php echo $reward->recommend_point; ?></td>
+            </tr>
+            <tr >
+                <td height="40" align="center">发布奖励</td>
+                <td height="40" align="center"><?php echo $reward->release_coin; ?></td>
+                <td height="40" align="center"><?php echo $reward->release_release; ?></td>
+                <td height="40" align="center"><?php echo $reward->release_point; ?></td>
+            </tr>
+            <tr >
+                <td height="40" align="center">充值奖励</td>
+                <td height="40" align="center"><?php echo $reward->recharge_coin; ?></td>
+                <td height="40" align="center"><?php echo $reward->recharge_release; ?></td>
+                <td height="40" align="center"><?php echo $reward->recharge_point; ?></td>
+            </tr >
+            <tr>
+                <td height="40" align="center">活动奖励</td>
+                <td height="40" align="center"><?php echo $reward->activity_coin; ?></td>
+                <td height="40" align="center"><?php echo $reward->activity_release; ?></td>
+                <td height="40" align="center"><?php echo $reward->activity_point; ?></td>
+            </tr>
+            <tr>
+                <td height="40" align="center">累积奖励</td>
+                <td height="40" align="center"><?php echo $total_coin; ?></td>
+                <td height="40" align="center"><?php echo $total_release; ?></td>
+                <td height="40" align="center"><?php echo $total_point; ?></td>
+            </tr>
+        </table>
+
+    </div>
+</div>

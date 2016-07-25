@@ -1,0 +1,70 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <ul class="ulColumn2">
+        <form action="/user/doadd" method="post">
+            <li>
+                <span class="item_name" style="width:150px;">会员类型：</span>
+                <select class="select" name="type">
+                    <option value="1" selected="selected">商家</option>
+                    <option value="2">刷手</option>
+                </select>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">VIP：</span>
+                <select class="select" name="isvip">
+                    <option value="1" selected="selected">不是</option>
+                    <option value="2">是</option>
+                </select>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">会员身份：</span>
+                <select class="select" name="identity">
+                    <option value="1">外部会员</option>
+                    <option value="2" selected="selected">内部会员</option>
+                </select>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">会员账户：</span>
+                <input type="text" class="textbox textbox_295" placeholder="会员账户 必填" name="account"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">会员密码：</span>
+                <input type="password" class="textbox textbox_295" placeholder="会员密码 必填" name="password"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">会员QQ：</span>
+                <input type="text" class="textbox textbox_295" placeholder="会员QQ 必填" name="qq"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">会员邮箱：</span>
+                <input type="text" class="textbox textbox_295" placeholder="会员邮箱 必填" name="email"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">会员手机：</span>
+                <input type="text" class="textbox textbox_295" placeholder="会员手机 必填" name="mobile"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">会员金币数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="会员金币数" name="gcoin"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">接点数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="接点数" name="contact_num"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">发布点数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="发布点数" name="release_num"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">积分：</span>
+                <input type="text" class="textbox textbox_295" placeholder="积分" name="points"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:200px;"></span>
+                <input type="submit" class="link_btn" value="添加"/>
+            </li>
+        </form>
+    </ul>
+</section>
+{% endblock %}

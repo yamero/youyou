@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>首页</title>
+  <script type="text/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="/static/js/jquery.SuperSlide.2.1.1.js"></script>
+  <script type="text/javascript" src="/static/js/Validform_v5.3.2_min.js"></script>
+  <link href="/static/css/index.css" rel="stylesheet" type="text/css" />
+  <link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<!--top开始-->
+<div id="top">
+  <div class="top auto">
+    <?php if(!$this->session->has('uname')){ ?>
+    <div class="huanying fl" id="noname">
+      <p> <span class="midn"></span>您好,欢迎来到右右电商服务平台！<a href="#">[ 登录 ]</a><a href="/index/reg"> [ 免费注册 ]</a></p>
+    </div>
+    <?php }else{ ?>
+    <div class="huanying fl" id="isname">
+      <p> <span class="midn"></span>您好,<span><a href="/user/index"><?php echo $this->session->get('uname'); ?></a><a href="/index/logout"> [ 安全退出 ]</a></span></p>
+    </div>
+    <?php } ?>
+    <div class="jiaru fr">
+      <ul>
+        <li><a <?php if($this->session->has('uname')){ ?> href="/user/index" <?php }else{ ?> href="/" <?php } ?> >我的账户</a></li>
+        <li><a href="#">帮助中心</a></li>
+        <li class="phone">手机版</li>
+        <li class="wei">微信端
+      </ul>
+    </div>
+  </div>
+</div>
+<!--logo开始-->
+<div class="denglu auto">
+  <div class="logo fl"><img src="/static/images/logo.jpg"></div>
+</div>
+<!--导航开始-->
+<div id="nav">
+  <div class=" dh auto">
+    <ul class="auto">
+      <li><a href="/">首页</a></li>
+      <li><a <?php if($this->session->has('uname')){ ?> href="/task/index" <?php }else{ ?> href="/" <?php } ?> >任务大厅</a></li>
+      <li><a <?php if($this->session->has('uname')){ ?> href="/user/index" <?php }else{ ?> href="/" <?php } ?> >会员中心</a></li>
+      <li><a <?php if($this->session->has('uname')){ ?> href="/promotion/index" <?php }else{ ?> href="/" <?php } ?>>我的推广</a></li>
+      <li><a <?php if($this->session->has('uname')){ ?> href="/user/recharge" <?php }else{ ?> href="/" <?php } ?> >会员充值</a></li>
+      <li><a href="#">联系客服</a></li>
+    </ul>
+  </div>
+</div>
+
+<?php echo $this->getContent(); ?>
+
+<!--底部开始-->
+<div id="footer" class="mt30">
+  <div class="footer auto">
+    <div class="footer_l fl">
+      <div class="footer-about fl">
+        <h2 class="title">关于右右网</h2>
+      </div>
+      <div class="footer-help fl">
+        <h2 class="title">帮助中心</h2>
+      </div>
+      <div class="footer-safe fl">
+        <h2 class="title">安全保障</h2>
+      </div>
+      <!--<div class="footer-help fl"><h3>帮助中心</h3></div>-->
+    </div>
+    <div class="footer_r fr">
+      <div class="erweima fl"> <img src="/static/images/erweima1.png" />
+        <h3 class="ml20">移动端下载</h3>
+      </div>
+      <div class="erweima fl"> <img src="/static/images/erweima2.png" />
+        <h3 class="ml20">微信公众号</h3>
+      </div>
+      <div class="youyou fr">
+        <p ><img src="/static/images/logo.png"/></p>
+        <p >全国服务热线：</p>
+        <p>人工服务时间：8.00-12.00</p>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<div class="contentr fr">
+    <div class="cr">
+        <p>升级淘宝号V2</p>
+    </div>
+    <div class="sj ml80 mt30">
+        <p>提交审核通过后：日可做10单，周可做20单，月可做30单。 </p>
+        <p class="mt15">1.淘宝号必须达到四星以上，同时成长值也要达到V2以上</p>
+        <p class="mt15">2.淘宝号必须已经审核成功并且通过‘升级淘宝号’</p>
+        <p class="mt15">提交成功后客服将在24小时内进行审核！</p>
+    </div>
+    <div class="cr_1 ml50 mt30" >
+        <form action="" method="post">
+        <div class="mt25">
+            <label class="xlabel_l ">淘宝小号:</label>
+            <select class="kuang2" name="tb_id">
+                <?php foreach($tb as $t){ ?>
+                <option value="<?php echo $t->id; ?>"><?php echo $t->name; ?></option>
+                <?php } ?>
+            </select>
+        </div>
+        <input class="submit_reg ml230 mt25" type="submit" value="增加" /><span class="ml20"></a><a href="/user/bindtb">返回绑定淘宝号</a></span>
+        </form>
+    </div>
+    <div class="">
+        <table width="975" border="1" cellspacing="0" bordercolor="#dcdcdc">
+            <tr>
+                <td width="281" height="40" align="center" bgcolor="#fef7f2">淘宝号</td>
+                <td width="235" align="center" bgcolor="#fef7f2">提交的时间</td>
+                <td width="179" align="center" bgcolor="#fef7f2">审核状态</td>
+                <td width="262" align="center" bgcolor="#fef7f2">可用操作</td>
+            </tr>
+            <?php foreach($upgradetbv2 as $ut2){ ?>
+            <tr>
+                <td width="281" height="35" align="center" bgcolor="#f6f5f5"><em><?php echo $ut2->name; ?></em></td>
+                <td width="235" align="center" bgcolor="#f6f5f5"><em><?php echo date('Y/m/d H:i:s',$ut2->create_time); ?></em></td>
+                <td width="179" align="center" bgcolor="#f6f5f5"><em><?php if($ut2->verify_status==1){ ?>未审核<?php }elseif($ut2->verify_status==2){ ?>未通过审核<?php }else{ ?>成功<?php } ?></em></td>
+                <td width="262" align="center" bgcolor="#f6f5f5"><a href="/user/delupgradetbv2/<?php echo $ut2->id; ?>" onclick="return confirm('您确定要删除吗？');">删除</a></td>
+            </tr>
+            <?php } ?>
+        </table>
+    </div>
+</div>

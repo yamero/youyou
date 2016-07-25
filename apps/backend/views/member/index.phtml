@@ -1,0 +1,33 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <div class="page_title">
+        <h2 class="fl">管理员列表</h2>
+        <a class="fr top_rt_btn">右侧按钮</a>
+    </div>
+    <table class="table">
+        <tr>
+            <th>管理员名</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+        {% for v in page.items %}
+        <tr align="center">
+            <td>{{ v.name|e }}</td>
+            <td>{{ v.create_time|e }}</td>
+            <td>
+                <a href="/member/edit?id={{ v.id }}" class="inner_btn">编辑</a>
+                <a href="/member/del?id={{ v.id }}" class="inner_btn">删除</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <aside class="paging">
+        <a href="/member?page=1">第一页</a>
+        {% for num in startnum..lastnum %}
+        <a href="/member?page={{ num }}" {% if currentPage==num %} class="active" {% endif %}>{{ num }}</a>
+        {% endfor %}
+        <a href="/member?page={{ page.last }}">最后一页</a>
+    </aside>
+</section>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <ul class="ulColumn2">
+        <form action="/rechargecard/doadd" method="post">
+            <li>
+                <span class="item_name" style="width:150px;">充值卡卡号：</span>
+                <input type="text" class="textbox textbox_295" placeholder="充值卡卡号" name="card_num" id="card_num" />
+                <a href="javascript:void(0);" class="inner_btn" onclick="uuid()">随机生成</a>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">价值多少金币：</span>
+                <input type="text" class="textbox textbox_295" placeholder="价值多少金币" name="gcoin_num" />
+            </li>
+            <li>
+                <span class="item_name" style="width:200px;"></span>
+                <input type="submit" class="link_btn" value="添加"/>
+            </li>
+        </form>
+    </ul>
+</section>
+<script type="text/javascript">
+    //充值卡号生成函数
+    function uuid() {
+        var s = [];
+        var hexDigits = "0123456789abcdef";
+        for (var i = 0; i < 36; i++) {
+            s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+        }
+        s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
+        s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
+        s[8] = s[13] = s[18] = s[23] = "-";
+        var uuid = s.join("");
+        $("#card_num").val(uuid);
+    }
+</script>
+{% endblock %}

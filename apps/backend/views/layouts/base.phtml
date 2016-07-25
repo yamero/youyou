@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>后台管理系统</title>
+<meta name="author" content="DeathGhost" />
+<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+<link href="/umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="/static/js/html5.js"></script>
+<![endif]-->
+<script src="/static/js/jquery.js"></script>
+<script src="/static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="/umeditor/umeditor.config.js"></script>
+<script type="text/javascript" src="/umeditor/umeditor.min.js"></script>
+<script type="text/javascript" src="/umeditor/lang/zh-cn/zh-cn.js"></script>
+<script>
+	(function($){
+		$(window).load(function(){
+			
+			$("a[rel='load-content']").click(function(e){
+				e.preventDefault();
+				var url=$(this).attr("href");
+				$.get(url,function(data){
+					$(".content .mCSB_container").append(data); //load new content inside .mCSB_container
+					//scroll-to appended content 
+					$(".content").mCustomScrollbar("scrollTo","h2:last");
+				});
+			});
+			
+			$(".content").delegate("a[href='top']","click",function(e){
+				e.preventDefault();
+				$(".content").mCustomScrollbar("scrollTo",$(this).attr("href"));
+			});
+			
+		});
+	})(jQuery);
+</script>
+</head>
+<body>
+<!--header-->
+<header>
+ <h1><img src="/static/images/admin_logo.png"/></h1>
+ <ul class="rt_nav">
+  <li><a href="http://you.phalcon.com" target="_blank" class="website_icon">站点首页</a></li>
+  <li><a href="/member/edit?id={{ uid }}" class="admin_icon">{{ uname }}</a></li>
+  <li><a href="/index/logout" class="quit_icon">安全退出</a></li>
+ </ul>
+</header>
+
+<!--aside nav-->
+<aside class="lt_aside_nav content mCustomScrollbar">
+ <h2><a href="/">起始页</a></h2>
+ <ul>
+ <li>
+     <dl>
+         <dt>站点相关</dt>
+         <dd><a href="/config/edit" {% if operation=='config' %} class="active" {% endif %}>配置站点</a></dd>
+         <dd><a href="/rewarddetail/edit" {% if operation=='rewarddetail' %} class="active" {% endif %}>奖励明细</a></dd>
+         <dd><a href="/bank/" {% if operation=='banklist' %} class="active" {% endif %}>银行列表</a></dd>
+         <dd><a href="/bank/add" {% if operation=='bankadd' %} class="active" {% endif %}>添加银行</a></dd>
+     </dl>
+ </li>
+  <li>
+   <dl>
+    <dt>管理员</dt>
+    <dd><a href="/member" {% if operation=='memberlist' %} class="active" {% endif %}>管理员列表</a></dd>
+    <dd><a href="/member/add" {% if operation=='memberadd' %} class="active" {% endif %}>添加管理员</a></dd>
+   </dl>
+  </li>
+  <li>
+   <dl>
+    <dt>文章</dt>
+    <dd><a href="/news/" {% if operation=='newslist' %} class="active" {% endif %}>文章列表</a></dd>
+    <dd><a href="/news/add" {% if operation=='newsadd' %} class="active" {% endif %}>添加文章</a></dd>
+    <dd><a href="/newstype" {% if operation=='newstypelist' %} class="active" {% endif %}>类型列表</a></dd>
+    <dd><a href="/newstype/add" {% if operation=='newstypeadd' %} class="active" {% endif %}>添加类型</a></dd>
+   </dl>
+  </li>
+ <li>
+     <dl>
+         <dt>会员相关</dt>
+         <dd><a href="/user/" {% if operation=='userlist' %} class="active" {% endif %}>会员列表</a></dd>
+         <dd><a href="/user/add" {% if operation=='useradd' %} class="active" {% endif %}>添加会员</a></dd>
+         <dd><a href="/quickrecharge/" {% if operation=='quickrechargelist' %} class="active" {% endif %}>快速充值列表</a></dd>
+         <dd><a href="/rechargecard/" {% if operation=='rechargecardlist' %} class="active" {% endif %}>充值卡列表</a></dd>
+         <dd><a href="/rechargecard/add" {% if operation=='rechargecardadd' %} class="active" {% endif %}>添加充值卡</a></dd>
+         <dd><a href="/shop/" {% if operation=='shoplist' %} class="active" {% endif %}>绑定店铺列表</a></dd>
+         <dd><a href="/taobao/" {% if operation=='taobaolist' %} class="active" {% endif %}>绑定淘宝号申请列表</a></dd>
+         <dd><a href="/tblevel/" {% if operation=='tblevellist' %} class="active" {% endif %}>更新淘宝号信誉申请列表</a></dd>
+         <dd><a href="/upgradetb/" {% if operation=='upgradetblist' %} class="active" {% endif %}>升级淘宝号申请列表</a></dd>
+         <dd><a href="/upgradetbv2/" {% if operation=='upgradetbv2list' %} class="active" {% endif %}>升级淘宝号V2申请列表</a></dd>
+         <dd><a href="/buyreleasebycard/" {% if operation=='buyreleasebycardlist' %} class="active" {% endif %}>充值卡购买发布点记录</a></dd>
+         <dd><a href="/buyreleasebycoin/" {% if operation=='buyreleasebycoinlist' %} class="active" {% endif %}>金币购买发布点记录</a></dd>
+         <dd><a href="/bankapply/" {% if operation=='bankapplylist' %} class="active" {% endif %}>银行认证申请列表</a></dd>
+         <dd><a href="/exchange/" {% if operation=='exchangelist' %} class="active" {% endif %}>金币兑现申请列表</a></dd>
+     </dl>
+ </li>
+   <li>
+     <dl>
+      <dt>任务相关</dt>
+        <dd><a href="/task/"{% if operation=='tasklist' %} class="active" {% endif %}>任务列表</a></dd>
+     </dl>
+  </li>
+  <li>
+   <p class="btm_infor">© 刘志伟 版权所有</p>
+  </li>
+ </ul>
+</aside>
+
+<section class="rt_wrap content mCustomScrollbar">
+ <div class="rt_content">
+      {% block content %}
+
+      {% endblock %}
+ </div>
+</section>
+</body>
+</html>

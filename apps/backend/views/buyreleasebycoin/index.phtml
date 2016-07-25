@@ -1,0 +1,35 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <div class="page_title">
+        <h2 class="fl">金币购买发布点记录列表</h2>
+    </div>
+    <table class="table">
+        <tr>
+            <th>购买会员</th>
+            <th>购买发布点数</th>
+            <th>扣除金币数</th>
+            <th>购买时间</th>
+            <th>操作</th>
+        </tr>
+        <?php foreach($page->items as $item){ ?>
+        <tr align="center">
+            <td><?php echo $item->account; ?></td>
+            <td><?php echo $item->point_num; ?></td>
+            <td><?php echo $item->coin_num; ?></td>
+            <td><?php echo date('Y-m-d H:i',$item->buy_time); ?></td>
+            <td>
+                <a href="/buyreleasebycoin/del/<?php echo $item->id; ?>" class="inner_btn">删除</a>
+            </td>
+        </tr>
+        <?php } ?>
+    </table>
+    <aside class="paging">
+        <a href="/buyreleasebycoin/index/1">第一页</a>
+        <?php for($i=$startnum;$i<=$lastnum;$i++){ ?>
+            <a href="/buyreleasebycoin/index/<?php echo $i; ?>" <?php if($i==$currentPage){ ?> class="active" <?php } ?>><?php echo $i; ?></a>
+        <?php } ?>
+        <a href="/buyreleasebycoin/index/<?php echo $page->last; ?>">最后一页</a>
+    </aside>
+</section>
+{% endblock %}

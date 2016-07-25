@@ -1,0 +1,69 @@
+<div class="contentr fr">
+    <div class="cr">
+        <p>银行认证</p>
+    </div>
+    <div class="renzheng">
+        <p class="  mt25 ml32">1.只能绑定一张银行卡，且此银行卡为【金币兑换】时所使用的银行卡，请考虑清楚后再认证！</p>
+        <p class=" mt15 ml32" style="color:#cf4503">2.务必选择正确的【银行名称】，正确填写【真实姓名】对应的【银行卡卡号】，以免打款失败！</p>
+        <p class="  mt15 ml32">3.提交后24小时内有专员处理打款。打款前，可随时修改银行信息。已打款后，将无法修改，切记核实清楚银行信息后再提交！</p>
+        <p class=" mt15 ml32">4.显示【已打款，进入验证】后，银行将在 2个工作日内往您银行卡转入0.01-1元，请收到金额后，回到网站填写，完成验证！</p>
+        <p class=" mt15 ml32">5.24小时内验证机会只有2次，2次都失败后，须扣除1金币手续费重新认证（银行重新打款），并且24小时后才可继续验证，避免<br />
+            浪费宝贵时间，请查询清楚后，再填写验证！</p>
+        <p class=" mt25 ml32" style="color:#cf4503">PS：星期一到星期五为工作日，星期六星期日为非工作日。</p>
+    </div>
+    <?php if($bankapply->count()<=0){ ?>
+    <div class="cr_1 ml90 mt30" >
+        <form action="" method="post">
+            <div class="mt25" style="margin-bottom: 0px;">
+                <label class="xlabel">持卡人姓名:</label>
+                <input type="text" name="real_name" class="kuang2"/>
+            </div>
+            <div>
+                <label class="xlabel mt25">银行名称:</label>
+                <select name="bank_id" class="kuang2">
+                    <option value="0">请选择</option>
+                    <?php foreach($bank as $b){ ?>
+                    <option value="<?php echo $b->id; ?>"><?php echo $b->bank_name; ?></option>
+                    <?php } ?>
+                </select>
+                <span>仅支持18家银行的借记卡</span>
+            </div>
+            <div class="mt25" style="margin-top: 0px;">
+                <label class="xlabel">银行卡卡号:</label>
+                <input type="text" name="bankcard_num" class="kuang2" />
+            </div>
+            <div class="mt25" style="margin-bottom: 0px;">
+                <label class="xlabel">提醒手机:</label>
+                <input type="text" name="mobile_num" class="kuang2" />
+            </div>
+            <input class="submit_reg ml160 mt25" type="submit" value="添加" />
+        </form>
+    </div>
+    <?php } ?>
+    <div class=" mt30">
+        <table width="975" height="40" border="1" cellspacing="0" bordercolor="#dcdcdc" >
+            <tr>
+                <td width="108" align="center" bgcolor="#fef7f2">流水号</td>
+                <td width="96" align="center" bgcolor="#fef7f2">真实姓名</td>
+                <td width="141" align="center" bgcolor="#fef7f2">银行名称</td>
+                <td width="155" align="center" bgcolor="#fef7f2">银行卡卡号</td>
+                <td width="125" align="center" bgcolor="#fef7f2">提醒手机</td>
+                <td width="125" align="center" bgcolor="#fef7f2">申请日期</td>
+                <td width="125" align="center" bgcolor="#fef7f2">处理日期</td>
+                <td width="66" align="center" bgcolor="#fef7f2">操作</td>
+            </tr>
+            <?php foreach($bankapply as $ba){ ?>
+            <tr>
+                <td width="108" align="center"><?php echo $ba->serial_num; ?></td>
+                <td width="70" align="center"><?php echo $ba->real_name; ?></td>
+                <td width="141" align="center"><?php echo $ba->bank_name; ?></td>
+                <td width="155" align="center"><?php echo $ba->bankcard_num; ?></td>
+                <td width="125" align="center"><?php echo $ba->mobile_num; ?></td>
+                <td width="125" align="center"><?php echo date('Y-m-d H:i',$ba->create_time); ?></td>
+                <td width="125" align="center"><?php if($ba->handle_time){ echo date('Y-m-d H:i',$ba->handle_time); }else{ ?>未处理<?php } ?></td>
+                <td width="100" align="center"><a href="/user/delbankapply" style="margin-right:6px;" onclick="return confirm('你确认要删除吗？');">删除</a><?php if($ba->handle_time&&$ba->verification==1){ ?><a href="/user/docertification">认证</a><?php } ?><?php if($ba->verification==2){ ?><span style="color:green;">验证通过</span><?php } ?></td>
+            </tr>
+            <?php } ?>
+        </table>
+    </div>
+</div>

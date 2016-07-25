@@ -1,0 +1,32 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <div class="page_title">
+        <h2 class="fl">银行列表</h2>
+    </div>
+    <table class="table">
+        <tr>
+            <th>银行id</th>
+            <th>银行名称</th>
+            <th>操作</th>
+        </tr>
+        {% for v in page.items %}
+        <tr align="center">
+            <td>{{ v.id|e }}</td>
+            <td>{{ v.bank_name|e }}</td>
+            <td>
+                <a href="/bank/edit/{{ v.id }}" class="inner_btn">编辑</a>
+                <a href="/bank/del/{{ v.id }}" class="inner_btn">删除</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <aside class="paging">
+        <a href="/newstype/index/1">第一页</a>
+        {% for num in startnum..lastnum %}
+        <a href="/newstype/index/{{ num }}" {% if currentPage==num %} class="active" {% endif %}>{{ num }}</a>
+        {% endfor %}
+        <a href="/newstype/index/{{ page.last }}">最后一页</a>
+    </aside>
+</section>
+{% endblock %}

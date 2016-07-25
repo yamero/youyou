@@ -1,0 +1,142 @@
+<!--实名认证-->
+<div id="mibao">
+    <div class="xinyonghu-1">
+        <p>步骤二,实名认证</p>
+        <div class="zhuce1">
+            <form action="/register/doregiste" method="post">
+            <?php foreach($data as $k=>$v){ ?>
+                <input type="hidden" name="<?php echo $k; ?>" value="<?php echo $v; ?>" />
+            <?php } ?>
+            <table width="840px" height="1451" cellpadding="0" cellspacing="0" class="forml_table" >
+                <tr >
+                    <th width="154" height="71"><span class="red">*</span> 姓名：</th>
+                    <td width="684"><input  type="text" name="real_name" class="kuang1">
+                        <label style=" color:#999999">&nbsp;&nbsp;请填写您的真实姓名</label></td>
+                </tr>
+                <tr>
+                    <th height="33"><span class="red">*</span> 身份证号码：</th>
+                    <td><input type="text" name="idcard_number" class="kuang1"></td>
+                </tr>
+                <tr>
+                    <th height="228"><span class="red">*</span> 手持身份证照：</th>
+                    <td><span class="sc">
+            <div><img src="/static/images/shenfenzheng1.jpg"  id="thumb1"  alt="手持身份证照" width="174px" height="140px" /></div>
+            <div> <span class="file mt15" >上传图片
+              <input type="file" onchange="doupload($(this),1)">
+              <input type="hidden" id="hinput1" name="idcard_gesture" />
+              </span> </div>
+            </span> <span class="auth-tmpl"><img src="/static/images/cankaotuli1.png" /></span></td>
+                </tr>
+                <tr>
+                    <th height="31"><span class="red">*</span> 手势照片：</th>
+                    <td><span class="sc">
+            <div><img src="/static/images/shenfenzheng1.jpg" id="thumb2"  alt="手势照片"  width="174px" height="140px" /></div>
+            <div> <span class="file mt15" >上传图片
+              <input type="file" onchange="doupload($(this),2)" />
+              <input type="hidden" id="hinput2" name="gesture" />
+              </span> </div>
+            </span> <span class="auth-tmpl"><img src="/static/images/cankaotuli2.png" /></span></td>
+                </tr>
+                <tr>
+                    <th height="228"><span class="red">*</span> 身份证正面：</th>
+                    <td><span class="sc">
+            <div><img src="/static/images/shenfenzheng1.jpg"  id="thumb3"  alt="身份证正面" width="174px" height="140px" /></div>
+            <div> <span class="file mt15" >上传图片
+              <input type="file" onchange="doupload($(this),3)" />
+              <input type="hidden" id="hinput3" name="idcard_front" />
+              </span> </div>
+            </span> <span class="auth-tmpl"><img src="/static/images/cankaotuli3.png" /></span></td>
+                </tr>
+                <tr>
+                    <th height="31"><span class="red">*</span> 身份证背面：</th>
+                    <td><span class="sc">
+            <div><img src="/static/images/shenfenzheng1.jpg"  id="thumb4"  alt="手持身份证照" width="174px" height="140px" /></div>
+            <div> <span class="file mt15" >上传图片
+              <input type="file" onchange="doupload($(this),4)" />
+              <input type="hidden" id="hinput4" name="idcard_back" />
+              </span> </div>
+            </span> <span class="auth-tmpl"><img src="/static/images/cankaotuli4.png" /></span></td>
+                </tr>
+                <tr>
+                    <th height="228"><span class="red">*</span> 商铺截图：</th>
+                    <td><span class="sc">
+            <div><img src="/static/images/shenfenzheng1.jpg" id="thumb5" width="174px" height="140px" /></div>
+            <div> <span class="file mt15" >上传图片
+              <input type="file" onchange="doupload($(this),5)" />
+              <input type="hidden" id="hinput5" name="shop_pic" />
+              </span> </div>
+            </span> <span class="auth-tmpl"><img src="/static/images/cankaotuli5.png" /></span></td>
+                </tr>
+                <tr>
+                    <th height="53"><span class="red">*</span> 所在地区：</th>
+                    <td><select name="province" onchange="changeCity(this.value);" style="height:30px;">
+                            <option value="0" selected="selected">请选择</option>
+                            <?php foreach($province as $p){ ?>
+                                <option value="<?php echo $p->Id; ?>"><?php echo $p->Name; ?></option>
+                            <?php } ?>
+                        </select>
+                        <select name="city" id="city" onchange="changeArea(this.value);"  style="height:30px;">
+                            <option value="0" selected="selected">请选择</option>
+                        </select>
+                        <select name="area" id="area" style="height:30px;">
+                            <option value="0" selected="selected">请选择</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <th height="55"><span class="red">*</span> 联系地址：</th>
+                    <td><input type="text" name="address" class="kuang1" />
+                        <label  style=" color:#999999">&nbsp;&nbsp;请填写真实地址，否则审核将不通过</label></td>
+                </tr>
+
+                <tr>
+                    <th height="44"><span class="red">*</span> 返款支付宝账户：</th>
+                    <td><input type="text" name="alipay" class="kuang1" />
+                        <label style=" color:#999999">&nbsp;&nbsp;必须为注册人本人的支付宝账户</label></td>
+                </tr>
+                <tr>
+                    <th height="60"><span class="red">*</span> 返款财付通账户：</th>
+                    <td><input type="text" name="tenpay" class="kuang1" />
+                        <label style=" color:#999999">&nbsp;&nbsp;必须为注册人本人的财付通账户</label></td>
+                </tr>
+                <tr><th height="69"></th>
+                    <td><label><input type="submit" value="确认提交" class="btn"></label></td></tr>
+            </table>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function doupload(fileobj,n){
+        var formData=new FormData();
+        formData.append('file',fileobj[0].files[0]);
+        $.ajax({
+            url: '/register/uploadthumb',
+            type: 'POST',
+            cache: false,
+            data: formData,
+            dataType:'json',
+            processData: false,
+            contentType: false
+        }).done(function(res) {
+            if(res.status==1){
+                $('img#thumb'+n).attr('src',res.info);
+                $('input#hinput'+n).val(res.info);
+            }else{
+                alert(res.info);
+            }
+        }).fail(function(res) {
+            alert('上传文件失败，请稍候重重试！');
+        });
+    }
+    function changeCity(id){
+        $.post("/register/getcity",{id:id},function(data){
+            $('#city').html(data);
+            $('#area').html("<option value='0' selected='selected'>--请选择--</option>");
+        });
+    }
+    function changeArea(id){
+        $.post("/register/getarea",{id:id},function(data){
+            $('#area').html(data);
+        });
+    }
+</script>

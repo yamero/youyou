@@ -1,0 +1,36 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <div class="page_title">
+        <h2 class="fl">更新淘宝号信誉申请列表</h2>
+    </div>
+    <table class="table">
+        <tr>
+            <th>申请人(会员名)</th>
+            <th>淘宝号</th>
+            <th>淘宝号当前信誉</th>
+            <th>申请提交时间</th>
+            <th>操作</th>
+        </tr>
+        <?php foreach($page->items as $item){ ?>
+        <tr align="center">
+            <td><?php echo $item->account; ?></td>
+            <td><?php echo $item->name; ?></td>
+            <td><?php if($item->heart_level==0){ ?>白号<?php }else{ ?><img src="/static/images/0<?php echo $item->heart_level; ?>.gif" /><?php } ?></td>
+            <td><?php echo date('Y-m-d H:i',$item->create_time); ?></td>
+            <td>
+                <a href="/tblevel/edit/<?php echo $item->tb_id; ?>" class="inner_btn">编辑</a>
+                <a href="/tblevel/del/<?php echo $item->id; ?>" class="inner_btn">删除</a>
+            </td>
+        </tr>
+        <?php } ?>
+    </table>
+    <aside class="paging">
+        <a href="/tblevel/index/1">第一页</a>
+        <?php for($i=$startnum;$i<=$lastnum;$i++){ ?>
+            <a href="/tblevel/index/<?php echo $i; ?>" <?php if($i==$currentPage){ ?> class="active" <?php } ?>><?php echo $i; ?></a>
+        <?php } ?>
+        <a href="/tblevel/index/<?php echo $page->last; ?>">最后一页</a>
+    </aside>
+</section>
+{% endblock %}

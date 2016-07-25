@@ -1,0 +1,22 @@
+<div class="contentr fr">
+    <div class="tjig"><img src="/static/images/woyaotuijian.jpg" /></div>
+    <div class="fa">
+        <h1 class="fa_1 f18 ml32 mt25">专属链接推广</h1>
+        <p class="f16 ml32 mt25">快来做任务赚钱吧，需要请点击我的邀请链接注册：<span><a href="#" id="plink"><?php echo $link; ?></a></span></p>
+        <p class="ml32 mt25"><span class="fz fl"><a href="javascript:void(0);" id="copy">复制地址</a></span><span class="dj f16 ml32">(如果点击无响应请手动复制)</span></p>
+    </div>
+    <div class="fa">
+        <h1 class="fa_1 f18 ml32 mt25">&nbsp;</h1>
+    </div>
+</div>
+<script type="text/javascript">
+    $("a#copy").zclip({
+        path:"/static/js/ZeroClipboard.swf",
+        copy:function(){
+            return $("a#plink").text();
+        },
+        afterCopy:function(){
+            alert("复制成功");
+        }
+    });
+</script>

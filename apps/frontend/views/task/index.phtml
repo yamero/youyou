@@ -1,0 +1,157 @@
+<script type="text/javascript">
+    function showHeart(v,n){
+        if(v=="0"){
+            $("img#heart"+n).attr("src","");
+        }else{
+            $("img#heart"+n).attr("src","/static/images/"+v+".gif");
+        }
+    }
+</script>
+<div class="contentr_6 fr">
+    <div class="rt mt15">
+        <form action="/task/index" method="post">
+        <div>
+            <span class="ml14 fl mt5 ">接单类型:&nbsp; </span>
+            <select name="splatform" class=" kuang5 fl">
+                <option value="0">全部</option>
+                <option value="1">淘宝</option>
+                <option value="2">京东</option>
+            </select>
+            <select name="stype" class=" kuang5 fl">
+                <option value="0">全部</option>
+                <option value="1">电脑单</option>
+                <option value="2">手机单</option>
+                <option value="3">浏览单</option>
+                <option value="4">秒拍单</option>
+            </select>
+        </div>
+        <div class="fl">
+            <span class="ml14 fl  mt5">发布人级别:&nbsp;</span>
+            <select name="level1" onchange="showHeart(this.value,1);" class="kuang5">
+                <option value="0">全部</option>
+                <option value="1">一心</option>
+                <option value="2">二心</option>
+                <option value="3">三心</option>
+                <option value="4">四心</option>
+                <option value="5">五心</option>
+                <option value="6">钻以上</option>
+            </select>
+            <img id="heart1" src="" />
+        </div>
+        <div class="fl">
+            <span class="ml14 fl  mt5">选择买号:&nbsp;</span>
+            <select name="level2" onchange="showHeart(this.value,2);" class="kuang5">
+                <option value="0">全部</option>
+                <option value="01">一心</option>
+                <option value="02">二心</option>
+                <option value="03">三心</option>
+                <option value="04">四心</option>
+                <option value="05">五心</option>
+                <option value="06">钻以上</option>
+            </select>
+            <img id="heart2" src="" />
+        </div>
+        <div>
+            <span class="ml14 ml14 fl mt5">支付方式:&nbsp;</span>
+            <select name="remote" class=" kuang5 fl ">
+                <option value="0">全部</option>
+                <option value="1">远程</option>
+                <option value="2">垫付</option>
+            </select>
+        </div>
+    </div>
+    <div class="rt1">
+        <label class=" ml14 mt15">任务价格:</label>
+        <input type="radio" name="price" value="0" checked="checked" />
+        全部
+        <input type="radio" name="price" value="1-100" />
+        0-100
+        <input type="radio" name="price" value="101-200" />
+        100-200
+        <input type="radio" name="price" value="201-300" />
+        200-300
+        <input type="radio" name="price" value="301-500" />
+        300-500
+        <input type="radio" name="price" value="501-1000" />
+        500-1000
+        <input type="radio" name="price" value="1001-10000" />
+        1000以上
+    </div>
+    <div class="sx-wrap mt15">
+        <div class="sx fl"> <span class="fl">
+            <select class="middle ml14" name="searchKey">
+                <option value="0">请选择</option>
+                <option value="1">任务编号</option>
+                <option value="2">商家会员名</option>
+            </select>
+            </span> <span class="fl">
+            <input class="ka" name="searchWords" type="text">
+            </span>
+             <span class="fl">
+            <input type="submit" class="search-button fl" value="确认">
+            </span> </div>
+        <p>&nbsp;</p>
+    </div>
+    </form>
+    <div class="main-list ml14">
+        <!--  任务开始-->
+        <?php foreach($page->items as $t){ ?>
+        <div class="task-info mt10" style="margin-top:10px;">
+            <div class="title-1">
+                <span class="ml14"><?php echo $t->sn; ?>)</span><i>(剩:<?php echo $t->number; ?>单)</i>
+                <span class=" ml20"><?php echo $t->account; ?></span>
+                <span class="ml20">积分(
+                    <?php if($t->points<4){ ?>白号
+                    <?php }elseif($t->points>=4&&$t->points<=10){ ?><img src="/static/images/1.gif" style="position: relative;top:3px;"/>
+                    <?php }elseif($t->points>=11&&$t->points<=40){ ?><img src="/static/images/2.gif" style="position: relative;top:3px;"/>
+                    <?php }elseif($t->points>=41&&$t->points<=90){ ?><img src="/static/images/3.gif" style="position: relative;top:3px;"/>
+                    <?php }elseif($t->points>=91&&$t->points<=150){ ?><img src="/static/images/4.gif" style="position: relative;top:3px;"/>
+                    <?php }elseif($t->points>=151&&$t->points<=250){ ?><img src="/static/images/5.gif" style="position: relative;top:3px;"/>
+                    <?php }elseif($t->points>=251&&$t->points<=500){ ?><img src="/static/images/6.gif" style="position: relative;top:3px;"/><?php } ?>)
+                </span>
+                <em class="ml20"><?php echo $t->special_ask; ?></em>
+            </div>
+            <ul class="clearfix mt10">
+                <li class="task-protey">
+                    <p class="ml14 mt30">刷手佣金</p>
+                    <p class=" mt10 ml14 fw"><?php echo $t->commission; ?>.00</p>
+                </li>
+                <li class="task-protey">
+                    <p class="ml14 mt30">任务价格</p>
+                    <p class=" mt10 ml14 fw">
+                        <?php echo $t->total_money; ?>.00
+                        <span class="ibtn-icon mt10 ml14" style="cursor: default;"><?php if($t->remote_pay==1){ ?>远程<?php }else{ ?>垫付<?php } ?></span>
+                    </p>
+                </li>
+                <li class="task-protey">
+                    <p class="ml14 mt30">买号级别</p>
+                    <p class=" mt10 ml14 fw"><?php if($t->isauth==2){ ?>不限制<?php }else{ ?><img src="/static/images/0<?php echo $t->auth_level; ?>.gif" /><?php } ?></p>
+                </li>
+                <li class="task-protey1">
+                    <p class="ml14">任务需求</p>
+                    <p class="ml14 mt5">假聊：<?php if($t->false_talk==1){ ?>【需要】<?php }else{ ?>【不需要】<?php } ?> 禁止城市：【<?php if($t->city==0){ ?>无<?php }else{ echo $t->Name; } ?>】</p>
+                    <p class="ml14">远程付款：<?php if($t->remote_pay==1){ ?>【是】<?php }else{ ?>【否】<?php } ?> 返款时间：【<?php echo $t->return_time; ?>小时】
+                    <p class="ml14">是否更改收货地址：<?php if($t->change_address==1){ ?>【是】<?php }else{ ?>【否】<?php } ?> 手机单：<?php if($t->type==2){ ?>【是】<?php }else{ ?>【否】<?php } ?>
+                    <p class="ml14">
+                        小号认证要求：<?php if($t->isauth==1){ ?>【是】<?php }else{ ?>【否】<?php } ?>
+                        小号信誉要求：<?php if($t->isauth==2){ ?>【不限制】<?php }elseif($t->auth_level==1){ ?>【一心以上】<?php }elseif($t->auth_level==2){ ?>【二心以上】<?php }elseif($t->auth_level==3){ ?>【三心以上】
+                        <?php }elseif($t->auth_level==4){ ?>【四心以上】<?php }elseif($t->auth_level==5){ ?>【五心以上】<?php }elseif($t->auth_level==6){ ?>【一钻以上】<?php } ?>
+                </li>
+                <?php if($this->session->get('utype')==2){ ?><li class="task-protey2"> <a href="javascript:void(0)" class="ibtn-big2 mt45 ml14" onclick="showTB(<?php echo $t->id; ?>);">抢此任务</a></li><?php } ?>
+            </ul>
+        </div>
+        <?php } ?>
+        <!-- 任务结束-->
+        <div class=" fenye mt25 ml170">
+            <?php if($page->last>1){ ?>
+            <ul>
+                <li>
+                    <?php for($i=$startnum;$i<=$lastnum;$i++){ ?>
+                    <a href="/task/index/<?php echo $i; ?>" <?php if($i==$currentPage){ ?>style="color:#FFF; background:#000099;"<?php } ?> ><?php echo $i; ?></a>
+                    <?php } ?>
+                </li>
+            </ul>
+            <?php } ?>
+        </div>
+    </div>
+</div>

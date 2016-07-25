@@ -1,0 +1,21 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+    <section>
+        <ul class="ulColumn2">
+            <form action="/member/doadd" method="post">
+            <li>
+                <span class="item_name" style="width:120px;">管理员名：</span>
+                <input type="text" class="textbox textbox_295" placeholder="用户名" name="name"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:120px;">管理员密码：</span>
+                <input type="text" class="textbox textbox_295" placeholder="密码" name="password"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;"></span>
+                <input type="submit" class="link_btn"/>
+            </li>
+            </form>
+        </ul>
+    </section>
+{% endblock %}

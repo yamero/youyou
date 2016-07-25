@@ -1,0 +1,339 @@
+<div class=" contentr_2 fr">
+    <div class="cr">
+        <p >发布任务-发布内容</p>
+    </div>
+    <div>
+        <form action="" class="mt10" method="post" id="form1" name="form1">
+            <div>
+                <label class="xlabel_2 mt15">绑定商铺:</label>
+                <select name="shop_id" class=" kuang3" style="width: auto;">
+                    <?php foreach($shop as $s){ ?>
+                    <option value="<?php echo $s->id; ?>"><?php echo $s->shop; ?></option>
+                    <?php } ?>
+                </select>
+                <em>掌柜号即卖家旺旺号</em>
+            </div>
+            <div>
+                <label class="xlabel_2 mt15">总金额:</label>
+                <input name="total_money" class=" kuang4" type="text" />
+                <em>元，请填写任务总金额，只能输入数字1-5000（远程付款的请输入1）</em></div>
+            <div>
+                <label class="xlabel_2 mt15">任务佣金:</label>
+                <input name="commission" class=" kuang4" type="text" />
+                <a href="javascript:void(0)" class="pay_btn" >查看佣金规则</a>
+            </div>
+            <div id="c">
+                <label class="xlabel_2 mt15">关键搜索词：</label>
+                <input type="text" name="keyword_0" value="" class="kuang4" />
+            </div>
+            <input type="button" id="e" value="添加"  class="ml145"/>
+            <br />
+            <script language="javascript">
+                var i = 1;
+                document.getElementById("e").onclick=function(){
+                    document.getElementById("c").innerHTML+="<div id=kdiv_"+i+"><input name='keyword_"+i+"' type='text' style='margin-left:144px;margin-top:5px;' class='kuang4' /><input type='button' value='删除' onclick='del1("+i+")' /></div>";
+                    i = i + 1;
+                }
+                function del1(o){
+                    document.getElementById("c").removeChild(document.getElementById("kdiv_"+o));
+                }
+            </script>
+            <div>
+                <label class="xlabel_2 mt15">上传图片:</label>
+                <input type="file" id="fileupload">
+                <input type="button" value="上传" id="btnupload">
+                <input type="hidden" name="img_thumb" id="img_thumb" />
+                <font color="red">（上传小于500KB的图片;若图片无法显示，则请把图修改为JPG格式）</font> <span id="lblpicmsg" style="color:Red;"></span>
+                <div style="position:relative;">
+                    <div id="imginfo"><img src=""></div>
+                </div>
+                <div id="imglist">
+                    <p class=" ml145 mt15"><img src="/static/images/renwutupian.jpg" id="thumb" width="215px" height="230px" /></p>
+                </div>
+            </div>
+            <div id="d">
+                <label class="xlabel_2 mt15">任务详细要求：</label>
+                <textarea rows="4" cols="70" name="ask_0" style="margin-top:5px;"></textarea>
+            </div>
+            <input type="button" id="b" value="添加"  class="ml145" />
+            <br />
+            <script language="javascript">
+                var j = 1;
+                document.getElementById("b").onclick=function(){
+                    document.getElementById("d").innerHTML+="<div id=adiv_"+j+"><textarea rows='4' cols='70' name='ask_"+j+"' type='text' style='margin-left:144px;margin-top:5px;' ></textarea><input type='button' value='删除' onclick='del2("+j+")' /></div>";
+                    j = j + 1;
+                }
+                function del2(o){
+                    document.getElementById("d").removeChild(document.getElementById("adiv_"+o));
+                }
+            </script>
+            <label class="xlabel_2 mt15">增拍店铺宝贝数量:</label>
+            <select name="add_num" class=" kuang5">
+                <?php for($i=0;$i<=5;$i++){ ?>
+                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                <?php } ?>
+            </select>
+            <em>增拍店铺宝贝数量</em>
+    </div>
+    <textarea class="mt15 ml145" rows="5" cols="70" name="add_title"></textarea>
+    <br />
+    <label class="xlabel_2 mt15">商品确认收货时间:</label>
+    <input id="rbcqrshsj1" type="radio" name="confirm_type" value="1" >
+    <input name="txtyear" type="text" value="" maxlength="4" id="txtyear"  style="width:40px;">
+    &nbsp;
+    <input name="txtmonth" type="text" value="" maxlength="2" id="txtmonth"   style="width:30px;">
+    &nbsp;
+    <input name="txtday" type="text" value="" maxlength="2" id="txtday" style="width:30px;">
+    <input id="rbcqrshsj2" type="radio" name="confirm_type" value="2">
+    根据物流到货时间
+    <input id="rbcqrshsj3" type="radio" name="confirm_type" value="3" checked="checked" />
+    站内详聊
+    <div>
+        <label class="xlabel_2 mt15">评价时间:</label>
+        <input type="radio" name="comment_time" value="1" />
+        <i>等待系统默认</i>
+        <input type="radio" name="comment_time" value="2" />
+        <i>确认收货后马上评价</i>
+        <input type="radio" name="comment_time" value="3" checked="checked" />
+        <i>站内详聊</i><em class="ml5">建议提供1-2元给部分淘客，让他们根据时间确认收货评价后截图</em>
+    </div>
+    <?php if($this->session->get('type')==4){ ?>
+    <div>
+        <label class="xlabel_2 mt15">手机拍:</label>
+        <input type="radio" name="mobile_buy" value="1" />
+        <i>是</i>
+        <input type="radio" name="mobile_buy" value="2" checked="checked" />
+        <i>否</i>
+    </div>
+    <?php }else{ ?>
+    <div class="mt15">
+        <label class="xlabel_2">是否追评/切图:</label>
+        <select name="isaddcomment" class=" kuang5">
+            <option value="1">是</option>
+            <option value="2" selected="selected">否</option>
+        </select>
+    </div>
+    <div>
+        <label class="xlabel_2 mt15">假聊:</label>
+        <input type="radio" name="false_talk" value="1" checked="checked">
+        <i>是</i>
+        <input type="radio" name="false_talk" value="2">
+        <i>否</i>
+    </div>
+    <div>
+        <label class="xlabel_2 mt15">改地址:</label>
+        <input type="radio" name="change_address" value="1">
+        <i>是</i>
+        <input type="radio" name="change_address" value="2" checked="checked">
+        <i>否</i><em class="ml5">选择改地址后返款时间必须选择立即返款,并且在30分钟内返款</em> </div>
+    <div>
+        <label class="xlabel_2 mt15">特殊要求:</label>
+        <input class=" kuang2" type="text" name="special_ask" maxlength="15" />
+        <em>输入0-15个中英文（如：禁止xx城市，我方远程电脑付款，只要三星以上的号等要求）</em>
+    </div>
+    <?php } ?>
+    <div>
+        <label class="xlabel_2 mt15">远程付款:</label>
+        <input type="radio" name="remote_pay" value="1">
+        <i>是</i>
+        <input type="radio" name="remote_pay" value="2" checked="checked">
+        <i>否</i><em class="ml5">选择远程付款必须使用网银进行远程付款</em>
+    </div>
+    <div>
+        <label class="xlabel_2 mt15">小号认证要求:</label>
+        <input type="radio" name="isauth" value="1">
+        <i>是</i>
+        <input type="radio" name="isauth" value="2" checked="checked">
+        <i>否</i><em class="ml5">选择条件过高会导致任务无人参加</em>
+    </div>
+    <div>
+        <label class="xlabel_2 mt15">小号资质要求:</label>
+        <?php if($this->session->get('platform')==1){ ?>
+        <input type="radio" name="auth_level" value="1" checked="checked" />
+        <i>一心以上</i>
+        <input type="radio" name="auth_level" value="2" />
+        <i>二心以上</i>
+        <input type="radio" name="auth_level" value="3" />
+        <i>三心以上</i>
+        <input type="radio" name="auth_level" value="4" />
+        <i>四心以上</i>
+        <input type="radio" name="auth_level" value="5" />
+        <i>五心以上</i>
+        <input type="radio" name="auth_level" value="6" />
+        <i>一钻以上</i>
+        <?php }elseif($this->session->get('platform')==2){ ?>
+        <input type="radio" name="auth_level" value="1" checked="checked" />
+        <i>注册会员</i>
+        <input type="radio" name="auth_level" value="2" />
+        <i>铜牌会员</i>
+        <input type="radio" name="auth_level" value="3" />
+        <i>银牌会员</i>
+        <input type="radio" name="auth_level" value="4" />
+        <i>金牌会员</i>
+        <input type="radio" name="auth_level" value="5" />
+        <i>钻石会员</i>
+        <?php } ?>
+        <em class="ml5">选择条件过高会导致任务无人参加</em> </div>
+    <div><label class="xlabel_2 mt15">刷手地域限制:</label>
+        <select name="province" onchange="areaChangeCallback(this.value);" style="height:30px;">
+            <option value="0" selected="selected">请选择</option>
+            <?php foreach($province as $p){ ?>
+            <option value="<?php echo $p->Id; ?>"><?php echo $p->Name; ?></option>
+            <?php } ?>
+        </select>
+        <select name="city" id="city"  style="height:30px;">
+            <option value="0" selected="selected">请选择</option>
+        </select>
+    </div>
+    <div>
+        <label class="xlabel_2 mt15">刷手接单天数限制:</label>
+        <select name="days" class="kuang5">
+            <?php for($i=0;$i<=10;$i++){ ?>
+            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+            <?php } ?>
+        </select>
+    </div>
+    <div>
+        <label class="xlabel_2 mt15">返款方式:</label>
+        <input type="radio" name="return_way" value="1">
+        <i>财付通转账</i>
+        <input type="radio" name="return_way" value="2">
+        <i>支付宝转账</i>
+        <input type="radio" name="return_way" value="3">
+        <i>支付宝转账银行</i>
+        <input type="radio" name="return_way" value="4" checked="checked">
+        <i>支付宝收款</i>
+        <input type="radio" name="return_way" value="5">
+        <i>财付通收款</i> <em class="ml5">（收款产生手续费商家须承担）</em> </div>
+    <div class="mt15">
+        <label class="xlabel_2">返款时间:</label>
+        <select name="return_time" class=" kuang5">
+            <?php for($i=1;$i<=20;$i++){ ?>
+                <option value="<?php echo $i; ?>"><?php echo $i; ?>小时</option>
+            <?php } ?>
+        </select>
+        <em>选择正确的返款时间（当天的任务必须当天返款）</em></div>
+    <div class="mt15">
+        <label class="xlabel_2">自动取消任务时间:</label>
+        <select name="auto_cancel" class=" kuang5">
+            <?php for($i=1;$i<=10;$i++){ ?>
+            <option value="<?php echo $i; ?>"><?php echo $i; ?>小时</option>
+            <?php } ?>
+        </select>
+        <em> 请选择正确的自动取消任务的时间</em></div>
+    <div class="mt15">
+        <label class="xlabel_2">发布任务数量:</label>
+        <select name="number" class=" kuang5">
+            <?php for($i=1;$i<=100;$i++){ ?>
+            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+            <?php } ?>
+        </select>
+        <em>发布任务数量只能与关键搜索词数量相等或是关键搜索词数量的倍数</em>
+    </div>
+    <div>
+        <label class="xlabel_2 mt15">保存模板:</label>
+        <input type="radio" name="issave" value="1">
+        <i>是</i>
+        <input type="radio" name="issave" value="2" checked="checked">
+        <i>否</i>
+         </div>
+    <div><input type="submit" value="发布任务" class="btn ml145 mt15">
+        <input type="reset" value="重置" class="btn ml32 mt15"></div>
+    </form>
+</div>
+
+<!--------------弹出框------------------------>
+
+<div class="pay-alert">
+    <div class="bg"> <span class="bg-top">
+    <p class="order-list"><strong>刷手佣金计算规则</strong></p>
+    <p class="false"><a href=""> ｘ</a></p>
+    </span>
+        <table width="600" height="78" border="1" cellpadding="0" cellspacing="0" bordercolor="#dddddd" class=" mt25 ml25">
+            <tr>
+                <td width="105" height="40" align="center">商品总金额</td>
+                <td width="99" align="center">200元内</td>
+                <td width="99" align="center">200－500元</td>
+                <td width="99" align="center">500－1000</td>
+                <td width="99" align="center">1000－1500</td>
+                <td width="99" align="center">每+500</td>
+            </tr>
+            <tr>
+                <td align="center">+佣金</td>
+                <td align="center">4元</td>
+                <td align="center">5元</td>
+                <td align="center">6元</td>
+                <td align="center">7元</td>
+                <td align="center">+1元</td>
+            </tr>
+        </table>
+        <table width="748" border="1" cellspacing="0" cellpadding="0" bordercolor="#dddddd" align="center" class=" mt15 " >
+            <tr>
+                <td width="110" height="42" align="center">淘宝号信誉等级</td>
+                <td width="59" align="center">白号</td>
+                <td width="57" align="center"><img src="/static/images/01.gif" /></td>
+                <td width="72" align="center"><img src="/static/images/02.gif" /></td>
+                <td width="65" align="center"><img src="/static/images/03.gif" /></td>
+                <td width="79" align="center"><img src="/static/images/04.gif" /></td>
+                <td width="95" align="center"><img src="/static/images/05.gif" /></td>
+                <td width="55" align="center"><img src="/static/images/6.png" /></td>
+                <td width="67" align="center"><img src="/static/images/7.png" /></td>
+                <td width="67" align="center">每+1钻</td>
+            </tr>
+            <tr>
+                <td height="41" align="center">+佣金</td>
+                <td align="center">0元</td>
+                <td align="center">1元</td>
+                <td align="center">2元</td>
+                <td align="center">3元</td>
+                <td align="center">3元</td>
+                <td align="center">4元</td>
+                <td align="center">5元</td>
+                <td align="center">6元</td>
+                <td align="center">+1元</td>
+            </tr>
+        </table>
+        <div class=" ml25 mt15">
+            <p>手机单+1元</p>
+            <p class="mt10">增拍店铺宝贝根据选择增拍数对应+佣金（选1+1元，选2就+2元，以此类推）</p>
+            </p>
+        </div>
+    </div>
+</div>
+<script>
+    function areaChangeCallback(id){
+        $.post("/task/getcity",{id:id},function(data){
+            $('#city').html(data);
+        });
+    }
+    $(function(){
+        $('.pay_btn').click(function(){
+            $('.pay-alert').css('display','block');
+        })
+        $('.false').click(function(){
+            $('.pay-alert').css('display','none');
+        })
+        $('input#btnupload').click(function(){
+            var formData=new FormData();
+            formData.append('file',$('input#fileupload')[0].files[0]);
+            $.ajax({
+                url: '/task/uploadthumb',
+                type: 'POST',
+                cache: false,
+                data: formData,
+                dataType:'json',
+                processData: false,
+                contentType: false
+            }).done(function(res) {
+                if(res.status==1){
+                    $('img#thumb').attr('src',res.info);
+                    $('input#img_thumb').val(res.info);
+                }else{
+                    alert(res.info);
+                }
+            }).fail(function(res) {
+                alert('上传文件失败，请稍候重重试！');
+            });
+        });
+    })
+</script>

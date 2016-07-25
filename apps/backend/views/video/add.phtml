@@ -1,0 +1,40 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <ul class="ulColumn2">
+        <form action="/Video/add" method="post" name="form1">
+            <li>
+                <span class="item_name" style="width:150px;">请选择分类：</span>
+                <select class="select" name="ntid">
+                    {% for t in newsType %}
+                    <option value="{{t.id}}">{{t.name|e}}</option>
+                    {% endfor %}
+                </select>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">视频标题：</span>
+                <input type="text" class="textbox textbox_295" placeholder="标题" name="title"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">视频简介：</span>
+                <textarea placeholder="请输入视频简介..." class="textarea" style="width:290px;height:100px;" name="blurb"></textarea>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">视频地址：</span>
+                <input type="text" class="textbox textbox_295" placeholder="视频地址" name="url"/>
+            </li>
+           <!--  <li>
+                <span class="item_name" style="width:150px;">内容：</span>
+                <script id="container" name="content" type="text/plain" style="width:800px;height:240px;"></script>
+            </li> -->
+            <li>
+                <span class="item_name" style="width:200px;"></span>
+                <input type="submit" class="link_btn"/>
+            </li>
+        </form>
+    </ul>
+</section>
+<script type="text/javascript">
+    //var um = UM.getEditor('container');
+</script>
+{% endblock %}

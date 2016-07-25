@@ -1,0 +1,52 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <div class="page_title">
+        <h2 class="fl">绑定淘宝号列表</h2>
+    </div>
+    <table class="table">
+        <tr>
+            <th>绑定人(会员名)</th>
+            <th>淘宝账号</th>
+            <th>支付宝账号</th>
+            <th>淘宝实名姓名</th>
+            <th>淘宝实名身份证号</th>
+            <th>权限等级</th>
+            <th>信誉等级</th>
+            <th>审核状态</th>
+            <th>审核未通过原因</th>
+            <th>启用状态</th>
+            <th>备注</th>
+            <th>绑定时间</th>
+            <th>操作</th>
+        </tr>
+        <?php foreach($page->items as $item){ ?>
+        <tr align="center">
+            <td><?php echo $item->account; ?></td>
+            <td><?php echo $item->name; ?></td>
+            <td><?php echo $item->alipay; ?></td>
+            <td><?php echo $item->real_name; ?></td>
+            <td><?php echo $item->idcard; ?></td>
+            <td><?php if($item->level==1){ ?>默认<?php }elseif($item->level==2){ ?>升级淘宝号<?php }else{ ?>升级淘宝V2<?php } ?></td>
+            <td><?php if($item->heart_level==0){ ?>白号<?php }else{ ?><img src="/static/images/0<?php echo $item->heart_level; ?>.gif" /><?php } ?></td>
+            <td><?php if($item->verify_status==1){ ?>未审核<?php }elseif($item->verify_status==2){ ?>审核未通过<?php }else{ ?>已通过审核<?php } ?></td>
+            <td><?php echo $item->reason; ?></td>
+            <td><?php if($item->use_status==1){ ?>已启用<?php }else{ ?>已禁用<?php } ?></td>
+            <td><?php echo $item->remark; ?></td>
+            <td><?php echo date('Y-m-d',$item->create_time); ?></td>
+            <td>
+                <a href="/taobao/edit/<?php echo $item->id; ?>" class="inner_btn">编辑</a>
+                <a href="/taobao/del/<?php echo $item->id; ?>" class="inner_btn">删除</a>
+            </td>
+        </tr>
+        <?php } ?>
+    </table>
+    <aside class="paging">
+        <a href="/taobao/index/1">第一页</a>
+        <?php for($i=$startnum;$i<=$lastnum;$i++){ ?>
+            <a href="/taobao/index/<?php echo $i; ?>" <?php if($i==$currentPage){ ?> class="active" <?php } ?>><?php echo $i; ?></a>
+        <?php } ?>
+        <a href="/taobao/index/<?php echo $page->last; ?>">最后一页</a>
+    </aside>
+</section>
+{% endblock %}

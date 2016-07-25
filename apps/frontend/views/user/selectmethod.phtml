@@ -1,0 +1,20 @@
+<div class="contentr-r fr">
+    <div class="cr-r">
+        <p>选择支付方式</p>
+    </div >
+    <form action="/user/showmethod" method="post">
+        <input type="hidden" name="coin" value="<?php echo $data['coin']; ?>" />
+        <input type="hidden" name="money" value="<?php echo $data['money']; ?>" />
+        <div class="zh-b">
+            <p class="aliby1">
+                <input type="radio" name="rechargeway" id="wx" value="1">
+                <label class="bank" for="wx"> 微信扫描支付</label>
+                <input type="radio" name="rechargeway" value="2" id="zfbsm" checked="checked">
+                <label class=" alipaysm" for="zfbsm"> 支付宝扫码支付</label>
+                <input type="radio" name="rechargeway" value="3" id="zfbzz" />
+                <label class="alipaysm1" for="zfbzz"> 支付宝转账支付</label>
+            </p>
+            <p class="cztijby1"><input name="btnsubmit" type="submit" style="cursor: pointer;" value="提 交" class="btnoo"></p>
+        </div>
+    </form>
+</div>

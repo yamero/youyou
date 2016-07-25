@@ -1,0 +1,110 @@
+<div class="contentr_3 fr">
+    <div class="slideTxtBox1">
+        <div class="hd">
+            <ul>
+                <li>绑定店铺</li>
+                <li>店铺列表</li>
+            </ul>
+        </div>
+        <div class="bd">
+            <ul>
+                <div class="table-content">
+                    <h2 class="f22">绑定流程</h2>
+                    <div class="bind-step">
+                        <dl  class="f16">
+                            <dt>第一步:</dt>
+                            <dd>进入<em>“淘宝网”</em>首页,点击右上角的<em>“卖家中心”</em></dd>
+                        </dl>
+                        <dl class="f16">
+                            <dt>第二步:</dt>
+                            <dd>进入后卖家中心后点击左侧菜单栏中的<span class="orange"><em>“出售中的宝贝”</em></span></dd>
+                        </dl>
+                        <dl class="f16">
+                            <dt>第三步:</dt>
+                            <dd>任意选取一款宝贝点击右侧的<span class="orange"><em>“编辑宝贝”</em></span></dd>
+                        </dl>
+                        <dl class="f16">
+                            <dt>第四步:</dt>
+                            <dd>复制验证码(<em>M1F56</span><span class="copy">复制</em>)粘贴到<em>“宝贝标题”</em>的末尾,检查验证码是否完整后确认提交
+                                <div class="zclip" id="zclip-ZeroClipboardMovie_1" style="position: absolute; left: 586px; top: 490px; width: 46px; height: 20px; z-index: 99;">
+
+                                </div>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>第五步:</dt>
+                            <dd>完整复制浏览器地址栏中的网址粘贴到下方商品链接输入框中</dd>
+                        </dl>
+                        <dl>
+                            <dt>店铺验证码:</dt>
+                            <dd><em id="verify"><?php echo $randnum; ?></em><span class="copy">复制</span>
+                                <div class="zclip" style="position: absolute; left: 511px; top: 574px; width: 46px; height: 20px; z-index: 99;">
+
+                                </div>
+                            </dd>
+                        </dl>
+                        <form action="" method="post">
+                            <input type="hidden" name="randnum" value="<?php echo $randnum; ?>" id="randnum">
+                            <dl>
+                                <dt>商品链接:</dt>
+                                <dd>
+                                    <input class="kuang1-1" type="text" name="shop_link" placeholder="请输入正确的商品链接">
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>店铺户籍:</dt>
+                                <dd>
+                                    <select class="kuang2" style="margin-top:5px;" name="shop_type">
+                                        <option value="1" selected="selected">淘宝店铺</option>
+                                        <option value="2">京东店铺</option>
+                                    </select>
+                                </dd>
+                            </dl>
+                            <div>
+                                <input class="submit_reg ml170 mt15"type="submit" value="确认无误，提交">
+                            </div>
+                        </form>
+                    </div>
+                    <h2 class="f22">参考图例</h2>
+                    <div style="height: 400px;"><img src="/static/images/ck.jpg" /></div>
+                </div>
+            </ul>
+            <ul class="mt30">
+                <table width="900" border="1" cellspacing="0" cellpadding="0" bordercolor="#dddddd" >
+                    <tr style=" border-bottom:#FFF; border-right:#edf2ff;">
+                        <td height="50" align="center" bgcolor="#edf2ff">绑定时间</td>
+                        <td align="center" bgcolor="#edf2ff">店铺户籍</td>
+                        <td align="center" bgcolor="#edf2ff">掌柜名称</td>
+                        <td align="center" bgcolor="#edf2ff">店铺名称</td>
+                        <td align="center" bgcolor="#edf2ff">发布任务数</td>
+                        <td align="center" bgcolor="#edf2ff">状态</td>
+                        <td align="center" bgcolor="#edf2ff"  style=" border-right-color:#dddddd ">操作</td>
+                    </tr>
+                    <?php foreach($shop as $s){ ?>
+                    <tr style=" border-top:#FFF; border-right:#FFF;;">
+                        <td height="50" align="center"><?php echo date('Y-m-d',$s->create_time); ?></td>
+                        <td align="center"><?php if($s->type==1){ ?>淘宝店铺<?php }else{ ?>京东店铺<?php } ?></td>
+                        <td align="center"><?php echo $s->master; ?></td>
+                        <td align="center"><?php echo $s->shop; ?></td>
+                        <td align="center"><?php echo $s->task_num; ?></td>
+                        <td align="center"><?php if($s->status==1){ ?>正常<?php }else{ ?>异常<?php } ?></td>
+                        <td align="center" style=" border-right-color:#dddddd "><a href="/user/delshop/<?php echo $s->id; ?>" onclick="return confirm('您确定要删除吗？');">删除</a></td>
+                    </tr>
+                    <?php } ?>
+                </table>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript">jQuery(".slideTxtBox1").slide();</script>
+    <script type="text/javascript">
+        $("span.copy").zclip({
+            path:"/static/js/ZeroClipboard.swf",
+            copy:function(){
+                return $("#randnum").val();
+            },
+            afterCopy:function(){
+                alert("复制成功");
+            }
+        });
+    </script>
+</div>

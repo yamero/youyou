@@ -1,0 +1,58 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <div class="page_title">
+        <h2 class="fl">会员列表</h2>
+    </div>
+    <form action="/user/index" method="post" style="margin-bottom:10px;">
+        <select name="identity" class="select" style="height:30px;width: 100px;">
+            <option value="">--会员身份--</option>
+            <option value="1">外部会员</option>
+            <option value="2">内部会员</option>
+        </select>
+        <select name="utype" class="select" style="height:30px;width: 100px;margin-left: 15px;">
+            <option value="">--会员类型--</option>
+            <option value="1">商家</option>
+            <option value="2">刷手</option>
+        </select>
+        <input type="text" class="textbox textbox_295" placeholder="会员名关键词" name="username" style="height:20px;width:200px;margin-left:15px;"/>
+        <input type="submit" value="搜索" class="link_btn" style="margin-left: 15px;" />
+    </form>
+    <table class="table">
+        <tr>
+            <th>账号</th>
+            <th>类型</th>
+            <th>身份</th>
+            <th>金币数</th>
+            <th>发布点数</th>
+            <th>QQ号</th>
+            <th>手机号</th>
+            <th>注册时间</th>
+            <th>操作</th>
+        </tr>
+        <?php foreach($page->items as $item){ ?>
+        <tr align="center">
+            <td><?php echo $item->account; ?></td>
+            <td><?php if($item->type==1){ ?>商家<?php }elseif($item->type==2){ ?>刷手<?php } ?></td>
+            <td><?php if($item->identity==1){ ?>外部会员<?php }elseif($item->identity==2){ ?>内部会员<?php } ?></td>
+            <td><?php echo $item->gcoin; ?></td>
+            <td><?php echo $item->release_num; ?></td>
+            <td><?php echo $item->qq; ?></td>
+            <td><?php echo $item->mobile; ?></td>
+            <td><?php echo date('Y-m-d',$item->reg_time); ?></td>
+            <td>
+                <a href="/user/edit/<?php echo $item->id; ?>" class="inner_btn">编辑</a>
+                <a href="/user/del/<?php echo $item->id; ?>" class="inner_btn">删除</a>
+            </td>
+        </tr>
+        <?php } ?>
+    </table>
+    <aside class="paging">
+        <a href="/user/index/1">第一页</a>
+        <?php for($i=$startnum;$i<=$lastnum;$i++){ ?>
+        <a href="/user/index/<?php echo $i; ?>" <?php if($i==$currentPage){ ?> class="active" <?php } ?>><?php echo $i; ?></a>
+        <?php } ?>
+        <a href="/user/index/<?php echo $page->last; ?>">最后一页</a>
+    </aside>
+</section>
+{% endblock %}

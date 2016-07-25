@@ -1,0 +1,19 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <ul class="ulColumn2">
+        <form action="/bankapply/doedit" method="post">
+            <li>
+                <span class="item_name" style="width:150px;">汇入金额：</span>
+                <input type="text" class="textbox textbox_295" placeholder="汇入金额" name="remittance" value="<?php echo $bankapply->remittance; ?>"/>
+                <span style="color:red;">向会员银行卡成功汇款之后，在此输入汇入的金额</span>
+            </li>
+            <li>
+                <span class="item_name" style="width:200px;"></span>
+                <input type="hidden" name="id" value="<?php echo $bankapply->id; ?>" />
+                <input type="submit" class="link_btn" value="编辑"/>
+            </li>
+        </form>
+    </ul>
+</section>
+{% endblock %}

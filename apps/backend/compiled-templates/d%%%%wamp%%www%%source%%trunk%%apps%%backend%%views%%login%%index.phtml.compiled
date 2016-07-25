@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>后台登录</title>
+<meta name="author" content="DeathGhost" />
+<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+<style>
+  body{height:100%;background:#16a085;overflow:hidden;}
+  canvas{z-index:-1;position:absolute;}
+</style>
+<script src="/static/js/jquery.js"></script>
+<script src="/static/js/Particleground.js"></script>
+<script>
+  $(document).ready(function() {
+    //粒子背景特效
+    $('body').particleground({
+      dotColor: '#5cbdaa',
+      lineColor: '#5cbdaa'
+    });
+
+    //登录验证
+    $(".submit_btn").click(function(){
+        var name=$("#name").val();
+        var pwd=$("#pwd").val();
+        var code=$("#code").val();
+        if(name==""||pwd==""){
+            alert("用户名或密码不能为空！");
+            return false;
+        }
+        if(code==""){
+            alert("验证码不能为空！");
+            return false;
+        }
+        $.post("/login/dologin",{name:name,pwd:pwd,code:code},function(data){
+          if(data=="ok"){
+            location.href="/";
+          }else{
+            alert("请检查您的用户名密码及验证码是否正确！");
+          }
+        });
+    });
+  });
+</script>
+</head>
+<body>
+<dl class="admin_login">
+ <dt>
+  <strong>右右网后台管理系统</strong>
+  <em>Management System</em>
+ </dt>
+
+ <dd class="user_icon">
+  <input type="text" placeholder="账号" class="login_txtbx" id="name"/>
+ </dd>
+ <dd class="pwd_icon">
+  <input type="password" placeholder="密码" class="login_txtbx" id="pwd"/>
+ </dd>
+ <dd class="val_icon">
+  <div class="checkcode">
+    <input type="text" placeholder="验证码" maxlength="4" class="login_txtbx" id="code" />
+    <img src="/index/showcode" onclick="this.src=this.src+'?'+Math.random();" />
+  </div>
+ </dd>
+ <dd>
+  <input type="button" value="立即登陆" class="submit_btn"/>
+ </dd>
+ <dd>
+  <p>© 2015-2016 刘志伟 版权所有</p>
+  <p>豫B2-20080224-1</p>
+ </dd>
+</dl>
+</body>
+</html>

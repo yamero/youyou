@@ -1,0 +1,83 @@
+<div class="contentr fr">
+    <div class="cr">
+        <p>升级淘宝号</p>
+    </div>
+    <div class=" ml80 mt30">
+        <p>1.提交审核通过后，名字和身份证号码对应的淘宝号将自动升级为：<i>日可做5单，周可做10单，月可做20单。</i>  </p>
+        <p class="mt15">2.请提交真实，清晰，完整的身份证正反面。
+        </p>
+        <p class="mt15">3.审核时间为48小时内。
+        </p>
+        <p class="mt15"> 4.如有疑问请联系QQ:800016849</p>
+    </div>
+    <form action="" method="post">
+        <div class="cr_1 ml50 mt30" >
+            <div class="mt25">
+                <label class="xlabel_l ">身份证姓名:</label>
+                <input name="real_name" type="text" id="cperson" class="kuang2" />
+                <span>（淘宝实名的身份证姓名）</span>
+            </div>
+            <div class="mt15">
+                <label class="xlabel_l ">身份证号码:</label>
+                <input name="idcard" type="text" id="ccardnumber" class="kuang2" />
+                <span>（淘宝实名的身份证号码）</span>
+            </div>
+            <div class="mt15">
+                <label class="xlabel_l ">身份证正面:</label>
+                <input type="text" readonly="readonly" id="picinput1" name="idcard_front">
+                <input type="file" id="fu1" style="width:70px;">
+                <input type="button" value="上传" onclick="doupload(1);" />
+                <a href="/static/images/ucard1.jpg" target="_blank" class="ml14"><i>查看示例</i></a>
+                <label class="xlabel_l mt15 ">身份证反面:</label>
+                <input type="text" readonly="readonly" id="picinput2" name="idcard_back">
+                <input type="file" id="fu2" style="width:70px;">
+                <input type="button" value="上传" onclick="doupload(2);" />
+                <a href="/static/images/ucard2.jpg" target="_blank"><i class="ml14">查看示例</i></a>
+            </div>
+                <input class="submit_reg ml230 mt25" type="submit" value="增加" /><span class="ml20"><a href="/user/bindtb">返回绑定淘宝号</a></span>
+        </div>
+    </form>
+    <div class="">
+        <table width="975" border="1" cellspacing="0" bordercolor="#dcdcdc"  >
+            <tr>
+                <td width="228" height="40" align="center" bgcolor="#fef7f2">身份证姓名</td>
+                <td width="236" align="center" bgcolor="#fef7f2">身份证号码</td>
+                <td width="169" align="center" bgcolor="#fef7f2">提交时间</td>
+                <td width="107" align="center" bgcolor="#fef7f2">审核状态</td>
+                <td width="213" align="center" bgcolor="#fef7f2">可用操作</td>
+            </tr>
+            <?php foreach($upgradetb as $ut){ ?>
+            <tr>
+                <td width="228" height="35" align="center" bgcolor="#f6f5f5"><em><?php echo $ut->real_name; ?></em></td>
+                <td width="236" align="center" bgcolor="#f6f5f5"><em><?php echo $ut->idcard; ?></em></td>
+                <td width="169" align="center" bgcolor="#f6f5f5"><em><?php echo date('Y/m/d H:i:s',$ut->create_time); ?></em></td>
+                <td width="107" align="center" bgcolor="#f6f5f5"><em><?php if($ut->verify_status==1){ ?>未审核<?php }elseif($ut->verify_status==2){ ?>未通过审核<?php }else{ ?>成功<?php } ?></em></td>
+                <td width="213" align="center" bgcolor="#f6f5f5"><a href="/user/delupgradetb/<?php echo $ut->id; ?>" onclick="return confirm('确定要删除吗？');">删除</a></td>
+            </tr>
+            <?php } ?>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    function doupload(n){
+        var formData=new FormData();
+        formData.append('file',$('input#fu'+n)[0].files[0]);
+        $.ajax({
+            url: '/user/uploadthumb',
+            type: 'POST',
+            cache: false,
+            data: formData,
+            dataType:'json',
+            processData: false,
+            contentType: false
+        }).done(function(res) {
+            if(res.status==1){
+                $('input#picinput'+n).val(res.info);
+            }else{
+                alert(res.info);
+            }
+        }).fail(function(res) {
+            alert('上传文件失败，请稍候重重试！');
+        });
+    }
+</script>

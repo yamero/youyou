@@ -1,0 +1,31 @@
+<div class="contentr fr">
+    <div class="cr">
+        <p>小号信誉</p>
+    </div>
+    <div class="cr_2 ml50 mt30" >
+        <p class="ml50 mt15">淘宝小号：<span id="ctb"><?php echo $tb->name; ?></span></p>
+        <p class="ml50 mt15">小号信誉：<span id="stb_xy"><?php if($tb->heart_level==0){ ?>白号<?php }else{ ?><img src="/static/images/0<?php echo $tb->heart_level; ?>.gif" /><?php } ?></span> <input class="ml14" type="button" value="更新信誉"  onclick="updateTB(<?php echo $tb->id; ?>);" id="updatebtn" /></p>
+        <p class="ml50 mt15">更新时间：<span id="dis_posttime"><?php echo date('Y/m/d H:i:s',$tb->update_time); ?></span></p>
+        <p class=" mt30 ml32" ><i>1.点击更新小号信誉后，正常为10分钟内更新完毕，若遇到高峰时间，则更新时间最慢为2个小时内。</i></p>
+        <p class="mt25 ml32"><i>2.每天只能更新1次。</i></p>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#updatebtn").ajaxStart(function(){
+        $(this).attr("disabled","disabled");
+    });
+    $("#updatebtn").ajaxStop(function(){
+       $(this).removeAttr("disabled");
+    });
+    function updateTB(id){
+        $.ajax({
+            url:"/user/updatetb",
+            type:"POST",
+            data:{id:id},
+            dataType:"json",
+            success:function(result){
+                alert(result.msg);
+            }
+        });
+    }
+</script>

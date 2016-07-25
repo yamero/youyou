@@ -1,0 +1,46 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <div class="page_title">
+        <h2 class="fl">文章列表</h2>
+    </div>
+    <form action="/news/index" method="post" style="margin-bottom:10px;">
+        <select class="select" name="type" style="margin-right:10px;">
+            <option value="">--文章类型--</option>
+            <?php foreach($newsType as $nt){ ?>
+                <option value="<?php echo $nt->id; ?>"><?php echo $nt->name; ?></option>
+            <?php } ?>
+        </select>
+        <input type="text" class="textbox textbox_295" placeholder="文章标题关键词" name="title" />
+        <input type="submit" value="搜索" class="link_btn" />
+    </form>
+    <table class="table">
+        <tr>
+            <th>文章标题</th>
+            <th>文章类型</th>
+            <th>发布人</th>
+            <th>最后修改时间</th>
+            <th>操作</th>
+        </tr>
+        {% for v in page.items %}
+        <tr align="center">
+            <td>{{ v.title|e }}</td>
+            <td>{{ v.name|e }}</td>
+            <td>{{ v.member|e }}</td>
+            <td>{{ v.modify_time|e }}</td>
+            <td>
+                <a href="/news/edit/{{ v.id }}" class="inner_btn">编辑</a>
+                <a href="/news/del/{{ v.id }}" class="inner_btn">删除</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <aside class="paging">
+        <a href="/news/index/1">第一页</a>
+        {% for num in startnum..lastnum %}
+        <a href="/news/index/{{ num }}" {% if currentPage==num %} class="active" {% endif %}>{{ num }}</a>
+        {% endfor %}
+        <a href="/news/index/{{ page.last }}">最后一页</a>
+    </aside>
+</section>
+{% endblock %}

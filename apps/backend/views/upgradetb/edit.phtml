@@ -1,0 +1,28 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <ul class="ulColumn2">
+        <form action="/upgradetb/doedit" method="post">
+            <li>
+                <span class="item_name" style="width:150px;">身份证正面照片：</span>
+                <img src="<?php echo $upgradetb->idcard_front; ?>" style="width:140px;height:100px;" />
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">身份证背面照片：</span>
+                <img src="<?php echo $upgradetb->idcard_back; ?>" style="width:140px;height:100px;" />
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">审核状态：</span>
+                <label class="single_selection"><input type="radio" name="verify_status" value="1" <?php if($upgradetb->verify_status==1){ ?>checked="checked"<?php } ?>>未审核</label>
+                <label class="single_selection"><input type="radio" name="verify_status" value="2" <?php if($upgradetb->verify_status==2){ ?>checked="checked"<?php } ?>>审核不通过</label>
+                <label class="single_selection"><input type="radio" name="verify_status" value="3" <?php if($upgradetb->verify_status==3){ ?>checked="checked"<?php } ?>>已通过审核</label>
+            </li>
+            <li>
+                <span class="item_name" style="width:200px;"></span>
+                <input type="hidden" name="id" value="<?php echo $upgradetb->id; ?>" />
+                <input type="submit" class="link_btn" value="编辑"/>
+            </li>
+        </form>
+    </ul>
+</section>
+{% endblock %}

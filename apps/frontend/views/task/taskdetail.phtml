@@ -1,0 +1,201 @@
+<div class=" contentr_4 fr">
+    <div class="cr">
+        <p  class="fl">任务详情</p><span class=" fh fr mt10"><a href="javascript:history.go(-1);">返回</a></span>
+    </div>
+    <!--任务详情表格开始--><table width="898" border="1" cellspacing="0" cellpadding="0"  class=" ml32 mt25"  bordercolor="#dddddd">
+        <tr>
+            <td width="180" height="55" align="center" bgcolor="#e5dbff">任务ID</td>
+            <td width="171" align="center" bgcolor="#e5dbff">总金额</td>
+            <td width="159" align="center" bgcolor="#e5dbff">发布人</td>
+            <td width="177" align="center" bgcolor="#e5dbff">状态</td>
+            <td width="199" align="center" bgcolor="#e5dbff">操作</td>
+        </tr>
+        <tr>
+            <td height="41" align="center" bgcolor="#edeefa"><?php echo $task->sn; ?></td>
+            <td align="center" bgcolor="#edeefa"><?php echo $task->total_money; ?>.00元</td>
+            <td align="center" bgcolor="#edeefa"><?php echo $user2->account; ?></td>
+            <td align="center" bgcolor="#edeefa">
+                <?php if($st->pay_status==1){ ?>任务进行中，未付款
+                <?php }elseif($st->return_status==1){ ?>已付款，商家返款中
+                <?php }elseif($st->receive_status==1){ ?>等待收货和评价
+                <?php }elseif($st->complete_status==1){ ?>已收货，商家确认中
+                <?php }else{ ?>任务完成<?php } ?>
+            </td>
+            <td align="center" bgcolor="#edeefa">任务已结束</td>
+        </tr>
+        <tr>
+            <td height="47" align="center" bgcolor="#edeefa">任务完成评价：</td>
+            <td colspan="4" align="center" bgcolor="#edeefa">暂无&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 【发布时间】：<?php echo date('Y/m/d H:i:s',$task->create_time); ?> 【完成时间】：<?php if($st->complete_time>0){ echo date('Y/m/d H:i:s',$st->complete_time); }else{ ?>未完成<?php } ?></td>
+        </tr>
+        <tr>
+            <td height="42" align="right">任务类型：</td>
+            <td colspan="4"> &nbsp;&nbsp;<?php if($task->platform==1){ ?>淘宝<?php }else{ ?>京东<?php } ?> <?php if($task->type==1){ ?>电脑单<?php }elseif($task->type==2){ ?>手机单<?php }elseif($task->type==3){ ?>浏览单<?php }else{ ?>秒拍单<?php } ?></td>
+        </tr>
+        <tr>
+            <td height="41" align="right">关键字：</td>
+            <td colspan="4">&nbsp;&nbsp; <?php echo $task->keywords; ?></td>
+        </tr>
+        <tr>
+            <td height="41" align="right">店铺名：</td>
+            <td colspan="4">&nbsp;&nbsp;<?php echo $shop->shop; ?></td>
+        </tr>
+        <tr>
+            <td height="255" align="right">宝贝示例图：</td>
+            <td colspan="4">&nbsp;&nbsp;<img src="<?php echo $task->img_thumb; ?>" style="width: 227px;height: 207px;" /></td>
+        </tr>
+        <tr>
+            <td height="35" align="right">申请人：</td>
+            <td colspan="4">
+                &nbsp;&nbsp;<?php echo $user1->account; ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                <?php if($user1->points>=0&&$user1->points<4){ ?>白号
+                <?php }elseif($user1->points>=4&&$user1->points<=10){ ?><img src="/static/images/1.gif" />
+                <?php }elseif($user1->points>=11&&$user1->points<=40){ ?><img src="/static/images/2.gif" />
+                <?php }elseif($user1->points>=41&&$user1->points<=90){ ?><img src="/static/images/3.gif" />
+                <?php }elseif($user1->points>=91&&$user1->points<=150){ ?><img src="/static/images/4.gif" />
+                <?php }elseif($user1->points>=151&&$user1->points<=250){ ?><img src="/static/images/5.gif" />
+                <?php }elseif($user1->points>=251&&$user1->points<=500){ ?><img src="/static/images/6.gif" /><?php } ?>
+                <?php echo $user1->points; ?>&nbsp;&nbsp;参与小号：<?php echo $tb->name; ?></td>
+        </tr>
+        <tr>
+            <td height="35" align="right">任务详细要求：</td>
+            <td colspan="4">&nbsp;&nbsp;<?php echo $task->detail; ?></td>
+        </tr>
+        <tr>
+            <td height="35" align="right">任务佣金：</td>
+            <td colspan="4">&nbsp;&nbsp;<?php echo $task->commission; ?>.00</td>
+        </tr>
+
+        <?php if($task->type==3){ ?>
+        <tr>
+            <td height="35" align="right">浏览时间：</td>
+            <td colspan="4">&nbsp;&nbsp;<?php echo $task->look_time; ?>分钟</td>
+        </tr>
+        <tr>
+            <td height="35" align="right">是否关注：</td>
+            <td colspan="4">&nbsp;&nbsp;<?php if($task->isfocus==1){ ?>是<?php }else{ ?>否<?php } ?></td>
+        </tr>
+        <tr>
+            <td height="35" align="right">是否收藏：</td>
+            <td colspan="4">&nbsp;&nbsp;<?php if($task->iscollect==1){ ?>是<?php }else{ ?>否<?php } ?></td>
+        </tr>
+        <tr>
+            <td height="35" align="right">手机浏览：</td>
+            <td colspan="4">&nbsp;&nbsp;<?php if($task->ismobile==1){ ?>是<?php }else{ ?>否<?php } ?></td>
+        </tr>
+        <?php } ?>
+
+        <?php if($task->type==1||$task->type==2||$task->type==4){ ?>
+        <tr>
+            <td height="35" align="right">商品确认收货时间：</td>
+            <td colspan="4">&nbsp;&nbsp;<?php if($task->confirm_type==1){ echo $task->confirm_time; }elseif($task->confirm_type==2){ ?>根据物流到货时间<?php }else{ ?>站内详聊<?php } ?></td>
+        </tr>
+        <tr>
+            <td height="35" align="right">评价时间：</td>
+            <td colspan="4">&nbsp;&nbsp;<?php if($task->comment_time==1){ ?>系统默认<?php }elseif($task->comment_time==2){ ?>确认收货后马上评价<?php }else{ ?>站内详聊<?php } ?></td>
+        </tr>
+        <tr>
+            <td height="35" align="right">评价内容：</td>
+            <td colspan="4">&nbsp;&nbsp;</td>
+        </tr>
+        <?php } ?>
+
+        <?php if($task->type==1||$task->type==2){ ?>
+        <tr>
+            <td height="35" align="right">假聊：</td>
+            <td colspan="4">&nbsp;&nbsp;<?php if($task->false_talk==1){ ?>需要<?php }else{ ?>不需要<?php } ?></td>
+        </tr>
+        <tr>
+            <td height="35" align="right">追评/晒图：</td>
+            <td colspan="4">&nbsp;&nbsp;<?php if($task->isaddcomment==1){ ?>是<?php }else{ ?>否<?php } ?></td>
+        </tr>
+        <tr>
+            <td height="35" align="right">改地址：</td>
+            <td colspan="4">&nbsp;&nbsp;<?php if($task->change_address==1){ ?>是<?php }else{ ?>否<?php } ?></td>
+        </tr>
+        <tr>
+            <td height="35" align="right">特殊要求：</td>
+            <td colspan="4">&nbsp;&nbsp;<?php if(empty($task->special_ask)){ ?>无<?php }else{ echo $task->special_ask; } ?></td>
+        </tr>
+        <?php } ?>
+
+        <tr>
+            <td height="35" align="right">返款方式：</td>
+            <td colspan="4">&nbsp;&nbsp;
+                <?php if($task->return_way==1){ ?>财付通转账
+                <?php }elseif($task->return_way==2){ ?>支付宝转账
+                <?php }elseif($task->return_way==3){ ?>支付宝转账银行
+                <?php }elseif($task->return_way==4){ ?>支付宝收款
+                <?php }else{ ?>财付通收款<?php } ?>
+            </td>
+        </tr>
+        <tr>
+            <td height="35" align="right">返款时间：</td>
+            <td colspan="4">&nbsp;&nbsp;<?php if($task->return_time>0){ echo $task->return_time; ?>小时<?php }else{ ?>立即<?php } ?></td>
+        </tr>
+
+        <?php if($task->type==1||$task->type==2||$task->type==4){ ?>
+        <tr>
+            <td height="35" align="right">增拍店铺宝贝数量：</td>
+            <td colspan="4">&nbsp;<?php echo $task->add_num; ?></td>
+        </tr>
+        <tr>
+            <td height="35" align="right">增拍店铺宝贝标题：</td>
+            <td colspan="4">&nbsp;&nbsp;<?php echo $task->add_title; ?></td>
+        </tr>
+        <tr>
+            <td height="35" align="right">远程付款：</td>
+            <td colspan="4">&nbsp;&nbsp;<?php if($task->remote_pay==1){ ?>是<?php }else{ ?>否<?php } ?></td>
+        </tr>
+        <tr>
+            <td height="35" align="right">小号认证要求：</td>
+            <td colspan="4">&nbsp;&nbsp;<?php if($task->isauth==1){ ?>是<?php }else{ ?>否<?php } ?></td>
+        </tr>
+        <?php if($task->isauth==1){ ?>
+        <tr>
+            <td height="35" align="right">小号资质要求：</td>
+            <?php if($task->platform==1){ ?>
+            <td colspan="4">&nbsp;&nbsp;
+                <?php if($task->auth_level==1){ ?>一心以上
+                <?php }elseif($task->auth_level==2){ ?>二心以上
+                <?php }elseif($task->auth_level==3){ ?>三心以上
+                <?php }elseif($task->auth_level==4){ ?>四心以上
+                <?php }elseif($task->auth_level==5){ ?>五心以上
+                <?php }else{ ?>一钻以上<?php } ?>
+            </td>
+            <?php }elseif($task->platform==2){ ?>
+            <td colspan="4">&nbsp;&nbsp;
+                <?php if($task->auth_level==1){ ?>注册会员以上
+                <?php }elseif($task->auth_level==2){ ?>铜牌会员以上
+                <?php }elseif($task->auth_level==3){ ?>银牌会员以上
+                <?php }elseif($task->auth_level==4){ ?>金牌会员以上
+                <?php }else{ ?>钻石会员以上<?php } ?>
+            </td>
+            <?php } ?>
+        </tr>
+        <?php } ?>
+        <?php } ?>
+
+        <?php if($task->type==3){ ?>
+        <tr>
+            <td height="169" align="right">任务验证：</td>
+            <td colspan="2" align="center" valign="middle"><p>商家截图</p>
+                <p><br />
+                    &nbsp;&nbsp;<img src="<?php echo $task->auth_thumb; ?>" style="width: 247px;height: 83px;"/></p>      </p></td>
+            <td align="center" valign="middle"><p>&nbsp;</p>
+                <p>刷手截图</p>
+                <p><br />&nbsp;&nbsp;<img src="../images/shuashoujietu.png"/></p>
+                <p>&nbsp;</p></td>
+            <td align="center" valign="middle">
+                <p>文字数量</p>
+                <p><br />
+                    104</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+            </td>
+        </tr>
+        <?php } ?>
+
+    </table>
+    <!--   任务详情表格结束-->
+</div>

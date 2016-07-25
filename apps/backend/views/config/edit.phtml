@@ -1,0 +1,46 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <ul class="ulColumn2">
+        <form action="/config/doedit" method="post">
+            <li>
+                <span class="item_name" style="width:180px;">站点名称：</span>
+                <input type="text" class="textbox textbox_295" placeholder="站点名称" name="title" value="<?php echo $config->title; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">站点关键词：</span>
+                <input type="text" class="textbox textbox_295" placeholder="站点关键词" name="keywords" value="<?php echo $config->keywords; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">上传图片存放地址域名：</span>
+                <input type="text" class="textbox textbox_295" placeholder="上传图片地址域名" name="img_domain" value="<?php echo $config->img_domain; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">每页显示记录数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="每页显示记录数" name="record_num" value="<?php echo $config->record_num; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">页码偏移量：</span>
+                <input type="text" class="textbox textbox_295" placeholder="页码偏移量" name="page_offset" value="<?php echo $config->page_offset; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">1金币可兑换人民币数(元)：</span>
+                <input type="text" class="textbox textbox_295" placeholder="1G币可兑换人民币数" name="exchange" value="<?php echo $config->exchange; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">1金币可购买发布点数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="1金币可购买发布点数" name="release_rate" value="<?php echo $config->release_rate; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">站点描述：</span>
+                <textarea cols="50" rows="8" name="description" ><?php echo $config->description; ?></textarea>
+            </li>
+            <li>
+                <input type="hidden" name="id" value="<?php echo $config->id; ?>" />
+                <span class="item_name" style="width:200px;"></span>
+                <input type="submit" class="link_btn" value="配置"/>
+            </li>
+        </form>
+    </ul>
+</section>
+{% endblock %}

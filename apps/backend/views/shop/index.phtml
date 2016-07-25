@@ -1,0 +1,40 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <div class="page_title">
+        <h2 class="fl">绑定店铺列表</h2>
+    </div>
+    <table class="table">
+        <tr>
+            <th>绑定人</th>
+            <th>店铺户籍</th>
+            <th>掌柜名</th>
+            <th>店铺名</th>
+            <th>状态</th>
+            <th>绑定时间</th>
+            <th>操作</th>
+        </tr>
+        <?php foreach($page->items as $item){ ?>
+        <tr align="center">
+            <td><?php echo $item->account; ?></td>
+            <td><?php if($item->type==1){ ?>淘宝店铺<?php }else{ ?>京东店铺<?php } ?></td>
+            <td><?php echo $item->master; ?></td>
+            <td><?php echo $item->shop; ?></td>
+            <td><?php if($item->status==1){ ?>正常<?php }else{ ?>异常<?php } ?></td>
+            <td><?php echo date('Y-m-d H:i',$item->create_time); ?></td>
+            <td>
+                <a href="/shop/edit/<?php echo $item->id; ?>" class="inner_btn">编辑</a>
+                <a href="/shop/del/<?php echo $item->id; ?>" class="inner_btn">删除</a>
+            </td>
+        </tr>
+        <?php } ?>
+    </table>
+    <aside class="paging">
+        <a href="/shop/index/1">第一页</a>
+        <?php for($i=$startnum;$i<=$lastnum;$i++){ ?>
+            <a href="/shop/index/<?php echo $i; ?>" <?php if($i==$currentPage){ ?> class="active" <?php } ?>><?php echo $i; ?></a>
+        <?php } ?>
+        <a href="/shop/index/<?php echo $page->last; ?>">最后一页</a>
+    </aside>
+</section>
+{% endblock %}

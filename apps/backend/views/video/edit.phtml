@@ -1,0 +1,36 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <ul class="ulColumn2">
+        <form action="/Video/edit" method="post">
+            {% for v in info %}
+            <li>
+                <span class="item_name" style="width:150px;">请选择分类：</span>
+                <select class="select" name="ntid">
+                    {% for t in newsType %}
+                    <option value="{{t.id}}"{% if v.ntid == t.id %}selected="selected"{% endif %}>{{t.name|e}}</option>
+                    {% endfor %}
+                </select>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">视频标题：</span>
+                <input type="text" class="textbox textbox_295" value="{{v.title|e}}" name="title"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">视频简介：</span>
+                <textarea  name="blurb" class="textarea" style="width:290px;height:100px;">{{v.blurb|e}}</textarea>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">视频地址：</span>
+                <input type="text" class="textbox textbox_295" value="{{v.url|e}}" name="url"/>
+            </li>
+            <li>
+            	<input type="hidden" value="{{v.id|e}}" name="id"/>
+                <span class="item_name" style="width:200px;"></span>
+                <input type="submit" class="link_btn"/>
+            </li>
+            {% endfor %}
+        </form>
+    </ul>
+</section>
+{% endblock %}

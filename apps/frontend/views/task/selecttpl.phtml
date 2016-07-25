@@ -1,0 +1,23 @@
+<div class=" ctr fr">
+    <div class="cr">
+        <p >发布类型</p>
+    </div>
+    <div>
+        <form action="/task/showtpl" class=" mt45" method="post">
+            <?php foreach($data as $k=>$v){ ?>
+            <input type="hidden" name="<?php echo $k; ?>" value="<?php echo $v; ?>" />
+            <?php } ?>
+            <div>
+                <label class="xlabel_2 mt25">选择模板:</label>
+                <select name="tpl" class=" kuang3">
+                    <option value="0">--请选择--</option>
+                    <?php foreach($tpl as $t){ ?>
+                    <option value="<?php echo $t->id; ?>"><?php echo $t->keywords; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div><input type="submit" value="确定" class=" submit_reg2 ml145 mt25">
+            </div>
+        </form>
+    </div>
+</div>

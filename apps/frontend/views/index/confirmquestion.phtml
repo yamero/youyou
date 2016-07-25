@@ -1,0 +1,51 @@
+<!--密保找回密码-->
+<div id="mibao">
+    <div class="mibao">
+        <p>如果忘记密码，请填写下面表单来重新获取密码</p>
+        <div class="wenti">
+            <form action="/index/findpassword" method="post" >
+                <div class="feld">
+                    <label class="label">第一问题:</label>
+                    <select class="zhaohui" style="height:40px; " disabled>
+                        <option value="1" <?php if($user->question1==1){ ?>selected<?php } ?> >我的生日是？</option>
+                        <option value="2" <?php if($user->question1==2){ ?>selected<?php } ?> >我妈妈的名字是？</option>
+                        <option value="3" <?php if($user->question1==3){ ?>selected<?php } ?> >我爸爸的名字是？</option>
+                        <option value="4" <?php if($user->question1==4){ ?>selected<?php } ?> >我爷爷的名字是？</option>
+                        <option value="5" <?php if($user->question1==5){ ?>selected<?php } ?> >我奶奶的名字是？</option>
+                        <option value="6" <?php if($user->question1==6){ ?>selected<?php } ?> >我的家乡是？</option>
+                    </select>
+                </div>
+                <div class="feld">
+                    <div class="mt25">
+                        <label class="label">第一答案:</label>
+                        <input type="text" name="answer1" class="kuang1" />
+                    </div>
+                </div>
+                <div class="feld">
+                    <label class="label">第二问题:</label>
+                    <select class="zhaohui" style="height:40px;margin-top:20px;" disabled>
+                        <option value="1" <?php if($user->question2==1){ ?>selected<?php } ?> >我的工号是？</option>
+                        <option value="2" <?php if($user->question2==2){ ?>selected<?php } ?> >我的车牌号是？</option>
+                        <option value="3" <?php if($user->question2==3){ ?>selected<?php } ?> >我上班的日期是？</option>
+                        <option value="4" <?php if($user->question2==4){ ?>selected<?php } ?> >我的幸运数字是？</option>
+                        <option value="5" <?php if($user->question2==5){ ?>selected<?php } ?> >我最喜欢的电影是？</option>
+                        <option value="6" <?php if($user->question2==6){ ?>selected<?php } ?> >我最喜欢的运动是？</option>
+                        <option value="7" <?php if($user->question2==7){ ?>selected<?php } ?> >我最喜欢的水果是？</option>
+                        <option value="8" <?php if($user->question2==8){ ?>selected<?php } ?> >我最爱吃的食物是？</option>
+                    </select>
+                </div>
+                <div class="feld">
+                    <div class="mt25">
+                        <label class="label">第二答案:</label>
+                        <input type="text" name="answer2" class="kuang1" />
+                    </div>
+                </div>
+                <input type="hidden" value="<?php echo $account; ?>" name="account" />
+                <input type="submit" value="提交" class="tijiao  ml80 mt30"/>
+            </form>
+            <span class=" mt30 ml80"><a href="#">电子邮件重置密码</a></span>
+            <span class=" mt30"><a href="#">手机短信重置密码</a></span>
+        </div>
+    </div>
+</div>
+</div>

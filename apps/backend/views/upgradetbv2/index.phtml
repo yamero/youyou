@@ -1,0 +1,36 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <div class="page_title">
+        <h2 class="fl">升级淘宝号V2申请列表</h2>
+    </div>
+    <table class="table">
+        <tr>
+            <th>申请人(会员名)</th>
+            <th>淘宝账号</th>
+            <th>审核状态</th>
+            <th>申请提交时间</th>
+            <th>操作</th>
+        </tr>
+        <?php foreach($page->items as $item){ ?>
+        <tr align="center">
+            <td><?php echo $item->account; ?></td>
+            <td><?php echo $item->name; ?></td>
+            <td><?php if($item->verify_status==1){ ?>未审核<?php }elseif($item->verify_status==2){ ?>审核未通过<?php }else{ ?>已通过审核<?php } ?></td>
+            <td><?php echo date('Y-m-d',$item->create_time); ?></td>
+            <td>
+                <a href="/upgradetbv2/edit/<?php echo $item->id; ?>" class="inner_btn">编辑</a>
+                <a href="/upgradetbv2/del/<?php echo $item->id; ?>" class="inner_btn">删除</a>
+            </td>
+        </tr>
+        <?php } ?>
+    </table>
+    <aside class="paging">
+        <a href="/upgradetbv2/index/1">第一页</a>
+        <?php for($i=$startnum;$i<=$lastnum;$i++){ ?>
+            <a href="/upgradetbv2/index/<?php echo $i; ?>" <?php if($i==$currentPage){ ?> class="active" <?php } ?>><?php echo $i; ?></a>
+        <?php } ?>
+        <a href="/upgradetbv2/index/<?php echo $page->last; ?>">最后一页</a>
+    </aside>
+</section>
+{% endblock %}

@@ -1,0 +1,212 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <ul class="ulColumn2">
+        <form action="/Task/edit" method="post" name="form1" enctype="multipart/form-data">
+            
+           <li>
+               <span class="item_name" style="width:150px;">选择模板：</span>
+               <select class="select" name="tpl_id">
+                   <option value="">选择模板</option>
+                   <option value="1">一套模板</option>
+               </select>
+           </li>
+            <li>
+                <span class="item_name" style="width:150px;">请选择分类：</span>
+                <select class="select" name="category">
+                    <option value="1">淘宝</option>
+                    <option value="2">京东</option>
+                    <option value="3">美团</option>
+                </select>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">任务类型：</span>
+                <label class="single_selection"><input type="radio" name="type" value="1" checked="checked">电脑</label>
+                <label class="single_selection"><input type="radio" name="type" value="2">手机</label>
+                <label class="single_selection"><input type="radio" name="type" value="3">流量</label>
+
+           </li>
+            <li>
+                <span class="item_name" style="width:150px;">选择宝贝：</span>
+               <select class="select" name="goods_id">
+                   <option value="1">宝贝1</option>
+               </select>
+               <span class="item_name" style="color:#FF4040;">选择要刷的宝贝ID</span>
+           </li>
+           <li>
+                <span class="item_name" style="width:150px;">任务标题：</span>
+                <input type="text" class="textbox textbox_295" placeholder="标题" name="name"/>
+                <span class="item_name" style="color:#FF4040;">填写任务标题</span>
+            </li>
+           <li>
+                <span class="item_name" style="width:150px;">任务总金额：</span>
+                <input type="text" class="textbox textbox_295" placeholder="总金额" name="total_money"/>元
+                <span class="item_name" style="color:#FF4040;">填写任务总金额，，数字1-5000</span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">卖家旺旺：</span>
+                <input type="text" class="textbox textbox_295" placeholder="旺旺" name="im_id"/>
+                <span class="item_name" style="color:#FF4040;">当前宝贝对应的旺旺，(买家方只显示旺旺的首尾两个字符)</span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">任务佣金：</span>
+                <input type="text" class="textbox textbox_295" placeholder="任务佣金" name="task_money"/>元
+                <span class="item_name" style="color:#FF4040;">给刷手的佣金，数字3-100</span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">关键搜索词：</span>
+                <input type="text" class="textbox textbox_295" placeholder="搜索关键词" name="skeywords"/>
+                <span class="item_name" style="color:#FF4040;">输入在淘宝搜索的关键词，然后上传宝贝搜索结果图</span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">上传图片：</span>
+                <label class="uploadImg">
+                     <input type="file"  name='img_path'/>
+                     <span>上传图片</span>
+                </label>
+                <span class="item_name" style="width:150px;color:#FF4040;">上传搜索结果显示图</span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">任务简介：</span>
+                <textarea placeholder="任务简介..." class="textarea" style="width:290px;height:100px;" name="profile"></textarea>
+                <span class="item_name" style="color:#FF4040;">可填写200中英文</span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">任务详细要求：</span>
+                <textarea placeholder="任务详细要求..." class="textarea" style="width:290px;height:100px;" name="task_need"></textarea>
+                <span class="item_name" style="color:#FF4040;">可填写200中英文，如通过其他外链来刷，请在此说明</span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">增拍店铺宝贝标题：</span>
+                <input type="text" class="textbox textbox_295" placeholder="增拍店铺宝贝标题" name="addgoods_title"/>
+                <span class="item_name" style="color:#FF4040;">增拍店铺其他宝贝标题</span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">增拍店铺宝贝数量：</span>
+                <input type="text" class="textbox textbox_295" placeholder="增拍店铺宝贝数量" name="addgoods_num"/>
+                <span class="item_name" style="color:#FF4040;">增拍店铺其他宝贝数量</span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">增拍店铺宝贝详细说明：</span>
+                <textarea placeholder="增拍店铺宝贝详细说明..." class="textarea" style="width:290px;height:100px;" name="addgoods_content"></textarea>
+                <span class="item_name" style="color:#FF4040;">增拍店铺其他宝贝详细说明，增拍宝贝的请自觉增加佣金</span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">商品确认收货时间：</span>
+
+                <label class="single_selection"><input type="radio" class="textarea" name="take_time">
+                    <input type="date" class="textarea" name="take_time"></input>
+                </label>
+                <label class="single_selection"><input type="radio" name="take_time" value="根据物流到货时间" checked="checked">默认根据物流到货时间</label>
+                <label class="single_selection"><input type="radio" name="take_time" value="站内详聊">站内详聊</label>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">评价时间：</span>
+                <label class="single_selection"><input type="radio" name="comment_time" value="1" checked="checked">系统默认</label>
+                <label class="single_selection"><input type="radio" name="comment_time" value="2">确认收货后立即评价</label>
+                <label class="single_selection"><input type="radio" name="comment_time" value="3">站内详聊</label>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">套餐：</span>
+                <select class="select" name="goods_id">
+                   <option value="">无套餐</option>
+               </select>
+               <span class="item_name" style="color:#FF4040;">若套餐任务，请选择套餐的宝贝数量</span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">是否追评/切图：</span>
+                <label class="single_selection"><input type="radio" name="add_comment" value="1">是</label>
+                <label class="single_selection"><input type="radio" name="add_comment" value="2" checked="checked">否</label>
+            </li>
+             <li>
+                <span class="item_name" style="width:150px;">商品原价：</span>
+                <input type="text" class="textarea" name="original_price"></input>
+                <span class="item_name" style="color:#FF4040;">商品元价格(包括增拍、套餐等)</span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">假聊：</span>
+                <label class="single_selection"><input type="radio" name="false_talk" value="1">是</label>
+                <label class="single_selection"><input type="radio" name="false_talk" value="2" checked="checked">否</label>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">改地址：</span>
+                <label class="single_selection"><input type="radio" name="edit_address" value="1">是</label>
+                <label class="single_selection"><input type="radio" name="edit_address" value="2" checked="checked">否</label>
+                <span class="item_name" style="color:#FF4040;">选择 是 的话返款时间必选立即返款，并在30分钟内</span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">特殊要求：</span>
+                <textarea placeholder="特殊要求..." class="textarea" style="width:290px;height:40px;" name="special_ask"></textarea>
+                <span class="item_name" style="color:#FF4040;">如:禁止XX城市，我方电脑远程付款，三星以上小号等</span>
+
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">远程付款：</span>
+                <label class="single_selection"><input type="radio" name="remote_pay" value="1">是</label>
+                <label class="single_selection"><input type="radio" name="remote_pay" value="2" checked="checked">否</label>
+                <span class="item_name" style="color:#FF4040;">选择 是 的话必须网银付款</span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">小号认证要求：</span>
+                <label class="single_selection"><input type="radio" name="user_certified" value="1">是</label>
+                <label class="single_selection"><input type="radio" name="user_certified" value="2" checked="checked">否</label>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">小号资质要求：</span>
+                <label class="single_selection"><input type="radio" name="user_aptitude" value="1" checked="checked">一心</label>
+                <label class="single_selection"><input type="radio" name="user_aptitude" value="2">二心</label>
+                <label class="single_selection"><input type="radio" name="user_aptitude" value="3">三心</label>
+                <label class="single_selection"><input type="radio" name="user_aptitude" value="4">四心</label>
+                <label class="single_selection"><input type="radio" name="user_aptitude" value="5">五心</label>
+                <label class="single_selection"><input type="radio" name="user_aptitude" value="4">一钻以上</label>
+                <label class="single_selection"><input type="radio" name="user_aptitude" value="4">不限制</label>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">返款方式：</span>
+                <label class="single_selection"><input type="radio" name="return_money_type" value="1" checked="checked">财付通转账</label>
+                <label class="single_selection"><input type="radio" name="return_money_type" value="2">支付宝转账</label>
+                <label class="single_selection"><input type="radio" name="return_money_type" value="3">支付宝转银行卡</label>
+                <label class="single_selection"><input type="radio" name="return_money_type" value="4">支付宝收款</label>
+                <label class="single_selection"><input type="radio" name="return_money_type" value="4">财付通收款</label>
+                <span class="item_name" style="color:#FF4040;">收款产生的手续费，必须商家承担</span>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">返款时间：</span>
+               <select class="select" name="return_money_time">
+                   <option value="">1小时</option>
+               </select>
+               <span class="item_name" style="color:#FF4040;">选择正确的返款时间(当天任务当天返款)</span>
+           </li>
+           <li>
+                <span class="item_name" style="width:150px;">自动取消任务时间：</span>
+               <select class="select" name="auto_cancel_time">
+                   <option value="">2小时</option>
+               </select>
+           </li>
+           <li>
+                <span class="item_name" style="width:150px;">发布任务数量：</span>
+               <select class="select" name="release_task_num">
+                   <option value="">200</option>
+               </select>
+               <span class="item_name" style="color:#FF4040;">此任务一次性发布的数量，选择1 发布完即扣1金币，2扣两个金币 ，以此类推</span>
+           </li>
+           <li>
+                <span class="item_name" style="width:150px;">是否保存模板：</span>
+                <label class="single_selection"><input type="radio" name="save_tpl" value="1">是</label>
+                <label class="single_selection"><input type="radio" name="save_tpl" value="2" checked="checked">否</label>
+            </li>
+           <!--  <li>
+                <span class="item_name" style="width:150px;">内容：</span>
+                <script id="container" name="content" type="text/plain" style="width:800px;height:240px;"></script>
+            </li> -->
+            <li>
+                <span class="item_name" style="width:200px;"></span>
+                <input type="submit" class="link_btn"/>
+            </li>
+        </form>
+    </ul>
+</section>
+<script type="text/javascript">
+    //var um = UM.getEditor('container');
+</script>
+{% endblock %}

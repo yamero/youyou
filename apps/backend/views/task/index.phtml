@@ -1,0 +1,49 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <div class="page_title">
+        <h2 class="fl">任务列表</h2>
+    </div>
+    <form action="/task/index" method="post" style="margin-bottom:10px;">
+        <input type="text" class="textbox textbox_295" placeholder="任务编号" name="taskSN" style="height:20px;width:200px;margin-left:15px;"/>
+        <input type="text" class="textbox textbox_295" placeholder="发布人会员名" name="releaseName" style="height:20px;width:200px;margin-left:15px;"/>
+        <input type="submit" value="搜索" class="link_btn" style="margin-left: 15px;" />
+    </form>
+    <table class="table">
+        <tr>
+            <th>发布人(会员名)</th>
+            <th>任务编号</th>
+            <th>任务平台</th>
+            <th>任务所属店铺</th>
+            <th>任务搜索关键词</th>
+            <th>任务总金额</th>
+            <th>任务佣金</th>
+            <th>任务发布时间</th>
+            <th>操作</th>
+        </tr>
+        <?php foreach($page->items as $item){ ?>
+        <tr align="center">
+            <td><?php echo $item->account; ?></td>
+            <td><?php echo $item->sn; ?></td>
+            <td><?php if($item->platform==1){ ?>淘宝<?php }else{ ?>京东<?php } ?></td>
+            <td><?php echo $item->shop; ?></td>
+            <td><?php echo $item->keywords; ?></td>
+            <td><?php echo $item->total_money; ?></td>
+            <td><?php echo $item->commission; ?></td>
+            <td><?php echo date('Y-m-d',$item->create_time); ?></td>
+            <td>
+                <a href="/task/edit/<?php echo $item->id; ?>" class="inner_btn">编辑</a>
+                <a href="/task/del/<?php echo $item->id; ?>" class="inner_btn">删除</a>
+            </td>
+        </tr>
+        <?php } ?>
+    </table>
+    <aside class="paging">
+        <a href="/task/index/1">第一页</a>
+        <?php for($i=$startnum;$i<=$lastnum;$i++){ ?>
+        <a href="/task/index/<?php echo $i; ?>" <?php if($i==$currentPage){ ?> class="active" <?php } ?>><?php echo $i; ?></a>
+        <?php } ?>
+        <a href="/task/index/<?php echo $page->last; ?>">最后一页</a>
+    </aside>
+</section>
+{% endblock %}

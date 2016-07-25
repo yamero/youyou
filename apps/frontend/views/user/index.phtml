@@ -1,0 +1,143 @@
+<div class="contentr fr">
+    <div class="cr">
+        <p>会员信息</p>
+    </div>
+    <div class="hy ml32 mt25">
+
+        <div class="huiyuan fl ">
+            <p class="fl mt10">
+                <img <?php if(empty($user->portrait)){ ?> src="/static/images/user_ico1.gif" <?php }else{ ?> src="<?php echo $user->portrait; ?>" <?php } ?> id="showimg" width="100px" height="100px"/>
+            </p>
+        <span class="file1 mt5">更改头像
+        <form action="/user/changeimg" target="frameFile" method="post" enctype="multipart/form-data" id="imgform">
+            <input id="fileUpload" type="file" name="pic[]" />
+            <iframe id='frameFile' name='frameFile' style='display: none;'></iframe>
+        </form>
+        </span>
+        </div>
+        <div class="huiyuan1">
+            <table width="790" height="141" border="0" bordercolor="#dddddd" cellpadding="0" cellspacing="0" class="fr">
+                <tr>
+                    <td height="35" colspan="4">用户名 : <em><?php echo $user->account; ?></em></td>
+                    <td height="35" colspan="4">注册时间 : <em><?php echo date('Y/m/d',$user->reg_time); ?></em></td>
+                </tr>
+                <tr>
+
+                    <td height="33" colspan="4">绑定QQ号：<em><?php echo $user->qq; ?></em></td>
+                    <td colspan="5">绑定手机号：<em><?php echo $user->mobile; ?></em></td>
+                </tr>
+                <tr>
+                    <td height="36" colspan="4">上次登入时间：<em><?php echo date('Y/m/d',$this->session->get('login_time')); ?></em></td>
+                    <td colspan="4">登入IP:<em><?php echo $this->session->get('ip'); ?>(河南省郑州市电信)</em></td>
+                </tr>
+                <tr>
+                    <td width="74" height="37">评价信息：</td>
+                    <td width="83">好评（<em>888</em>）</td>
+                    <td width="69">中评（<em>0</em>）</td>
+                    <td width="73">差评（<em>0</em>）</td>
+                    <td width="72">账户信息：</td>
+                    <td width="100"><img src="/static/images/jinbi.png" />金币（<em><?php echo $user->gcoin; ?></em>）</td>
+                    <td width="95">发布点（<em><?php echo $user->release_num; ?></em>）</td>
+                    <td width="133">
+                        <?php if($user->points>=4&&$user->points<=10){ ?><img src="/static/images/1.gif" />
+                        <?php }elseif($user->points>=11&&$user->points<=40){ ?><img src="/static/images/2.gif" />
+                        <?php }elseif($user->points>=41&&$user->points<=90){ ?><img src="/static/images/3.gif" />
+                        <?php }elseif($user->points>=91&&$user->points<=150){ ?><img src="/static/images/4.gif" />
+                        <?php }elseif($user->points>=151&&$user->points<=250){ ?><img src="/static/images/5.gif" />
+                        <?php }elseif($user->points>=251&&$user->points<=500){ ?><img src="/static/images/6.gif" /><?php } ?>
+                        积分（<em><?php echo $user->points; ?></em>）
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="cr1 mt25">
+        <p>任务信息</p>
+    </div>
+    <!--商家显示任务-->
+    <div class=" mt45 ml32">
+        <table width="900" border="1" bordercolor="#dddddd" cellspacing="0" cellpadding="0" class="f16">
+            <tr>
+                <td width="214" height="57" bgcolor="#f0f0f0">&nbsp;</td>
+                <td height="57" colspan="4" align="center" bgcolor="#f0f0f0" class="f16" >发任务数</td>
+            </tr>
+            <tr >
+                <td height="40">&nbsp;</td>
+                <td width="177" height="40" align="center">电脑单</td>
+                <td width="160" height="40" align="center">手机单</td>
+                <td width="177" height="40" align="center">浏览单</td>
+                <td width="160" height="40" align="center">秒拍单</td>
+            </tr>
+            <tr>
+                <td height="40" align="center">当天完成</td>
+                <td height="40">&nbsp;</td>
+                <td height="40">&nbsp;</td>
+                <td height="40">&nbsp;</td>
+                <td height="40">&nbsp;</td>
+            </tr>
+            <tr >
+                <td height="40" align="center">30天内完成</td>
+                <td height="40"></td>
+                <td height="40">&nbsp;</td>
+                <td height="40">&nbsp;</td>
+                <td height="40">&nbsp;</td>
+            </tr>
+            <tr >
+                <td height="40" align="center">历史完成</td>
+                <td height="40">&nbsp;</td>
+                <td height="40">&nbsp;</td>
+                <td height="40">&nbsp;</td>
+                <td height="40">&nbsp;</td>
+            </tr >
+        </table>
+    </div>
+    <!-- 淘客显示任务-->
+    <div class=" mt45 ml32"  style="display:none" >
+        <table width="900" border="1" bordercolor="#dddddd" cellspacing="0" cellpadding="0" class="f16">
+            <tr>
+                <td width="214" height="57" bgcolor="#f0f0f0">&nbsp;</td>
+                <td height="57" colspan="4" align="center" bgcolor="#f0f0f0" class="f16" >接任务数</td>
+            </tr>
+            <tr >
+                <td height="40">&nbsp;</td>
+                <td width="177" height="40" align="center">电脑单</td>
+                <td width="160" height="40" align="center">手机单</td>
+                <td width="177" height="40" align="center">浏览单</td>
+                <td width="160" height="40" align="center">秒拍单</td>
+            </tr>
+            <tr>
+                <td height="40" align="center">当天完成</td>
+                <td height="40">&nbsp;</td>
+                <td height="40">&nbsp;</td>
+                <td height="40">&nbsp;</td>
+                <td height="40">&nbsp;</td>
+            </tr>
+            <tr >
+                <td height="40" align="center">30天内完成</td>
+                <td height="40"></td>
+                <td height="40">&nbsp;</td>
+                <td height="40">&nbsp;</td>
+                <td height="40">&nbsp;</td>
+            </tr>
+            <tr >
+                <td height="40" align="center">历史完成</td>
+                <td height="40">&nbsp;</td>
+                <td height="40">&nbsp;</td>
+                <td height="40">&nbsp;</td>
+                <td height="40">&nbsp;</td>
+            </tr >
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#fileUpload").change(function(){
+           $("#imgform").submit();
+        });
+        $("#frameFile").load(function(){
+            var wnd=this.contentWindow;
+            var str = $(wnd.document.body).html();
+            $("#showimg").attr("src",str);
+        });
+    });
+</script>

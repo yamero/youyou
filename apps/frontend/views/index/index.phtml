@@ -1,0 +1,103 @@
+<!--banner轮播和登录-->
+<div id="main" class="auto">
+  <!--轮播开始-->
+  <div id="slider" class="fl">
+    <div class="banner-box">
+      <div class="bd">
+        <ul>
+          <li>
+            <div class="m-width"> <a href="javascript:void(0);"><img src="/static/images/banner1.jpg" /></a> </div>
+          </li>
+          <li >
+            <div class="m-width"> <a href="javascript:void(0);"><img src="/static/images/banner2.jpg" /></a> </div>
+          </li>
+          <li>
+            <div class="m-width"> <a href="javascript:void(0);"><img src="/static/images/banner1.jpg" /></a> </div>
+          </li>
+          <li >
+            <div class="m-width"> <a href="javascript:void(0);"><img src="/static/images/banner2.jpg" /></a> </div>
+          </li>
+        </ul>
+      </div>
+      <div class="banner-btn"> <a class="prev" href="javascript:void(0);"></a> <a class="next" href="javascript:void(0);"></a>
+        <div class="hd">
+          <ul>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      function changeCaptcha(){
+        var srcstr= $("#codeimg").attr("src")+'?'+new Date().getTime();
+        $("#codeimg").attr("src",srcstr);
+      }
+      $(document).ready(function(){
+
+        $(".prev,.next").hover(function(){
+          $(this).stop(true,false).fadeTo("show",0.9);
+        },function(){
+          $(this).stop(true,false).fadeTo("show",0.4);
+        });
+
+        $(".banner-box").slide({
+          titCell:".hd ul",
+          mainCell:".bd ul",
+          effect:"fold",
+          interTime:3500,
+          delayTime:500,
+          autoPlay:true,
+          autoPage:true,
+          trigger:"click"
+        });
+      });
+    </script>
+
+  </div>
+  <!-- 登录-->
+  <?php if(!$this->session->has('uname')){ ?>
+  <div class="deng fr" id="nologin">
+    <h1 class="ml14">欢迎进入右右电商服务平台</h1>
+    <div class="login_main">
+      <form action="" method="post" id="loginform">
+        <p>用户名/邮箱：</p>
+        <input type="text" name="name" class="input_text" />
+        <p class="mt10">密码：</p>
+        <input type="password" name="password" class="con_input" />
+        <p class="mt10">验证码：</p>
+        <p class="input_wrap">
+          <input type="text" class="inputs fl" name="code" />
+          <img src="/captcha/aa" id="codeimg"/> <span class=" zi fr"> <a href="javascript:void(0);" onclick="changeCaptcha()">换一张</a></span> </p>
+        <input type="submit" value="立即登入"  class="login mt10"/>
+        <div class="zc fr mt10">
+          <p class="f16"><a href="/index/reg">免费注册</a></p>
+        </div>
+      </form>
+      <p class="mt15"><a href="/index/lostpassword">忘记密码</a></p>
+    </div>
+  </div>
+  <?php }else{ ?>
+  <div class="deng fr" id="islogin">
+    <h1 class="ml14">您好！<?php echo $this->session->get('uname'); ?>,欢迎回来！</h1>
+    <div class="user ml32 mt25">
+      <div class="user-icon fl">
+        <img src="/static/images/user_ico.gif" id="head_ico" alt="用户头像" />
+      </div>
+      <div class="user-info">
+        <p><span>用户名：</span><em><?php echo $user->account; ?></em></p>
+        <p><span>会员积分：</span><em><?php echo $user->points; ?></em></p>
+        <p><span>金币余额：</span><em><?php echo $user->gcoin; ?></em></p>
+        <p><span>发布点：</span><em><?php echo $user->release_num; ?></em></p>
+        <p style="display:none" ><span>保证金：</span><em>10</em></p>
+      </div>
+      <p class="ml10 mt10"><span>上次登入时间：</span><em><?php echo date('Y-m-d H:i:s',$this->session->get('login_time')); ?></em></p>
+      <p class="ml10 mt10"><span>上次登入IP：</span><em><?php echo $this->session->get('ip'); ?>(河南省郑州市电信)</em></p>
+      <p class="operate f16 ml14 mt15"><a class="ibtn ibtn-super ibtn-orange" href="#">马上开始</a></p>
+    </div>
+  </div>
+  <?php } ?>
+</div>
+<script type="text/javascript">
+  $("#loginform").Validform({
+    tiptype:1
+  });
+</script>

@@ -1,0 +1,20 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <ul class="ulColumn2">
+        <form action="/exchange/doedit" method="post">
+            <li>
+                <span class="item_name" style="width:150px;">处理状态：</span>
+                <label class="single_selection"><input type="radio" name="handle_status" value="1" <?php if($exchange->handle_status==1){ ?>checked="checked"<?php } ?>>未处理</label>
+                <label class="single_selection"><input type="radio" name="handle_status" value="2" <?php if($exchange->handle_status==2){ ?>checked="checked"<?php } ?>>处理中</label>
+                <label class="single_selection"><input type="radio" name="handle_status" value="3" <?php if($exchange->handle_status==3){ ?>checked="checked"<?php } ?>>已处理</label>
+            </li>
+            <li>
+                <span class="item_name" style="width:200px;"></span>
+                <input type="hidden" name="id" value="<?php echo $exchange->id; ?>" />
+                <input type="submit" class="link_btn" value="编辑"/>
+            </li>
+        </form>
+    </ul>
+</section>
+{% endblock %}

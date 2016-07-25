@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>后台管理系统</title>
+<meta name="author" content="DeathGhost" />
+<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+<link href="/umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="/static/js/html5.js"></script>
+<![endif]-->
+<script src="/static/js/jquery.js"></script>
+<script src="/static/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="/umeditor/umeditor.config.js"></script>
+<script type="text/javascript" src="/umeditor/umeditor.min.js"></script>
+<script type="text/javascript" src="/umeditor/lang/zh-cn/zh-cn.js"></script>
+<script>
+	(function($){
+		$(window).load(function(){
+			
+			$("a[rel='load-content']").click(function(e){
+				e.preventDefault();
+				var url=$(this).attr("href");
+				$.get(url,function(data){
+					$(".content .mCSB_container").append(data); //load new content inside .mCSB_container
+					//scroll-to appended content 
+					$(".content").mCustomScrollbar("scrollTo","h2:last");
+				});
+			});
+			
+			$(".content").delegate("a[href='top']","click",function(e){
+				e.preventDefault();
+				$(".content").mCustomScrollbar("scrollTo",$(this).attr("href"));
+			});
+			
+		});
+	})(jQuery);
+</script>
+</head>
+<body>
+<!--header-->
+<header>
+ <h1><img src="/static/images/admin_logo.png"/></h1>
+ <ul class="rt_nav">
+  <li><a href="http://you.phalcon.com" target="_blank" class="website_icon">站点首页</a></li>
+  <li><a href="/member/edit?id=<?= $uid ?>" class="admin_icon"><?= $uname ?></a></li>
+  <li><a href="/index/logout" class="quit_icon">安全退出</a></li>
+ </ul>
+</header>
+
+<!--aside nav-->
+<aside class="lt_aside_nav content mCustomScrollbar">
+ <h2><a href="/">起始页</a></h2>
+ <ul>
+ <li>
+     <dl>
+         <dt>站点相关</dt>
+         <dd><a href="/config/edit" <?php if ($operation == 'config') { ?> class="active" <?php } ?>>配置站点</a></dd>
+         <dd><a href="/rewarddetail/edit" <?php if ($operation == 'rewarddetail') { ?> class="active" <?php } ?>>奖励明细</a></dd>
+         <dd><a href="/bank/" <?php if ($operation == 'banklist') { ?> class="active" <?php } ?>>银行列表</a></dd>
+         <dd><a href="/bank/add" <?php if ($operation == 'bankadd') { ?> class="active" <?php } ?>>添加银行</a></dd>
+     </dl>
+ </li>
+  <li>
+   <dl>
+    <dt>管理员</dt>
+    <dd><a href="/member" <?php if ($operation == 'memberlist') { ?> class="active" <?php } ?>>管理员列表</a></dd>
+    <dd><a href="/member/add" <?php if ($operation == 'memberadd') { ?> class="active" <?php } ?>>添加管理员</a></dd>
+   </dl>
+  </li>
+  <li>
+   <dl>
+    <dt>文章</dt>
+    <dd><a href="/news/" <?php if ($operation == 'newslist') { ?> class="active" <?php } ?>>文章列表</a></dd>
+    <dd><a href="/news/add" <?php if ($operation == 'newsadd') { ?> class="active" <?php } ?>>添加文章</a></dd>
+    <dd><a href="/newstype" <?php if ($operation == 'newstypelist') { ?> class="active" <?php } ?>>类型列表</a></dd>
+    <dd><a href="/newstype/add" <?php if ($operation == 'newstypeadd') { ?> class="active" <?php } ?>>添加类型</a></dd>
+   </dl>
+  </li>
+ <li>
+     <dl>
+         <dt>会员相关</dt>
+         <dd><a href="/user/" <?php if ($operation == 'userlist') { ?> class="active" <?php } ?>>会员列表</a></dd>
+         <dd><a href="/user/add" <?php if ($operation == 'useradd') { ?> class="active" <?php } ?>>添加会员</a></dd>
+         <dd><a href="/quickrecharge/" <?php if ($operation == 'quickrechargelist') { ?> class="active" <?php } ?>>快速充值列表</a></dd>
+         <dd><a href="/rechargecard/" <?php if ($operation == 'rechargecardlist') { ?> class="active" <?php } ?>>充值卡列表</a></dd>
+         <dd><a href="/rechargecard/add" <?php if ($operation == 'rechargecardadd') { ?> class="active" <?php } ?>>添加充值卡</a></dd>
+         <dd><a href="/shop/" <?php if ($operation == 'shoplist') { ?> class="active" <?php } ?>>绑定店铺列表</a></dd>
+         <dd><a href="/taobao/" <?php if ($operation == 'taobaolist') { ?> class="active" <?php } ?>>绑定淘宝号申请列表</a></dd>
+         <dd><a href="/tblevel/" <?php if ($operation == 'tblevellist') { ?> class="active" <?php } ?>>更新淘宝号信誉申请列表</a></dd>
+         <dd><a href="/upgradetb/" <?php if ($operation == 'upgradetblist') { ?> class="active" <?php } ?>>升级淘宝号申请列表</a></dd>
+         <dd><a href="/upgradetbv2/" <?php if ($operation == 'upgradetbv2list') { ?> class="active" <?php } ?>>升级淘宝号V2申请列表</a></dd>
+         <dd><a href="/buyreleasebycard/" <?php if ($operation == 'buyreleasebycardlist') { ?> class="active" <?php } ?>>充值卡购买发布点记录</a></dd>
+         <dd><a href="/buyreleasebycoin/" <?php if ($operation == 'buyreleasebycoinlist') { ?> class="active" <?php } ?>>金币购买发布点记录</a></dd>
+         <dd><a href="/bankapply/" <?php if ($operation == 'bankapplylist') { ?> class="active" <?php } ?>>银行认证申请列表</a></dd>
+         <dd><a href="/exchange/" <?php if ($operation == 'exchangelist') { ?> class="active" <?php } ?>>金币兑现申请列表</a></dd>
+     </dl>
+ </li>
+   <li>
+     <dl>
+      <dt>任务相关</dt>
+        <dd><a href="/task/"<?php if ($operation == 'tasklist') { ?> class="active" <?php } ?>>任务列表</a></dd>
+     </dl>
+  </li>
+  <li>
+   <p class="btm_infor">© 刘志伟 版权所有</p>
+  </li>
+ </ul>
+</aside>
+
+<section class="rt_wrap content mCustomScrollbar">
+ <div class="rt_content">
+      
+<section>
+    <div class="page_title">
+        <h2 class="fl">充值卡列表</h2>
+    </div>
+    <table class="table">
+        <tr>
+            <th>充值卡卡号</th>
+            <th>价值</th>
+            <th>是否被使用</th>
+            <th>充值卡添加时间</th>
+            <th>操作</th>
+        </tr>
+        <?php foreach($page->items as $item){ ?>
+        <tr align="center">
+            <td><?php echo $item->card_num; ?></td>
+            <td><?php echo $item->gcoin_num; ?>金币</td>
+            <td><?php if($item->isuse==1){ ?>未被使用<?php }elseif($item->isuse==2){ ?>已被使用<?php } ?></td>
+            <td><?php echo date('Y-m-d',$item->create_time); ?></td>
+            <td>
+                <a href="/rechargecard/del/<?php echo $item->id; ?>" class="inner_btn">删除</a>
+            </td>
+        </tr>
+        <?php } ?>
+    </table>
+    <aside class="paging">
+        <a href="/rechargecard/index/1">第一页</a>
+        <?php for($i=$startnum;$i<=$lastnum;$i++){ ?>
+            <a href="/rechargecard/index/<?php echo $i; ?>" <?php if($i==$currentPage){ ?> class="active" <?php } ?>><?php echo $i; ?></a>
+        <?php } ?>
+        <a href="/rechargecard/index/<?php echo $page->last; ?>">最后一页</a>
+    </aside>
+</section>
+
+ </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<div class="contentr fr">
+    <div class="cr">
+        <p >推荐记录</p>
+    </div>
+    <div class="ml32 mt25"><span>我的推荐人：<em><?php if(empty($puser->account)){ ?>无<?php }else{ echo $puser->account; } ?></em></span><span class="ml50">累积推荐：<em><?php echo $rcount; ?>人</em></span></div>
+    <div class=" ml32 mt25" >
+
+        <table width="795" border="1" bordercolor="#dddddd" cellspacing="0" cellpadding="0" class="f16">
+
+            <tr >
+                <td width="216" rowspan="2"  align="center">推广员分类</td>
+                <td width="197" height="43" align="center" bgcolor="#f0f0f0">推荐成功奖励</td>
+                <td width="163" height="43" align="center" bgcolor="#f0f0f0">完单提成奖励</td>
+                <td width="209" height="43" align="center" bgcolor="#f0f0f0">总计</td>
+            </tr>
+            <tr >
+                <td height="40" align="center">&nbsp;</td>
+                <td height="40" align="center">&nbsp;</td>
+                <td height="40" align="center">&nbsp;</td>
+            </tr>
+
+        </table>
+
+    </div>
+    <div class="ml32 mt25">我推荐的人</div>
+    <table  class="ml32 mt15" width="807" border="1" cellspacing="0" cellpadding="0" bordercolor="#dddddd" >
+        <tr style=" border-bottom:#FFF; border-right:#edf2ff;">
+            <td width="189" height="50" align="center" bgcolor="#f0f0f0">我的下线</td>
+            <td width="174" align="center" bgcolor="#f0f0f0">联系QQ</td>
+            <td width="154" align="center" bgcolor="#f0f0f0">姓名</td>
+            <td width="123" align="center" bgcolor="#f0f0f0">状态</td>
+            <td width="155" align="center" bgcolor="#f0f0f0" style=" border-right-color:#dddddd ">注册时间</td>
+        </tr>
+        <?php foreach($ruser as $ru){ ?>
+        <tr style=" border-top:#FFF; border-right:#FFF;">
+            <td height="50" align="center"><?php echo $ru->account; ?></td>
+            <td align="center"><?php echo $ru->qq; ?></td>
+            <td align="center"><?php echo $ru->real_name; ?></td>
+            <td align="center">已生效</td>
+            <td align="center" style=" border-right-color:#dddddd "><?php echo date('Y-m-d',$ru->reg_time); ?></td>
+        </tr>
+        <?php } ?>
+    </table>
+</div>

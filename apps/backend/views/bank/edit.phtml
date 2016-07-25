@@ -1,0 +1,18 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <ul class="ulColumn2">
+        <form action="/bank/doedit" method="post">
+            <li>
+                <span class="item_name" style="width:150px;">银行名称：</span>
+                <input type="text" class="textbox textbox_295" placeholder="类型名" name="bank_name" value="{{ bank.bank_name }}"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:200px;"></span>
+                <input type="hidden" name="id" value="{{ bank.id }}" />
+                <input type="submit" class="link_btn"/>
+            </li>
+        </form>
+    </ul>
+</section>
+{% endblock %}

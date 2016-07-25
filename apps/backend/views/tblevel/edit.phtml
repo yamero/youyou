@@ -1,0 +1,24 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <ul class="ulColumn2">
+        <form action="/tblevel/doedit" method="post">
+            <li>
+                <span class="item_name" style="width:150px;">信誉等级：</span>
+                <label class="single_selection"><input type="radio" name="heart_level" value="0" <?php if($tb->heart_level==0){ ?>checked="checked"<?php } ?> >白号</label>
+                <label class="single_selection"><input type="radio" name="heart_level" value="1" <?php if($tb->heart_level==1){ ?>checked="checked"<?php } ?> ><img src="/static/images/01.gif" /></label>
+                <label class="single_selection"><input type="radio" name="heart_level" value="2" <?php if($tb->heart_level==2){ ?>checked="checked"<?php } ?> ><img src="/static/images/02.gif" /></label>
+                <label class="single_selection"><input type="radio" name="heart_level" value="3" <?php if($tb->heart_level==3){ ?>checked="checked"<?php } ?> ><img src="/static/images/03.gif" /></label>
+                <label class="single_selection"><input type="radio" name="heart_level" value="4" <?php if($tb->heart_level==4){ ?>checked="checked"<?php } ?> ><img src="/static/images/04.gif" /></label>
+                <label class="single_selection"><input type="radio" name="heart_level" value="5" <?php if($tb->heart_level==5){ ?>checked="checked"<?php } ?> ><img src="/static/images/05.gif" /></label>
+                <label class="single_selection"><input type="radio" name="heart_level" value="6" <?php if($tb->heart_level==6){ ?>checked="checked"<?php } ?> ><img src="/static/images/06.gif" /></label>
+            </li>
+            <li>
+                <span class="item_name" style="width:200px;"></span>
+                <input type="hidden" name="id" value="<?php echo $tb->id; ?>" />
+                <input type="submit" class="link_btn" value="更新"/>
+            </li>
+        </form>
+    </ul>
+</section>
+{% endblock %}

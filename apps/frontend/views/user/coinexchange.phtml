@@ -1,0 +1,65 @@
+<div class="contentr fr">
+    <div class="cr">
+        <p>金币兑现</p>
+    </div>
+    <div class="renzheng">
+        <p class="  mt25 ml32">1.取消支付宝兑换，统一改为银行卡兑换</p>
+        <p class=" mt15 ml32" >2.担保金原价退兑,其它用途使用的则1金币兑换0.9元,100金币起兑换。</p>
+        <p class="  mt15 ml32">3.普通金币兑换时间为6-8天，担保金兑换时间为1个月（申请过300元以上的任务则属于担保金）。</p>
+        <p class=" mt15 ml32" style="color:#cf4503">4.务必选择正确的【银行名称】，填写正确的【银行卡卡号】【银行卡姓名】，以免打款失败。</p>
+        <p class=" mt15 ml32">5.显示兑换完成后，银行将在2个工作日内打款到您银行账户。如2个工作日后未收到，请联系右右客服。</p>
+        <p class=" mt15 ml32" style="color:#cf4503">PS：星期一到星期五为工作日，星期六星期日为非工作日。</p>
+    </div>
+    <div class="cr_2 ml90 mt30" >
+        <form action="" method="post">
+            <?php foreach($bankapply as $ba){ ?>
+            <label class="xlabel mt25">银行名称:</label>
+            <select class="kuang2" disabled="disabled">
+                <option value="<?php echo $ba->bank_id; ?>" selected="selected"><?php echo $ba->bank_name; ?></option>
+            </select>
+            <span>仅支持18家银行的借记卡</span>
+            <div class="mt25">
+                <label class="xlabel">银行卡卡号:</label>
+                <input type="text" class="kuang2" value="<?php echo $ba->bankcard_num; ?>" disabled="disabled" />
+            </div>
+            <div action="" class="mt25">
+                <label class="xlabel">持卡人姓名:</label>
+                <input type="text" class="kuang2" value="<?php echo $ba->real_name; ?>" disabled="disabled" />
+            </div>
+            <div action="" class="mt25">
+                <label class="xlabel">兑换金币数:</label>
+                <input type="text" name="coin_num" class="kuang2" />
+            </div>
+            <div action="" class="mt25">
+                <label class="xlabel">提醒手机:</label>
+                <input type="text" class="kuang2" value="<?php echo $ba->mobile_num; ?>" disabled="disabled" />
+            </div>
+            <p class=" mt15 ml120" style="color:#cf4503;">提交银行处理时，通过此手机号码通知您。</p>
+            <input class="submit_reg ml160 mt25" type="submit" value="兑换" />
+            <?php } ?>
+            <?php if($bankapply->count()<=0){ ?>您还未认证银行卡，请先认证银行卡！<?php } ?>
+        </form>
+    </div>
+    <div class=" mt30">
+        <table width="975" height="40" border="1" cellspacing="0" bordercolor="#dcdcdc" >
+            <tr>
+                <td width="240" align="center" bgcolor="#fef7f2">流水号</td>
+                <td width="240" align="center" bgcolor="#fef7f2">申请日期</td>
+                <td width="240" align="center" bgcolor="#fef7f2">处理日期</td>
+                <td width="177" align="center" bgcolor="#fef7f2">状态</td>
+                <td width="178" align="center" bgcolor="#fef7f2">操作</td>
+            </tr>
+            <?php foreach($exchangerecord as $e){ ?>
+            <tr>
+                <td width="240" align="center"><?php echo $e->serial_num; ?></td>
+                <td width="240" align="center"><?php echo date('Y-m-d H:i',$e->create_time); ?></td>
+                <td width="240" align="center" >
+                    <?php if($e->handle_status==1){ ?>未处理<?php }elseif($e->handle_status==2){ ?>处理中<?php }else{ echo date('Y-m-d H:i',$e->handle_time); }?>
+                </td>
+                <td width="177" align="center"><?php if($e->handle_status==1){ ?>未处理<?php }elseif($e->handle_status==2){ ?>处理中<?php }else{ ?>已处理<?php } ?></td>
+                <td width="178" align="center"></td>
+            </tr>
+            <?php } ?>
+        </table>
+    </div>
+</div>

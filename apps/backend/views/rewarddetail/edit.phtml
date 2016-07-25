@@ -1,0 +1,74 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <ul class="ulColumn2">
+        <form action="/rewarddetail/doedit" method="post">
+            <li>
+                <span class="item_name" style="width:180px;">新注册奖励金币数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="新注册奖励金币数" name="register_coin" value="<?php echo $rewarddetail->register_coin; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">新注册奖励发布点数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="新注册奖励发布点数" name="register_release" value="<?php echo $rewarddetail->register_release; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">新注册奖励积分数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="新注册奖励积分数" name="register_point" value="<?php echo $rewarddetail->register_point; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">推荐奖励金币数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="推荐奖励金币数" name="recommend_coin" value="<?php echo $rewarddetail->recommend_coin; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">推荐奖励发布点数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="推荐奖励发布点数" name="recommend_release" value="<?php echo $rewarddetail->recommend_release; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">推荐奖励积分数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="推荐奖励积分数" name="recommend_point" value="<?php echo $rewarddetail->recommend_point; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">发布奖励金币数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="发布奖励金币数" name="release_coin" value="<?php echo $rewarddetail->release_coin; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">发布奖励发布点数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="发布奖励发布点数" name="release_release" value="<?php echo $rewarddetail->release_release; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">发布奖励积分数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="发布奖励积分数" name="release_point" value="<?php echo $rewarddetail->release_point; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">充值奖励金币数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="充值奖励金币数" name="recharge_coin" value="<?php echo $rewarddetail->recharge_coin; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">充值奖励发布点数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="充值奖励发布点数" name="recharge_release" value="<?php echo $rewarddetail->recharge_release; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">充值奖励积分数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="充值奖励积分数" name="recharge_point" value="<?php echo $rewarddetail->recharge_point; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">活动奖励金币数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="活动奖励金币数" name="activity_coin" value="<?php echo $rewarddetail->activity_coin; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">活动奖励发布点数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="活动奖励发布点数" name="activity_release" value="<?php echo $rewarddetail->activity_release; ?>" />
+            </li>
+            <li>
+                <span class="item_name" style="width:180px;">活动奖励积分数：</span>
+                <input type="text" class="textbox textbox_295" placeholder="活动奖励积分数" name="activity_point" value="<?php echo $rewarddetail->activity_point; ?>" />
+            </li>
+            <li>
+                <input type="hidden" name="id" value="<?php echo $rewarddetail->id; ?>" />
+                <span class="item_name" style="width:200px;"></span>
+                <input type="submit" class="link_btn" value="编辑"/>
+            </li>
+        </form>
+    </ul>
+</section>
+{% endblock %}

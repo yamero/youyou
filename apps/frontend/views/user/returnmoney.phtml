@@ -1,0 +1,34 @@
+<div class="contentr fr">
+    <div class="cr">
+        <p>返款设置</p>
+    </div>
+    <div class="taobao mt30">
+        <p class="f16"><a href="#">淘客收款账户姓名必须为本人或者家人，若需要修改收款账户姓名，请点击下面的<br />
+                修改收款姓名 提交相关证件进行修改！(商家可直接修改)</a></p>
+    </div>
+    <div class="cr_6  mt30" >
+        <form action="" method="post">
+            <div class="mt25">
+                <label class="xlabel_l ">支付宝账号:</label>
+                <input type="text" class="kuang2" value="<?php echo $user->alipay; ?>" disabled />
+                <span>通过支付宝返款本金和佣金（此支付宝不能用来刷单）</span>
+            </div>
+            <div class="mt15">
+                <label class="xlabel_l ">支付宝真实姓名:</label>
+                <input name="alipay_name" class="kuang2" type="text" class="txt1" value="<?php echo $user->alipay_name; ?>" />
+                <span>支付宝真实姓名</span>
+            </div>
+            <div class="mt25">
+                <label class="xlabel_l ">财付通账号名:</label>
+                <input type="text"  value="<?php echo $user->tenpay; ?>" class="kuang2" disabled />
+                <span>通过财付通返款本金和佣金（为接更多任务，最好开通一个）</span>
+            </div>
+            <div class="mt25">
+                <label class="xlabel_l ">财付通真实姓名:</label>
+                <input type="text" name="tenpay_name" class="kuang2" value="<?php echo $user->tenpay_name; ?>" />
+                <span>收款财付通真实姓名</span>
+            </div>
+            <input class="submit_reg ml210 mt25" type="submit" value="保存修改" class="sbt_add">
+        </form>
+    </div>
+</div>

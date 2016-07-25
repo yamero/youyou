@@ -1,0 +1,88 @@
+<div class="contentr fr">
+    <div class="cr">
+        <p>绑定淘宝号</p>
+    </div>
+    <div class="taobao mt30">
+        <p class="f16"><a href="#">详情点击此处查询淘宝号规则（不按要求填写会导致右右号限制登陆！）</a></p>
+    </div>
+    <form action="" method="post">
+    <div class="cr_2 ml50 mt30" >
+        <div class="mt25">
+            <label class="xlabel_l ">1&nbsp;淘宝会员号:</label>
+            <input type="text" name="name" class="kuang2" />
+            <span>(接任务的淘宝号)</span>
+        </div>
+        <div class="mt15">
+            <label class="xlabel_l ">2&nbsp;支付宝账户:</label>
+            <input type="text" name="alipay" class="kuang2" />
+            <span>(接任务的淘宝号对应的支付宝)</span>
+        </div>
+        <div class="mt25">
+            <label class="xlabel_l ">3&nbsp;淘宝实名姓名:</label>
+            <input type="text" name="real_name" class="kuang2" />
+            <span>(接任务的淘宝号姓名)</span>
+        </div>
+        <div class="mt25">
+            <label class="xlabel_l ">4&nbsp;淘宝实名身份证号码:</label>
+            <input type="text" name="idcard" class="kuang2" />
+        </div>
+        <input class="submit_reg ml240 mt25" type="submit" value="增加" />
+        <span class="ml20"><a href="/user/upgradetbv2">升级淘宝号V2</a></span>
+        <span class="ml20"><a href="/user/upgradetb">升级淘宝号</a></span>
+    </div>
+    </form>
+    <div class=" mt30">
+        <table width="975" border="1" cellspacing="0" bordercolor="#dcdcdc"  >
+            <tr>
+                <td width="152" height="40" align="center" bgcolor="#fef7f2">已绑定的淘宝号</td>
+                <td width="80" align="center" bgcolor="#fef7f2">不通过原因</td>
+                <td width="61" align="center" bgcolor="#fef7f2">状态</td>
+                <td width="82" align="center" bgcolor="#fef7f2">日已做<img src="/static/images/jiantou.png" class="ml5" /></td>
+                <td width="84" align="center" bgcolor="#fef7f2">周已做<img src="/static/images/jiantou.png" class="ml5" /></td>
+                <td width="92" align="center" bgcolor="#fef7f2">月已做<img src="/static/images/jiantou.png" class="ml5" /></td>
+                <td width="77" align="center" bgcolor="#fef7f2">启用<img src="/static/images/jiantou.png" class="ml5" /></td>
+                <td width="63" align="center" bgcolor="#fef7f2">备注</td>
+                <td width="248" align="center" bgcolor="#fef7f2">可用操作</td>
+            </tr>
+            <?php foreach($tb as $t){ ?>
+            <tr>
+                <td width="152" height="35" align="center" bgcolor="#f6f5f5"><?php echo $t->name; ?></td>
+                <td width="80" align="center" bgcolor="#f6f5f5"><?php echo $t->reason; ?></td>
+                <td width="61" align="center" bgcolor="#f6f5f5"><?php if($t->verify_status==1){ ?>未审核<?php }elseif($t->verify_status==2){ ?>未通过审核<?php }else{ ?>已审核通过<?php } ?></td>
+                <td width="82" align="center" bgcolor="#f6f5f5"><?php echo $num['day'][$t->id]; ?></td>
+                <td width="84" align="center" bgcolor="#f6f5f5"><?php echo $num['week'][$t->id]; ?></td>
+                <td width="92" align="center" bgcolor="#f6f5f5"><?php echo $num['month'][$t->id]; ?></td>
+                <td width="77" align="center" bgcolor="#f6f5f5"><?php if($t->use_status==1){ ?>是<?php }else{ ?>否<?php } ?></td>
+                <td width="100" align="center" bgcolor="#f6f5f5"><?php echo $t->remark; ?></td>
+                <td width="248" align="center" bgcolor="#f6f5f5">
+                    <?php if($t->use_status==1){ ?><a href="/user/tbdisabled/<?php echo $t->id; ?>" onclick="return confirm('您确定要禁用此淘宝号吗？');">禁用</a><?php }else{ ?><a href="/user/tbenabled/<?php echo $t->id; ?>" onclick="return confirm('您确定要禁用此淘宝号吗？');">启用</a><?php } ?>
+                    <a href="/user/deltb/<?php echo $t->id; ?>" onclick="return confirm('您确定要删除此淘宝号吗？');">删除</a> <a href="javascrip:void(0);" onclick="showRemark(<?php echo $t->id; ?>);">备注</a> <a href="/user/updatecredit/<?php echo $t->id; ?>">更新信誉</a>
+                </td>
+            </tr>
+            <?php } ?>
+        </table>
+    </div>
+</div>
+<!--填写备注弹框-->
+<div class="pay-alert">
+    <div class="bg">
+        <span class="bg-top">
+        <p class="order-list"><strong>填写备注</strong></p>
+        <p class="false"><a href=""> ｘ</a></p>
+        </span>
+        <div style="width:500px;margin-left:auto;margin-right:auto;margin-top:60px;">
+            <form action="/user/addremark" method="post">
+                <input type="hidden" name="id" id="tbid"/>
+                备注：<textarea cols="50" rows="8" name="remark"></textarea>
+                <input class="submit_reg" type="submit" value="提交" style="margin-left:180px;"/>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function showRemark(id){
+        $('input#tbid').val('');
+        $('input#tbid').val(id);
+        $('.pay-alert').css('display','block');
+    }
+</script>

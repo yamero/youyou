@@ -1,0 +1,169 @@
+<div class="contentr_4 fr">
+    <div class="cr">
+        <p class="fl">我的任务</p>
+    </div>
+    <div class="syrw mt15  ml240" style=" margin-bottom:10px">
+        <?php if(empty($opt)){ ?><span style="color:#f7941d" class="f16">所有任务</span>|<?php }else{ ?><span class="f16"><a href="/task/shoppertask">所有任务</a></span> | <?php } ?>
+        <?php if($opt==1){ ?><span style="color:#f7941d" class="f16">待审核</span>|<?php }else{ ?><span class="f16"><a href="/task/shoppertask/1">待审核</a></span> | <?php } ?>
+        <?php if($opt==2){ ?><span style="color:#f7941d" class="f16">待付款</span>|<?php }else{ ?><span class="f16"><a href="/task/shoppertask/2">待付款</a></span> | <?php } ?>
+        <?php if($opt==3){ ?><span style="color:#f7941d" class="f16">待返款</span>|<?php }else{ ?><span class="f16"><a href="/task/shoppertask/3">待返款</a></span> | <?php } ?>
+        <?php if($opt==4){ ?><span style="color:#f7941d" class="f16">待收货</span>|<?php }else{ ?><span class="f16"><a href="/task/shoppertask/4">待收货</a></span> | <?php } ?>
+        <?php if($opt==5){ ?><span style="color:#f7941d" class="f16">已完成</span><?php }else{ ?><span class="f16"><a href="/task/shoppertask/5">已完成</a></span><?php } ?>
+        <span><a class="ibtn-big1 ml190" href="/task/shoppertask">刷新任务</a></span>
+    </div>
+    <div class="renwu-list">
+        <ul>
+            <li class="task-protey-rw">任务需求</li>
+            <li class="task-protey-rw">任务佣金</li>
+            <li class="task-protey-rw">任务价格</li>
+            <li class="task-protey-rw">买号星级</li>
+            <li class="task-protey-rw">任务状态</li>
+            <li class=" task-protey-rw1">操作</li>
+        </ul>
+    </div>
+    <!--   我的任务开始 -->
+    <?php foreach($mytask as $mt){ ?>
+        <div class="task-info2 ml14 mt15">
+            <div class="title-1 ">
+                <span class="ml14 fl">订单号：<?php echo $mt->sn; ?></span>
+                <span class="ml20 fl">商家：<?php echo $user->account; ?></span>
+                <?php if($mt->platform==1){ ?>
+                    <span class="ml20 fl">掌柜名：<em><?php echo $mt->master; ?></em></span>
+                <?php }elseif($mt->platform==2){ ?>
+                    <span class="ml20 fl">店铺名：<em><?php echo $mt->shop; ?></em></span>
+                <?php } ?>
+                <h2 class="fr"><i><strong>刷手QQ:<?php echo $mt->qq; ?></strong></i><span ><img src="/static/images/button_11.gif"  class="img-rw ml14"/></span></h2>
+            </div>
+            <ul class=" clearfix-rw2 mt10">
+                <li class=" task-protey-rw-11">
+                    <p class=" mt25  fw"><?php if($mt->platform==1){ ?>淘宝<?php }else{ ?>京东<?php } ?> <?php if($mt->type==1){ ?>电脑单<?php }elseif($mt->type==2){ ?>手机单<?php }elseif($mt->type==3){ ?>浏览单<?php }else{ ?>秒拍单<?php } ?></p>
+                </li>
+                <li class="task-protey-rw-11">
+                    <p class=" mt25   fw"><?php echo $mt->commission; ?>.00</p>
+                </li>
+                <li class="task-protey-rw-11">
+                    <p class=" mt25 fw"><?php echo $mt->total_money; ?>.00<span class=" ibtn-icon mt10 ml14"><?php if($mt->remote_pay==1){ ?>远程<?php }else{ ?>垫付<?php } ?></span></p>
+                </li>
+                <li class=" task-protey-rw-11">
+                    <p class=" mt25  fw"><?php if($mt->isauth==2){ ?>不限制<?php }else{ ?><img src="/static/images/0<?php echo $t->auth_level; ?>.gif" /><?php } ?></p>
+                </li>
+                <li class=" task-protey-rw-11">
+                    <p class="mt15">
+                        <?php if($mt->verify_status==1){ ?><span class="fw">商家审核中</span>
+                        <?php }elseif($mt->verify_status==2){ ?><span class="fw">未通过商家审核</span>
+                        <?php }elseif($mt->pay_status==1){ ?><span class="fk fw">任务进行中，未付款</span>
+                        <?php }elseif($mt->return_status==1){ ?><span class="fank fw">已付款，商家返款中</span>
+                        <?php }elseif($mt->receive_status==1){ ?><span class="sh fw">等待收货和评价</span>
+                        <?php }elseif($mt->complete_status==1){ ?><span class="fank fw">已收货，商家确认中</span>
+                        <?php }else{ ?><span class="wanc fw">任务完成</span><?php } ?>
+                    </p>
+                </li>
+                <li class="task-protey-rw-22">
+                    <?php if($mt->return_status==1){ ?><span class="ibtn-big-rw mt5"><a href="javascript:void(0);" onclick="cancelTask(<?php echo $mt->id; ?>);">取消任务</a></span> <br /><?php } ?>
+                    <?php if($mt->verify_status==1){ ?>
+                        <span class="ibtn-big-rw1-1 mt5"><a href="javascript:void(0);" onclick="verifyTask(<?php echo $mt->id; ?>,3)">通过</a></span><br/>
+                        <span class="ibtn-big-rw2-2 mt5"><a href="javascript:void(0);" onclick="verifyTask(<?php echo $mt->id; ?>,2)">不通过</a></span><br/>
+                    <?php } ?>
+                    <?php if($mt->verify_status==3){ ?><span class=" ibtn-big-rw1 mt5"><a href="/task/taskdetail/<?php echo $mt->id; ?>">查看详情</a></span><br /><?php } ?>
+                    <?php if($mt->verify_status==3&&$mt->pay_status==2&&$mt->return_status==1){ ?><span class="ibtn-big-rw2 mt5"><a href="javascript:void(0);" onclick="returnMoney(<?php echo $mt->id; ?>);">确认返款</a></span><?php } ?>
+                    <?php if($mt->verify_status==3&&$mt->pay_status==2&&$mt->return_status==2&&$mt->receive_status==2&&$mt->complete_status==1){ ?><span class="ibtn-big-rw3 mt5"><a href="javascript:void(0);" onclick="completeTask(<?php echo $mt->id; ?>);">终结任务</a></span><?php } ?>
+                </li>
+            </ul>
+            <ul class="foot-clearfix-rw fl mt5">
+                <li class="fl ml14">
+                    <p><?php echo date('Y-m-d H:i:s',$mt->create_time); ?></p>
+                </li>
+                <li class="fl ml32">
+                    <p>采用买号：<?php echo $mt->name; ?> <?php if($mt->heart_level==0){ ?>白号<?php }else{ ?><img src="/static/images/0<?php echo $mt->heart_level; ?>.gif" /><?php } ?></p>
+                </li>
+                <?php if(!empty($mt->order_sn)){ ?>
+                    <li class="fl ml32">
+                        <p>淘宝订单号：<?php echo $mt->order_sn; ?></p>
+                    </li>
+                <?php } ?>
+                <li class="fl ml32">
+                    <p>返款财付通账户： <?php echo $mt->tenpay; ?> <?php if(empty($mt->tenpay_name)){ echo $mt->real_name; }else{ echo $mt->tenpay_name; } ?></p>
+                </li>
+            </ul>
+        </div>
+    <?php } ?>
+    <!-- 我的任务结束-->
+</div>
+<script type="text/javascript">
+    function cancelTask(id){
+        var isdel=window.confirm("确定要取消任务吗？");
+        if(isdel){
+            $.ajax({
+                url:"/task/canceltask",
+                type:"POST",
+                data:{id:id},
+                dataType:"json",
+                success:function(result){
+                    if(result.status==1){
+                        alert(result.msg);
+                        location.reload();
+                    }else{
+                        alert(result.msg);
+                    }
+                }
+            });
+        }
+    }
+    function verifyTask(id,v){
+        var isdel=window.confirm("确定要进行此操作吗？");
+        if(isdel){
+            $.ajax({
+                url:"/task/verify",
+                type:"POST",
+                data:{id:id,val:v},
+                dataType:"json",
+                success:function(result){
+                    if(result.status==1){
+                        alert(result.msg);
+                        location.reload();
+                    }else{
+                        alert(result.msg);
+                    }
+                }
+            });
+        }
+    }
+    function returnMoney(id){
+        var isdel=window.confirm("确定要进行此操作吗？");
+        if(isdel){
+            $.ajax({
+                url:"/task/returnmoney",
+                type:"POST",
+                data:{id:id},
+                dataType:"json",
+                success:function(result){
+                    if(result.status==1){
+                        alert(result.msg);
+                        location.reload();
+                    }else{
+                        alert(result.msg);
+                    }
+                }
+            });
+        }
+    }
+    function completeTask(id){
+        var isdel=window.confirm("确定要终结此任务吗？");
+        if(isdel){
+            $.ajax({
+                url:"/task/completetask",
+                type:"POST",
+                data:{id:id},
+                dataType:"json",
+                success:function(result){
+                    if(result.status==1){
+                        alert(result.msg);
+                        location.reload();
+                    }else{
+                        alert(result.msg);
+                    }
+                }
+            });
+        }
+    }
+</script>

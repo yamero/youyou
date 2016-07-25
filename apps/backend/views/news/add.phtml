@@ -1,0 +1,62 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("input#thumb").change(function(event){
+            $("img#thumbimg").attr("src","");
+            var file=event.target.files[0];
+            if(file){
+                var r=new FileReader();
+                r.readAsDataURL(file);
+                r.onload=function(e){
+                    var contents= e.target.result;
+                    $("img#thumbimg").attr("src",contents);
+                }
+            }else{
+                alert("选择图片失败！");
+            }
+        });
+    });
+</script>
+<section>
+    <ul class="ulColumn2">
+        <form action="/news/doadd" method="post" enctype="multipart/form-data">
+            <li>
+                <span class="item_name" style="width:150px;">类型：</span>
+                <select class="select" name="type">
+                    {% for nt in newsType %}
+                    <option value="{{ nt.id }}">{{ nt.name }}</option>
+                    {% endfor %}
+                </select>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">缩略图：</span>
+                <label class="uploadImg">
+                    <input type="file" name="pic[]" id="thumb"/>
+                    <span>选择图片</span>
+                </label>
+                <img src="" width="150px" height="120px" id="thumbimg" />
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">标题：</span>
+                <input type="text" class="textbox textbox_295" placeholder="标题 必填" name="title"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">发布人：</span>
+                <input type="text" class="textbox textbox_295" placeholder="不填则为当前登录管理员" name="member"/>
+            </li>
+            <li>
+                <span class="item_name" style="width:150px;">内容：</span>
+                <script id="container" name="content" type="text/plain" style="width:800px;height:240px;"></script>
+            </li>
+            <li>
+                <span class="item_name" style="width:200px;"></span>
+                <input type="submit" class="link_btn" value="添加"/>
+            </li>
+        </form>
+    </ul>
+</section>
+<script type="text/javascript">
+    var um = UM.getEditor('container');
+</script>
+{% endblock %}

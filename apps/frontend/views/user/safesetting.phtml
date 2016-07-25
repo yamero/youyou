@@ -1,0 +1,94 @@
+<div class="contentr fr">
+    <div class="cr">
+        <p>安全设置</p>
+    </div>
+    <div class="slideTxtBox  mt30 ml50">
+        <div class="hd">
+            <ul>
+                <li>修改密码</li>
+                <li>修改密保</li>
+            </ul>
+        </div>
+        <div class="bd">
+            <ul class="ml32">
+                <form action="/user/changepassword" method="post">
+                    <li>
+                        <div action="" class="mt25">
+                            <label class="xlabel_l">原密码:</label>
+                            <input type="password" name="oldpassword" class="kuang1" />
+                            <em>请输入您的原密码</em>
+                        </div>
+                    </li>
+                    <li>
+                        <div action="" class="mt25">
+                            <label class="xlabel_l">新密码:</label>
+                            <input type="password" name="newpassword" class="kuang1" />
+                            <em>由字母和数字组成6-16个字符</em>
+                        </div>
+                    </li>
+                    <li>
+                        <div action="" class="mt25">
+                            <label class="xlabel_l">确认新密码:</label>
+                            <input type="password" name="repassword" class="kuang1" />
+                            <em>请再次输入新密码</em>
+                        </div>
+                    </li>
+                    <input class="submit_reg  mt25" style=" margin-left:-150px;" type="submit" value="修改" />
+                </form>
+            </ul>
+            <ul class="ml50">
+                <form action="/user/changequestion" method="post">
+                    <li>
+                        <label class="xlabel">第一问题:</label>
+                        <select name="question1" class="kuang1" onchange="disinput(this.value,1)">
+                            <option value="0" <?php if($user->question1==0){ ?>selected="selected"<?php } ?> >--未设置--</option>
+                            <option value="1" <?php if($user->question1==1){ ?>selected="selected"<?php } ?> >我的生日是？</option>
+                            <option value="2" <?php if($user->question1==2){ ?>selected="selected"<?php } ?> >我妈妈的名字是？</option>
+                            <option value="3" <?php if($user->question1==3){ ?>selected="selected"<?php } ?> >我爸爸的名字是？</option>
+                            <option value="4" <?php if($user->question1==4){ ?>selected="selected"<?php } ?> >我爷爷的名字是？</option>
+                            <option value="5" <?php if($user->question1==5){ ?>selected="selected"<?php } ?> >我奶奶的名字是？</option>
+                            <option value="6" <?php if($user->question1==6){ ?>selected="selected"<?php } ?> >我的家乡是？</option>
+                        </select>
+                    </li>
+                    <li>
+                        <div class="mt25">
+                            <label class="xlabel">验证答案:</label>
+                            <input type="text" name="answer1" id="answer1" class="kuang1" <?php if($user->question1==0){ ?>disabled="disabled"<?php } ?> value="<?php if($user->question1!=0){ echo $user->answer1; } ?>" />
+                        </div>
+                    </li>
+                    <li>
+                        <label class="xlabel mt25">第二问题:</label>
+                        <select name="question2" class="kuang1" onchange="disinput(this.value,2)">
+                            <option value="0" <?php if($user->question2==0){ ?>selected="selected"<?php } ?> >--未设置--</option>
+                            <option value="1" <?php if($user->question2==1){ ?>selected="selected"<?php } ?> >我的工号是？</option>
+                            <option value="2" <?php if($user->question2==2){ ?>selected="selected"<?php } ?> >我的车牌号是？</option>
+                            <option value="3" <?php if($user->question2==3){ ?>selected="selected"<?php } ?> >我上班的日期是？</option>
+                            <option value="4" <?php if($user->question2==4){ ?>selected="selected"<?php } ?> >我的幸运数字是？</option>
+                            <option value="5" <?php if($user->question2==5){ ?>selected="selected"<?php } ?> >我最喜欢的电影是？</option>
+                            <option value="6" <?php if($user->question2==6){ ?>selected="selected"<?php } ?> >我最喜欢的运动是？</option>
+                            <option value="7" <?php if($user->question2==7){ ?>selected="selected"<?php } ?> >我最喜欢的水果是？</option>
+                            <option value="8" <?php if($user->question2==8){ ?>selected="selected"<?php } ?> >我最爱吃的食物是？</option>
+                        </select>
+                    </li>
+                    <li>
+                        <div class="mt25">
+                            <label class="xlabel">验证答案:</label>
+                            <input type="text" name="answer2" id="answer2" class="kuang1" <?php if($user->question2==0){ ?>disabled="disabled"<?php } ?> value="<?php if($user->question2!=0){ echo $user->answer2; } ?>" />
+                        </div>
+                    </li>
+                    <input class="submit_reg mt25" style="margin-left:-305px;" type="submit" value="修改" />
+                </form>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript">jQuery(".slideTxtBox").slide();</script>
+    <script type="text/javascript">
+        function disinput(val,n){
+            if(val==0){
+                $('#answer'+n).attr('disabled','disabled');
+            }else{
+                $('#answer'+n).removeAttr('disabled');
+            }
+        }
+    </script>
+</div>

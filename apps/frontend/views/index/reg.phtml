@@ -1,0 +1,116 @@
+<!--注册-->
+<div id="mibao">
+    <div class="xinyonghu">
+        <p>步骤一,新用户注册</p>
+        <form class="vform" method="post" action="/register/nextregiste">
+        <div class="zhuce">
+            <div class="feld">
+                    <label class="xlabel">注册意向:</label>
+                    <select name="type" class="kuang">
+                        <option value="1">商家</option>
+                        <option value="2" selected="selected">刷手</option>
+                    </select>
+            </div>
+            <div class="feld">
+                <div class="mt25">
+                    <label class="xlabel">邀请码:</label>
+                    <input type="text" name="invite_code" class="kuang1" />
+                    <span>填写邀请码，可免费获得赠送金币<em> <a href="#" style="color:#f7951f">点此获得邀请码</a></em></span>
+                </div>
+            </div>
+            <div class="feld">
+                <div class="mt25">
+                    <label class="xlabel">用户名:</label>
+                    <input type="text" name="account" class="kuang1" datatype="s2-16" nullmsg="请输入用户名" errormsg="用户名不符合要求" placeholder="字母、数字、汉字或下划线，2-16个字符" ajaxurl="/register/checkName" />
+                </div>
+            </div>
+            <div class="feld">
+                <div class="mt25">
+                    <label class="xlabel">密码:</label>
+                    <input type="password" name="password" class="kuang1" placeholder="数字、大小写字母或下划线，6-32个字符" datatype="s6-32" errormsg="密码不符合要求" nullmsg="请输入密码" ajaxurl="/register/checkPassword" />
+                </div>
+            </div>
+            <div class="feld">
+                <div class="mt25">
+                    <label class="xlabel">确认密码:</label>
+                    <input type="password" class="kuang1" datatype="*" recheck="password" nullmsg="请再次输入密码" errormsg="两次密码输入不一致" placeholder="再次输入密码" sucmsg="两次密码输入一致" />
+                </div>
+            </div>
+            <div class="feld">
+                <div class="mt25">
+                    <label class="xlabel">QQ号码:</label>
+                    <input type=" text" name="qq" class="kuang1" placeholder="请填写您的QQ号" datatype="n5-12" nullmsg="请输入您的QQ号" errormsg="请输入正确的QQ号" ajaxurl="/register/checkQQ" />
+                </div>
+            </div>
+            <div class="feld">
+                <div class="mt25">
+                    <label class="xlabel">邮箱:</label>
+                    <input type=" text" name="email" class="kuang1" placeholder="请填写您的邮箱" datatype="e" nullmsg="请输入您的邮箱" errormsg="请输入正确的邮箱" sucmsg="邮箱格式正确" ajaxurl="/register/checkEmail" />
+                </div>
+            </div>
+            <div class="feld">
+                    <label class="xlabel mt25">第一问题:</label>
+                    <select name="question1" class="kuang1" onchange="disinput(this.value,1)">
+                        <option value="0" selected="selected">--请选择--</option>
+                        <option value="1">我的生日是？</option>
+                        <option value="2">我妈妈的名字是？</option>
+                        <option value="3">我爸爸的名字是？</option>
+                        <option value="4">我爷爷的名字是？</option>
+                        <option value="5">我奶奶的名字是？</option>
+                        <option value="6">我的家乡是？</option>
+                    </select>
+            </div>
+            <div class="feld">
+                <div class="mt25">
+                    <label class="xlabel">第一答案:</label>
+                    <input type="text" name="answer1" id="answer1" class="kuang1" disabled="disabled" />
+                </div>
+            </div>
+            <div class="feld">
+                <label class="xlabel mt25">第二问题:</label>
+                <select name="question2" class="kuang1"  onchange="disinput(this.value,2)">
+                    <option value="0" selected="selected">--请选择--</option>
+                    <option value="1">我的工号是？</option>
+                    <option value="2">我的车牌号是？</option>
+                    <option value="3">我上班的日期是？</option>
+                    <option value="4">我的幸运数字是？</option>
+                    <option value="5">我最喜欢的电影是？</option>
+                    <option value="6">我最喜欢的运动是？</option>
+                    <option value="7">我最喜欢的水果是？</option>
+                    <option value="8">我最爱吃的食物是？</option>
+                </select>
+            </div>
+            <div class="feld">
+                <div class="mt25">
+                    <label class="xlabel">第二答案:</label>
+                    <input type="text" name="answer2" id="answer2" class="kuang1" disabled="disabled" />
+                </div>
+            </div>
+            <div class="feld">
+                <div class="mt25">
+                    <label class="xlabel">手机号码:</label>
+                    <input type="text" name="mobile" class="kuang1" placeholder="请输入您的手机号" datatype="m" nullmsg="请输入您的手机号" errormsg="请输入正确的手机号" sucmsg="手机格式正确" />
+                </div>
+            </div>
+            <div class="mt25">
+                <label class="xlabel">手机验证码:</label>
+                <input type="text" class="kuang1" />
+                <font class="ma"><a href="#">获取手机验证码</a></font> <span>填写手机收到的验证码</span>
+            </div>
+            <input type="submit" class="xiayibu mt25 ml90" style="color:#ffffff;" value="下一步"/>
+        </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $(".vform").Validform({
+        tiptype:3
+    });
+    function disinput(val,n){
+        if(val==0){
+            $('#answer'+n).attr('disabled','disabled');
+        }else{
+            $('#answer'+n).removeAttr('disabled');
+        }
+    }
+</script>

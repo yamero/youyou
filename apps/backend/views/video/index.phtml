@@ -1,0 +1,51 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <div class="page_title">
+        <h2 class="fl">视频列表</h2>
+<!--         <a class="fr top_rt_btn">右侧按钮</a> -->
+    </div>
+    <table class="table">
+        <tr>
+            <th>视频分类</th>
+            <th>标题</th>
+            <th>简介</th>
+            <th>视频地址</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+        {% for v in page.items %}
+        <tr align="center">
+            <td>{{ v.name|e }}</td>
+            <td>{{ v.title|e }}</td>
+            <td><?php echo mb_substr($v->blurb,'0','20','utf-8'); ?></td>
+            <td>{{ v.url|e }}</td>
+            <td><?php echo date('Y-m-d', $v->create_time); ?></td>
+            <td>
+                <a href="/Video/edit?id={{ v.id }}" class="inner_btn">编辑</a>
+                <a href="/Video/del?id={{ v.id }}" class="inner_btn" onclick="return confirm('确定删除?')">删除</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <aside class="paging">
+        <a href="/Video/index?page=1">第一页</a>
+        {% for num in startnum..lastnum %}
+        <a href="/Video/index?page={{ num }}" {% if currentPage==num %} class="active" {% endif %}>{{ num }}</a>
+        {% endfor %}
+        <a href="/Video/index?page={{page.next}}">下一页</a>
+        <a href="/Video/index?page={{ page.last }}">最后一页</a>
+        <a href="">共 {{page.total_pages}} 页</a>
+    </aside>
+</section><!-- 
+<form method="post" action="/Video/up" enctype="multipart/form-data">
+        <li>
+            <span class="item_name" style="width:120px;">上传图片：</span>
+            <label class="uploadImg">
+             <input type="file"  name='file1'/>
+             <span>上传图片</span>
+            </label>
+       </li>
+    <input type="submit" class="link_btn">
+</form> -->
+{% endblock %}

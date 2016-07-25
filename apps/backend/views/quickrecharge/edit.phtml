@@ -1,0 +1,19 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<section>
+    <ul class="ulColumn2">
+        <form action="/quickrecharge/doedit" method="post">
+            <li>
+                <span class="item_name" style="width:150px;">支付状态：</span>
+                <label class="single_selection"><input type="radio" name="pay_status" value="1" <?php if($quickrecharge->pay_status==1){ ?>checked="checked"<?php } ?>>未支付</label>
+                <label class="single_selection"><input type="radio" name="pay_status" value="2" <?php if($quickrecharge->pay_status==2){ ?>checked="checked"<?php } ?>>已支付</label>
+            </li>
+            <li>
+                <span class="item_name" style="width:200px;"></span>
+                <input type="hidden" name="id" value="<?php echo $quickrecharge->id; ?>" />
+                <input type="submit" class="link_btn" value="编辑"/>
+            </li>
+        </form>
+    </ul>
+</section>
+{% endblock %}

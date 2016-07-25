@@ -1,0 +1,282 @@
+{% extends "layouts/base.phtml" %}
+{% block content %}
+<script>
+    $(document).ready(function(){
+        //tab
+        $(".admin_tab li a").click(function(){
+            var liindex = $(".admin_tab li a").index(this);
+            $(this).addClass("active").parent().siblings().find("a").removeClass("active");
+            $(".admin_tab_cont").eq(liindex).fadeIn(150).siblings(".admin_tab_cont").hide();
+        });
+    });
+</script>
+<section>
+    <ul class="admin_tab">
+        <li><a class="active">基本信息</a></li>
+        <li><a>认证相关</a></li>
+        <li><a>其他信息</a></li>
+    </ul>
+    <div class="admin_tab_cont" style="display: block;">
+        <section>
+            <ul class="ulColumn2">
+                <form action="/user/doedit" method="post">
+                    <li>
+                        <span class="item_name" style="width:150px;">会员类型：</span>
+                        <select class="select" name="type">
+                            <option value="1" {% if u.type==1 %} selected="selected" {% endif %}>商家</option>
+                            <option value="2" {% if u.type==2 %} selected="selected" {% endif %}>刷手</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">VIP：</span>
+                        <select class="select" name="isvip">
+                            <option value="1" {% if u.isvip==1 %} selected="selected" {% endif %}>不是</option>
+                            <option value="2" {% if u.isvip==2 %} selected="selected" {% endif %}>是</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">会员身份：</span>
+                        <select class="select" name="identity">
+                            <option value="1" {% if u.identity==1 %} selected="selected" {% endif %}>外部会员</option>
+                            <option value="2" {% if u.identity==2 %} selected="selected" {% endif %}>内部会员</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">冻结状态：</span>
+                        <select class="select" name="isfreeze">
+                            <option value="1" {% if u.isfreeze==1 %} selected="selected" {% endif %}>未冻结</option>
+                            <option value="2" {% if u.isfreeze==2 %} selected="selected" {% endif %}>冻结</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">会员账户：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="会员账户" name="account" value="{{ u.account }}"/>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">会员密码：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="不修改密码请留空" name="password" />
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">会员QQ：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="会员QQ 必填" name="qq" value="{{ u.qq }}"/>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">会员邮箱：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="会员邮箱 必填" name="email" value="{{ u.email }}"/>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">会员手机：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="会员手机 必填" name="mobile" value="{{ u.mobile }}"/>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">会员金币数：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="会员金币数" name="gcoin" value="{{ u.gcoin }}"/>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">接点数：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="接点数" name="contact_num" value="{{ u.contact_num }}"/>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">发布点数：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="发布点数" name="release_num" value="{{ u.release_num }}"/>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">积分：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="积分" name="points" value="{{ u.points }}"/>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:200px;"></span>
+                        <input type="hidden" name="id" value="{{ u.id }}" />
+                        <input type="submit" class="link_btn" value="编辑"/>
+                    </li>
+                </form>
+            </ul>
+        </section>
+    </div>
+    <div class="admin_tab_cont">
+        <section>
+            <ul class="ulColumn2">
+                <form action="/user/doedit" method="post" enctype="multipart/form-data">
+                	<li>
+                    	<span class="item_name" style="width:150px;">身份证正面照片：</span>
+                    	<label class="uploadImg">
+                    		<input type="file" name="pic[]" onchange="showImg(event.target.files[0],1);" />
+                    		<span>上传图片</span>
+                    	</label>
+                        <img src="<?php echo $u->idcard_front; ?>" style="width:140px;height:100px;margin-top:-40px;" id="thumb1" />
+                    </li>
+                    <li>
+                    	<span class="item_name" style="width:150px;">身份证背面照片：</span>
+                    	<label class="uploadImg">
+                    		<input type="file" name="pic[]" onchange="showImg(event.target.files[0],2);" />
+                    		<span>上传图片</span>
+                    	</label>
+                        <img src="<?php echo $u->idcard_back; ?>" style="width:140px;height:100px;margin-top:-40px;" id="thumb2" />
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">手持身份证照片：</span>
+                        <label class="uploadImg">
+                            <input type="file" name="pic[]" onchange="showImg(event.target.files[0],3);" />
+                            <span>上传图片</span>
+                        </label>
+                        <img src="<?php echo $u->idcard_gesture; ?>" style="width:140px;height:100px;margin-top:-40px;" id="thumb3" />
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">手势照片：</span>
+                        <label class="uploadImg">
+                            <input type="file" name="pic[]" onchange="showImg(event.target.files[0],4);" />
+                            <span>上传图片</span>
+                        </label>
+                        <img src="<?php echo $u->gesture; ?>" style="width:140px;height:100px;margin-top:-40px;" id="thumb4" />
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">店铺照片：</span>
+                        <label class="uploadImg">
+                            <input type="file" name="pic[]" onchange="showImg(event.target.files[0],5);" />
+                            <span>上传图片</span>
+                        </label>
+                        <img src="<?php echo $u->shop_pic; ?>" style="width:140px;height:100px;margin-top:-40px;" id="thumb5" />
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">所在省：</span>
+                        <select class="select" name="province" onchange="changeCity(this.value);">
+                            <option value="0" <?php if($u->province==0){ ?>selected="selected"<?php } ?> >--请选择--</option>
+                            <?php foreach($province as $p){ ?>
+                            <option value="<?php echo $p->Id; ?>" <?php if($u->province==$p->Id){ ?>selected="selected"<?php } ?> ><?php echo $p->Name; ?></option>
+                            <?php } ?>
+                        </select>
+                        <span class="item_name" style="width:30px;">市：</span>
+                        <select class="select" name="city" id="city" onchange="changeArea(this.value);">
+                            <option value="0" <?php if($u->city==0){ ?>selected="selected"<?php } ?> >--请选择--</option>
+                            <?php foreach($city as $c){ ?>
+                                <option value="<?php echo $c->Id; ?>" <?php if($u->city==$c->Id){ ?>selected="selected"<?php } ?> ><?php echo $c->Name; ?></option>
+                            <?php } ?>
+                        </select>
+                        <span class="item_name" style="width:30px;">区：</span>
+                        <select class="select" name="area" id="area">
+                            <option value="0" <?php if($u->area==0){ ?>selected="selected"<?php } ?> >--请选择--</option>
+                            <?php foreach($area as $a){ ?>
+                                <option value="<?php echo $a->Id; ?>" <?php if($u->area==$a->Id){ ?>selected="selected"<?php } ?> ><?php echo $a->Name; ?></option>
+                            <?php } ?>
+                        </select>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">真实姓名：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="真实姓名" name="real_name" value="<?php echo $u->real_name; ?>"/>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">返款支付宝账号：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="返款支付宝账号" name="alipay" value="<?php echo $u->alipay; ?>"/>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">返款财付通账号：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="返款财付通账号" name="tenpay" value="<?php echo $u->tenpay; ?>"/>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">身份证号：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="身份证号" name="idcard_number" value="<?php echo $u->idcard_number; ?>"/>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">联系地址：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="联系地址" name="address" value="<?php echo $u->address; ?>" style="width:400px;"/>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">推广链接：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="推广链接" name="promote_link" value="<?php echo $u->promote_link; ?>" style="width:400px;"/>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:200px;"></span>
+                        <input type="hidden" name="id" value="<?php echo $u->id; ?>" />
+                        <input type="submit" class="link_btn" value="编辑"/>
+                    </li>
+                </form>
+            </ul>
+        </section>
+    </div>
+    <div class="admin_tab_cont">
+        <section>
+            <ul class="ulColumn2">
+                <form action="/user/doedit" method="post">
+                    <li>
+                        <span class="item_name" style="width:150px;">密保问题1：</span>
+                        <select class="select" name="question1">
+                            <option value="0" <?php if($u->question1==0){ ?>selected="selected"<?php } ?> >--未设置--</option>
+                            <option value="1" <?php if($u->question1==1){ ?>selected="selected"<?php } ?> >我的生日是？</option>
+                            <option value="2" <?php if($u->question1==2){ ?>selected="selected"<?php } ?> >我妈妈的名字是？</option>
+                            <option value="3" <?php if($u->question1==3){ ?>selected="selected"<?php } ?> >我爸爸的名字是？</option>
+                            <option value="4" <?php if($u->question1==4){ ?>selected="selected"<?php } ?> >我爷爷的名字是？</option>
+                            <option value="5" <?php if($u->question1==5){ ?>selected="selected"<?php } ?> >我奶奶的名字是？</option>
+                            <option value="6" <?php if($u->question1==6){ ?>selected="selected"<?php } ?> >我的家乡是？</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">密保问题1答案：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="密保问题1答案" name="answer1" value="<?php if($u->question1!=0){ echo $u->answer1; } ?>" />
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">密保问题2：</span>
+                        <select class="select" name="question2">
+                            <option value="0" <?php if($u->question2==0){ ?>selected="selected"<?php } ?> >--未设置--</option>
+                            <option value="1" <?php if($u->question2==1){ ?>selected="selected"<?php } ?> >我的工号是？</option>
+                            <option value="2" <?php if($u->question2==2){ ?>selected="selected"<?php } ?> >我的车牌号是？</option>
+                            <option value="3" <?php if($u->question2==3){ ?>selected="selected"<?php } ?> >我上班的日期是？</option>
+                            <option value="4" <?php if($u->question2==4){ ?>selected="selected"<?php } ?> >我的幸运数字是？</option>
+                            <option value="5" <?php if($u->question2==5){ ?>selected="selected"<?php } ?> >我最喜欢的电影是？</option>
+                            <option value="6" <?php if($u->question2==6){ ?>selected="selected"<?php } ?> >我最喜欢的运动是？</option>
+                            <option value="7" <?php if($u->question2==7){ ?>selected="selected"<?php } ?> >我最喜欢的水果是？</option>
+                            <option value="8" <?php if($u->question2==8){ ?>selected="selected"<?php } ?> >我最爱吃的食物是？</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">密保问题2答案：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="密保问题2答案" name="answer2" value="<?php if($u->question2!=0){ echo $u->answer2; } ?>" />
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">上次登录IP：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="上次登录IP" name="ip" value="<?php echo $u->ip; ?>" disabled="disabled" />
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">上次登录时间：</span>
+                        <input type="text" class="textbox textbox_295" value="<?php echo date('Y-m-d',$u->login_time); ?>" disabled="disabled" />
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:150px;">上次登录地址：</span>
+                        <input type="text" class="textbox textbox_295" placeholder="上次登录地址" name="ip_address" value="<?php echo getIPLoc_QQ('192.168.31.1'); ?>" disabled="disabled" />
+                    </li>
+                    <li>
+                        <span class="item_name" style="width:200px;"></span>
+                        <input type="hidden" name="id" value="<?php echo $u->id; ?>" />
+                        <input type="submit" class="link_btn" value="编辑"/>
+                    </li>
+                </form>
+            </ul>
+        </section>
+    </div>
+</section>
+<script type="text/javascript">
+    function showImg(file,n){
+        if(file){
+            $('img#thumb'+n).attr('src','');
+            var r=new FileReader();
+            r.readAsDataURL(file);
+            r.onload=function(e){
+                var contents= e.target.result;
+                $('img#thumb'+n).attr("src",contents);
+            }
+        }else{
+            alert("选择图片失败！");
+        }
+    }
+    function changeCity(id){
+        $.post("/user/getcity",{id:id},function(data){
+            $('#city').html(data);
+            $('#area').html("<option value='0' selected='selected'>--请选择--</option>");
+        });
+    }
+    function changeArea(id){
+        $.post("/user/getarea",{id:id},function(data){
+            $('#area').html(data);
+        });
+    }
+</script>
+{% endblock %}
